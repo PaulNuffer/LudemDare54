@@ -15,6 +15,8 @@ func _physics_process(delta):
 	velocity = dir_to_player * move_speed * -1
 	move_and_slide()
 	
+	#if colliding with wall, enter cower state
+	
 	global_rotation = dir_to_player.angle()
 
 	if ray_cast_2d.is_colliding() and ray_cast_2d.get_collider() == player:
