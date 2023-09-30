@@ -12,8 +12,17 @@ config_version=5
 
 config/name="GayJam"
 run/main_scene="res://world.tscn"
-config/features=PackedStringArray("4.1", "GL Compatibility")
+config/features=PackedStringArray("4.1", "C#", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=3840
+window/size/viewport_height=2160
+window/size/mode=3
+window/size/initial_position_type=3
+window/stretch/mode="viewport"
+window/stretch/scale=0.5
 
 [dotnet]
 
