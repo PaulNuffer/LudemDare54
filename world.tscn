@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://pulv50b8war6"]
+[gd_scene load_steps=8 format=3 uid="uid://pulv50b8war6"]
 
 [ext_resource type="Texture2D" uid="uid://b5ks5xb4pi4ww" path="res://white_square.png" id="1_6g3vl"]
 [ext_resource type="Script" path="res://world.gd" id="1_h3xci"]
@@ -8,6 +8,12 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bcm6k"]
 size = Vector2(170.804, 194.451)
+
+[sub_resource type="Curve2D" id="Curve2D_hx86s"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -2773, -7957, 0, 0, 0, 0, 12987, -7895, 0, 0, 0, 0, 13027, 3632, 0, 0, 0, 0, -2804, 3668, 0, 0, 0, 0, -2773, -7953)
+}
+point_count = 5
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_h3xci")
@@ -250,8 +256,15 @@ shape = SubResource("RectangleShape2D_bcm6k")
 [node name="Player" parent="." instance=ExtResource("2_b2s1h")]
 position = Vector2(605, 580)
 
-[node name="Timer" type="Timer" parent="."]
+[node name="SpawnTimer" type="Timer" parent="."]
 wait_time = 1.316
 autostart = true
 
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[node name="SpawnPath" type="Path2D" parent="."]
+curve = SubResource("Curve2D_hx86s")
+
+[node name="SpawnLocation" type="PathFollow2D" parent="SpawnPath"]
+position = Vector2(-2773, -7957)
+rotation = 0.00393399
+
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
