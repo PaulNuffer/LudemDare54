@@ -6,7 +6,7 @@ extends CharacterBody2D
 @onready var player: CharacterBody2D = get_tree().get_first_node_in_group("player")
 
 var dead = false
-var opacity = 255
+var opacity = 500
 
 func _physics_process(delta):
 	if dead:
@@ -19,7 +19,6 @@ func _physics_process(delta):
 	#code for stopping moving and shooting instead if close enough, randomized
 	move_and_slide()
 	
-
 	
 	global_rotation = dir_to_player.angle()
 
@@ -40,7 +39,9 @@ func kill():
 
 
 func _on_death_cull_timer_timeout():
-	opacity = opacity - 10
-	modulate.a = opacity
+	opacity = opacity - 5
+	$Graphics/Dead/Splatter.self_modulate.a8 = opacity
+	$Graphics/Dead.self_modulate.a8 = opacity - 150
+	print(opacity)
 	
 	
