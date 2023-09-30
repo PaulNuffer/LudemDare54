@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://pulv50b8war6"]
+[gd_scene load_steps=7 format=3 uid="uid://pulv50b8war6"]
 
 [ext_resource type="Texture2D" uid="uid://b5ks5xb4pi4ww" path="res://white_square.png" id="1_6g3vl"]
 [ext_resource type="Script" path="res://world.gd" id="1_h3xci"]
 [ext_resource type="PackedScene" uid="uid://dyj383tmdfjq0" path="res://player.tscn" id="2_b2s1h"]
+[ext_resource type="PackedScene" uid="uid://7q48jmg6staf" path="res://guard.tscn" id="2_ct77u"]
 [ext_resource type="PackedScene" uid="uid://b3ioob0g7m7ks" path="res://worker.tscn" id="3_m4cf5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bcm6k"]
@@ -10,6 +11,8 @@ size = Vector2(170.804, 194.451)
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_h3xci")
+guard_scene = ExtResource("2_ct77u")
+worker_scene = ExtResource("3_m4cf5")
 
 [node name="Environment" type="Node2D" parent="."]
 

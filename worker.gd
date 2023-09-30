@@ -26,6 +26,7 @@ func kill():
 	if dead:
 		return
 	dead = true
+	
 	$DeathSound.play()
 	$Graphics/Dead.show()
 	$Graphics/Alive.hide()
