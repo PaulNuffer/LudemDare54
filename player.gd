@@ -2,6 +2,8 @@ extends CharacterBody2D
 
 @onready var ray_cast_2d = $RayCast2D
 @export var move_speed = 700
+
+const bulletPath = preload('res://bullet.tscn')
 	
 var dead = false
 	
@@ -38,6 +40,10 @@ func restart():
 	get_tree().reload_current_scene()
 	
 func shoot():
+	#var bullet = bulletPath.instantiate()
+	#get_parent().add_child(bullet)
+	
+	#bullet.position = global_position
 	$MuzzleFlash.show()
 	$MuzzleFlash/Timer.start()
 	$ShootSound.play()
