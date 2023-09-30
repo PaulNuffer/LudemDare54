@@ -119,5 +119,9 @@ text = "restart"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(214, -62)
+scale = Vector2(50, 50)
+
 [connection signal="timeout" from="MuzzleFlash/Timer" to="MuzzleFlash" method="hide"]
 [connection signal="button_up" from="CanvasLayer/DeathScreen/Panel/Button" to="." method="restart"]

@@ -43,7 +43,7 @@ func shoot():
 	var bullet = bulletPath.instantiate()
 	get_parent().add_child(bullet)
 	
-	bullet.position = global_position
+	bullet.position = $Marker2D.global_position
 	$MuzzleFlash.show()
 	$MuzzleFlash/Timer.start()
 	$ShootSound.play()

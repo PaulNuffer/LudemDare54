@@ -1,13 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://dt4l81nu0imoq"]
+[gd_scene load_steps=4 format=3 uid="uid://dt4l81nu0imoq"]
 
 [ext_resource type="Texture2D" uid="uid://cosh5rsd7x0up" path="res://fakebullet.png" id="1_67phd"]
+[ext_resource type="Script" path="res://bullet.gd" id="1_sj6e0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ltp72"]
 size = Vector2(257.561, 209.747)
 
 [node name="Bullet" type="CharacterBody2D"]
 scale = Vector2(0.0523598, 0.0527395)
-collision_layer = 4
+collision_layer = 8
+script = ExtResource("1_sj6e0")
 
 [node name="Fakebullet" type="Sprite2D" parent="."]
 position = Vector2(2, 0)
