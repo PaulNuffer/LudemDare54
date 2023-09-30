@@ -69,3 +69,9 @@ position = Vector2(605, 580)
 
 [node name="Worker" parent="." instance=ExtResource("3_m4cf5")]
 position = Vector2(-156, 17)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 1.316
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
