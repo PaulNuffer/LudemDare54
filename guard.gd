@@ -46,3 +46,4 @@ func _on_death_cull_timer_timeout():
 
 func _ready():
 	add_to_group('enemies')
+	print(get_groups())

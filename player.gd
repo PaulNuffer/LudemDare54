@@ -50,8 +50,8 @@ func shoot():
 	$MuzzleFlash.show()
 	$MuzzleFlash/Timer.start()
 	$ShootSound.play()
-	if ray_cast_2d.is_colliding() and ray_cast_2d.get_collider().has_method("kill"):
-		ray_cast_2d.get_collider().kill()
+	#if ray_cast_2d.is_colliding() and ray_cast_2d.get_collider().has_method("kill"):
+		#ray_cast_2d.get_collider().kill()
 	
 	#call this for stuff that is activated by the player (ie right click to go invisible)
 func process_utility_slot(i):
