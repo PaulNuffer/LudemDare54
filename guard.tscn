@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://7q48jmg6staf"]
+[gd_scene load_steps=7 format=3 uid="uid://buk1ivvggbfx0"]
 
 [ext_resource type="Script" path="res://guard.gd" id="1_au868"]
 [ext_resource type="Texture2D" uid="uid://bp4redxvs5nlm" path="res://guard.png" id="2_8rkp8"]
@@ -9,7 +9,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_54b51"]
 radius = 237.079
 
-[node name="Guard" type="CharacterBody2D"]
+[node name="Worker" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 3
 script = ExtResource("1_au868")
@@ -43,8 +43,3 @@ stream = ExtResource("5_fb3vs")
 volume_db = 5.622
 max_distance = 3e+07
 bus = &"sfx"
-
-[node name="DeathCullTimer" type="Timer" parent="."]
-wait_time = 0.05
-
-[connection signal="timeout" from="DeathCullTimer" to="." method="_on_death_cull_timer_timeout"]

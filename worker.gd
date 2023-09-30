@@ -43,3 +43,6 @@ func _on_death_cull_timer_timeout():
 	$Graphics/Dead/Splatter.self_modulate.a8 = opacity
 	$Graphics/Dead.self_modulate.a8 = opacity - 150
 	print(opacity)
+
+func _ready():
+	add_to_group('enemies')
