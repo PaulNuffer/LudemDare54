@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://b5ks5xb4pi4ww" path="res://white_square.png" id="1_6g3vl"]
 [ext_resource type="Script" path="res://world.gd" id="1_h3xci"]
 [ext_resource type="PackedScene" uid="uid://dyj383tmdfjq0" path="res://player.tscn" id="2_b2s1h"]
-[ext_resource type="PackedScene" path="res://guard.tscn" id="2_ct77u"]
+[ext_resource type="PackedScene" uid="uid://7q48jmg6staf" path="res://guard.tscn" id="2_ct77u"]
 [ext_resource type="PackedScene" uid="uid://b3ioob0g7m7ks" path="res://worker.tscn" id="3_m4cf5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bcm6k"]
@@ -25,7 +25,8 @@ texture = ExtResource("1_6g3vl")
 
 [node name="Block" type="Sprite2D" parent="Environment"]
 modulate = Color(0, 0, 0, 1)
-position = Vector2(339, 474)
+position = Vector2(5143.75, -8459)
+scale = Vector2(40.1643, 1)
 texture = ExtResource("1_6g3vl")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Environment/Block"]
@@ -34,9 +35,186 @@ texture = ExtResource("1_6g3vl")
 scale = Vector2(2.51166, 2.17536)
 shape = SubResource("RectangleShape2D_bcm6k")
 
+[node name="Block5" type="Sprite2D" parent="Environment"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(3804, 1699)
+texture = ExtResource("1_6g3vl")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Environment/Block5"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Block5/StaticBody2D"]
+scale = Vector2(2.51166, 2.17536)
+shape = SubResource("RectangleShape2D_bcm6k")
+
+[node name="Block6" type="Sprite2D" parent="Environment"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(1394, 1507)
+texture = ExtResource("1_6g3vl")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Environment/Block6"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Block6/StaticBody2D"]
+scale = Vector2(2.51166, 2.17536)
+shape = SubResource("RectangleShape2D_bcm6k")
+
+[node name="Block7" type="Sprite2D" parent="Environment"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(1937, 704)
+texture = ExtResource("1_6g3vl")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Environment/Block7"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Block7/StaticBody2D"]
+scale = Vector2(2.51166, 2.17536)
+shape = SubResource("RectangleShape2D_bcm6k")
+
+[node name="Block8" type="Sprite2D" parent="Environment"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(-1321, 721)
+texture = ExtResource("1_6g3vl")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Environment/Block8"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Block8/StaticBody2D"]
+scale = Vector2(2.51166, 2.17536)
+shape = SubResource("RectangleShape2D_bcm6k")
+
+[node name="Block10" type="Sprite2D" parent="Environment"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(3074, 133)
+texture = ExtResource("1_6g3vl")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Environment/Block10"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Block10/StaticBody2D"]
+scale = Vector2(2.51166, 2.17536)
+shape = SubResource("RectangleShape2D_bcm6k")
+
+[node name="Block11" type="Sprite2D" parent="Environment"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(3227, -155)
+texture = ExtResource("1_6g3vl")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Environment/Block11"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Block11/StaticBody2D"]
+scale = Vector2(2.51166, 2.17536)
+shape = SubResource("RectangleShape2D_bcm6k")
+
+[node name="Block12" type="Sprite2D" parent="Environment"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(3368, -489)
+texture = ExtResource("1_6g3vl")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Environment/Block12"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Block12/StaticBody2D"]
+scale = Vector2(2.51166, 2.17536)
+shape = SubResource("RectangleShape2D_bcm6k")
+
+[node name="Block13" type="Sprite2D" parent="Environment"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(3464, -749)
+texture = ExtResource("1_6g3vl")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Environment/Block13"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Block13/StaticBody2D"]
+scale = Vector2(2.51166, 2.17536)
+shape = SubResource("RectangleShape2D_bcm6k")
+
+[node name="Block14" type="Sprite2D" parent="Environment"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(3498, -970)
+texture = ExtResource("1_6g3vl")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Environment/Block14"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Block14/StaticBody2D"]
+scale = Vector2(2.51166, 2.17536)
+shape = SubResource("RectangleShape2D_bcm6k")
+
+[node name="Block15" type="Sprite2D" parent="Environment"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(6004, -3934)
+texture = ExtResource("1_6g3vl")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Environment/Block15"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Block15/StaticBody2D"]
+scale = Vector2(2.51166, 2.17536)
+shape = SubResource("RectangleShape2D_bcm6k")
+
+[node name="Block16" type="Sprite2D" parent="Environment"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(6015, -3578)
+texture = ExtResource("1_6g3vl")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Environment/Block16"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Block16/StaticBody2D"]
+scale = Vector2(2.51166, 2.17536)
+shape = SubResource("RectangleShape2D_bcm6k")
+
+[node name="Block17" type="Sprite2D" parent="Environment"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(6021, -3227)
+texture = ExtResource("1_6g3vl")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Environment/Block17"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Block17/StaticBody2D"]
+scale = Vector2(2.51166, 2.17536)
+shape = SubResource("RectangleShape2D_bcm6k")
+
+[node name="Block18" type="Sprite2D" parent="Environment"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(6219, -2939)
+texture = ExtResource("1_6g3vl")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Environment/Block18"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Block18/StaticBody2D"]
+scale = Vector2(2.51166, 2.17536)
+shape = SubResource("RectangleShape2D_bcm6k")
+
+[node name="Block19" type="Sprite2D" parent="Environment"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(6434, -2628)
+texture = ExtResource("1_6g3vl")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Environment/Block19"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Block19/StaticBody2D"]
+scale = Vector2(2.51166, 2.17536)
+shape = SubResource("RectangleShape2D_bcm6k")
+
+[node name="Block20" type="Sprite2D" parent="Environment"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(6604, -2340)
+texture = ExtResource("1_6g3vl")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Environment/Block20"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Block20/StaticBody2D"]
+scale = Vector2(2.51166, 2.17536)
+shape = SubResource("RectangleShape2D_bcm6k")
+
+[node name="Block9" type="Sprite2D" parent="Environment"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(494, -1090)
+texture = ExtResource("1_6g3vl")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Environment/Block9"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Block9/StaticBody2D"]
+scale = Vector2(2.51166, 2.17536)
+shape = SubResource("RectangleShape2D_bcm6k")
+
 [node name="Block2" type="Sprite2D" parent="Environment"]
 modulate = Color(0, 0, 0, 1)
-position = Vector2(-239, 921)
+position = Vector2(-3262, -1922.5)
+scale = Vector2(0.910256, 29.8697)
 texture = ExtResource("1_6g3vl")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Environment/Block2"]
@@ -47,7 +225,8 @@ shape = SubResource("RectangleShape2D_bcm6k")
 
 [node name="Block3" type="Sprite2D" parent="Environment"]
 modulate = Color(0, 0, 0, 1)
-position = Vector2(712, 1278)
+position = Vector2(13518, -2233)
+scale = Vector2(1, 29.1801)
 texture = ExtResource("1_6g3vl")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Environment/Block3"]
@@ -58,7 +237,8 @@ shape = SubResource("RectangleShape2D_bcm6k")
 
 [node name="Block4" type="Sprite2D" parent="Environment"]
 modulate = Color(0, 0, 0, 1)
-position = Vector2(51, 1520)
+position = Vector2(5330.63, 4161)
+scale = Vector2(39.1486, 1.09479)
 texture = ExtResource("1_6g3vl")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Environment/Block4"]
@@ -69,9 +249,6 @@ shape = SubResource("RectangleShape2D_bcm6k")
 
 [node name="Player" parent="." instance=ExtResource("2_b2s1h")]
 position = Vector2(605, 580)
-
-[node name="Worker" parent="." instance=ExtResource("3_m4cf5")]
-position = Vector2(-156, 17)
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 1.316
