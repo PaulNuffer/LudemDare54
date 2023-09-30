@@ -3,6 +3,9 @@ extends CharacterBody2D
 @onready var ray_cast_2d = $RayCast2D
 @export var move_speed = 700
 
+#array of arrays representing the upgrades, master array pos is slot number, first element of child array is type, second element of child array is index
+var array = [["none", 0], ["none", 0], ["none", 0]]
+
 const bulletPath = preload('res://bullet.tscn')
 	
 var dead = false
@@ -50,3 +53,32 @@ func shoot():
 	if ray_cast_2d.is_colliding() and ray_cast_2d.get_collider().has_method("kill"):
 		ray_cast_2d.get_collider().kill()
 	
+	#call this for stuff that is activated by the player (ie right click to go invisible)
+func process_utility_slot(i):
+	match i:
+		1:
+			pass
+		2:
+			pass
+		_:
+			pass #default behaviour
+	
+	#call this for stuff that is always active (ie +5 weapon damage) (this will be activated once per passive chip every time you upgrade, after resetting all stats to default)
+func process_passive_slot(i):
+	match i:
+		1:
+			pass
+		2:
+			pass
+		_:
+			pass #default behaviour
+	
+	#call this for stuff that is a weapon (ie i shouldnt have to explain) (setting the weapon sprite will happen elsewhere)
+func process_weapon_slot(i):
+	match i:
+		1:
+			pass
+		2:
+			pass
+		_:
+			pass #default behaviour
