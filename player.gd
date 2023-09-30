@@ -81,7 +81,7 @@ func shoot():
 func process_utility_slot(i):
 	match i:
 		1:
-			pass
+			global_position = get_global_mouse_position()
 		2:
 			pass
 		_:
@@ -96,6 +96,10 @@ func process_passive_slot(i):
 		2:
 			hitscan = true
 			damage -= 2
+		3:
+			spread += 60
+			homing = true
+			reloadtimemod = -20
 		_:
 			pass #default behaviour
 	
