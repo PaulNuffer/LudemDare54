@@ -23,5 +23,5 @@ shape = SubResource("RectangleShape2D_ltp72")
 [node name="RayCast2D" type="RayCast2D" parent="."]
 position = Vector2(-398.381, -6.93881)
 scale = Vector2(1, 100)
-target_position = Vector2(600, 2.08165e-12)
+target_position = Vector2(800, 2.08165e-12)
 collision_mask = 5
