@@ -40,10 +40,10 @@ func restart():
 	get_tree().reload_current_scene()
 	
 func shoot():
-	#var bullet = bulletPath.instantiate()
-	#get_parent().add_child(bullet)
+	var bullet = bulletPath.instantiate()
+	get_parent().add_child(bullet)
 	
-	#bullet.position = global_position
+	bullet.position = global_position
 	$MuzzleFlash.show()
 	$MuzzleFlash/Timer.start()
 	$ShootSound.play()
