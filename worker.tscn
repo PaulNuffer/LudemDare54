@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=3 uid="uid://b3ioob0g7m7ks"]
+
+[ext_resource type="Texture2D" uid="uid://xrscyphyro6a" path="res://worker.png" id="1_ovuxo"]
+[ext_resource type="Script" path="res://worker.gd" id="1_sw1sg"]
+[ext_resource type="Texture2D" uid="uid://ckl6f2ibslqq4" path="res://splatter.png" id="2_2ew75"]
+[ext_resource type="Texture2D" uid="uid://dxowcefwl7pqw" path="res://dead_body.png" id="2_7smkk"]
+[ext_resource type="AudioStream" uid="uid://bj5b2m0dmc71d" path="res://death.wav" id="5_506rq"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_54b51"]
+radius = 237.079
+
+[node name="Worker" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("1_sw1sg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(1, 0.98223)
+shape = SubResource("CircleShape2D_54b51")
+
+[node name="Graphics" type="Node2D" parent="."]
+scale = Vector2(1, 0.98223)
+
+[node name="Alive" type="Sprite2D" parent="Graphics"]
+texture = ExtResource("1_ovuxo")
+
+[node name="Dead" type="Sprite2D" parent="Graphics"]
+visible = false
+z_index = -1
+texture = ExtResource("2_7smkk")
+
+[node name="Splatter" type="Sprite2D" parent="Graphics/Dead"]
+show_behind_parent = true
+position = Vector2(11, -3)
+texture = ExtResource("2_2ew75")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(0, -400)
+collision_mask = 3
+
+[node name="DeathSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_506rq")
+volume_db = 5.622
+max_distance = 3e+07
+bus = &"sfx"
