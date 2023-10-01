@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+const bulletPath = preload('res://bullet.tscn')
+
 @onready var ray_cast_2d = $RayCast2D
 
 @export var move_speed = 1600
@@ -9,22 +11,63 @@ extends CharacterBody2D
 var dead = false
 var opacity = 500
 
+var dir_to_player
+var disttoplayer
+
+var shootoffset = randf_range(-500, 2000) #random offset of how far away from player guard will stop and shoot
+var reloadtimer = 0;
+
 func _physics_process(delta):
 	if dead:
 		if opacity < 1:
 			queue_free()
 		return
 		
-	var dir_to_player = global_position.direction_to(player.global_position)
-	velocity = dir_to_player * move_speed
-	#code for stopping moving and shooting instead if close enough, randomized
-	move_and_slide()
+	if reloadtimer > 0: #decrement reload timer
+		reloadtimer-=1
+		
+	dir_to_player = global_position.direction_to(player.global_position)
 	
-	
-	global_rotation = dir_to_player.angle()
+	disttoplayer = global_position.distance_to(player.global_position)
 
-	if ray_cast_2d.is_colliding() and ray_cast_2d.get_collider() == player:
-		player.kill()
+	#move close to player if they are far away, and run from player if they get close
+	if disttoplayer < 1100 + shootoffset:
+		velocity = -dir_to_player * move_speed/2
+		move_and_slide()
+		shoot()
+	if disttoplayer > 1300 + shootoffset:
+		velocity = dir_to_player * move_speed
+		move_and_slide()
+	if disttoplayer < 1300 + shootoffset and disttoplayer > 1100 + shootoffset:
+		shoot()
+		
+	global_rotation = dir_to_player.angle()
+	
+	#code for stopping moving and shooting instead if close enough, randomized
+	
+func shoot():
+	if reloadtimer == 0:
+		reloadtimer = 60
+		createbullet()
+
+
+func createbullet():
+
+	#bullet code
+	var bullet = bulletPath.instantiate()
+	get_parent().add_child(bullet)
+	bullet.position = global_position
+	
+	#this code is totally fucked because in theory it does nothing (bullet calcs its own spread) but if i remove it the game crashes lol
+	var standardDir = dir_to_player.angle() * 180 / PI
+	var newDir = (standardDir + randf_range(-10, 10)) * PI / 180
+	bullet.velocity = Vector2.from_angle(newDir)
+	
+	bullet.spread = 10
+	bullet.damage = 1
+	bullet.bullet_speed = 2000
+	bullet.lifetime = 200
+
 
 func hurt(damage):
 	health -= damage

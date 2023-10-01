@@ -8,12 +8,12 @@ extends CharacterBody2D
 @export var spread = 100
 @export var lifetime = 400
 
-func _process(delta):
+func _physics_process(delta):
+	
 	lifetime-=1
 	if lifetime <= 0:
 		queue_free()
-
-func _physics_process(delta):
+		
 	global_rotation = velocity.angle()
 	
 	move_and_collide(velocity.normalized() * delta * bullet_speed) 

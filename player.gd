@@ -60,14 +60,7 @@ func _process(delta):
 		get_tree().quit()
 	if Input.is_action_just_pressed("restart"):
 		restart()
-	if reloadtimer > 0: #decrement reload timer
-		reloadtimer-=1
-	if screenfadetimer > 0: #decrement screen fade timer
-		screenfadetimer-=1
-		$fade/ColorRect.self_modulate.a8 = screenfadetimer
-		if(screenfadetimer == 1):
-			$fade/ColorRect.hide()
-			canact = true
+
 		
 	if hitscan:
 		#if the hitscan distance is zero we need to calculate it so its roughly the same as where the bullet would have ended up
@@ -91,6 +84,15 @@ func _physics_process(delta):
 		return
 	if Input.is_action_just_pressed("interact"):
 		execute_interaction()
+		
+	if reloadtimer > 0: #decrement reload timer
+			reloadtimer-=1
+	if screenfadetimer > 0: #decrement screen fade timer
+		screenfadetimer-=1
+		$fade/ColorRect.self_modulate.a8 = screenfadetimer
+		if(screenfadetimer == 1):
+			$fade/ColorRect.hide()
+			canact = true
 
 	var move_dir = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	if(move_dir.is_zero_approx()):
