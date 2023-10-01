@@ -12,7 +12,6 @@ var weapon_array = [["Default", "Default description", "Default Flavortext"], ["
 var utility_array = [["Default", "Default description", "Default Flavortext"], ["Teleport", "Right click to go to that location", "teleports behind you"]]
 var passive_array = [["Default", "Default description", "Default Flavortext"], ["Blind Rage", "High damage, high spread", "RRRRAAAAAAHHHH"], ["Calculated Shot", "Bullets are hitscan, but lower damage", "point and click game"], ["Rapid Fire", "Faster firing, more spread, and homing", "the game plays itself"]]
 
-var spawned = 0
 
 func _ready():
 	var player = get_node("Player")
@@ -37,7 +36,7 @@ func textbox_fields(info):
 
 func _on_spawn_timer_timeout():
 	
-	if spawned < wave_array[wave_number][0]:
+	if GlobalVariables.spawned < wave_array[wave_number][0]:
 		var typerand = randf()
 		if typerand < wave_array[wave_number][1]: #if the random number is below the difficulty, spawn a threat
 			var guard = guard_scene.instantiate()
@@ -45,7 +44,7 @@ func _on_spawn_timer_timeout():
 			guard_spawn_location.progress_ratio = randf()
 			guard.position = guard_spawn_location.position
 			add_child(guard)
-			spawned += 1
+			GlobalVariables.spawned += 1
 			GlobalVariables.enemy_count += 1
 		else:
 			var worker = worker_scene.instantiate()
@@ -53,20 +52,22 @@ func _on_spawn_timer_timeout():
 			worker_spawn_location.progress_ratio = randf()
 			worker.position = worker_spawn_location.position
 			add_child(worker)
-			spawned+=1
+			GlobalVariables.spawned += 1
 	else: 
 		if GlobalVariables.enemy_count == 0:
-			spawn_upgrade(2000)
-			spawn_upgrade(3500)
-			spawn_upgrade(5000)
-			#trigger upgrade screen here
-			print("wave complete")
-			print(wave_number)
-			if wave_number < wave_array.size() - 1:
-				wave_number += 1
-				spawned = 0
-			else:
-				print("finished all waves")
+			if GlobalVariables.wavecompleted == false:
+				spawn_upgrade(2000)
+				spawn_upgrade(3500)
+				spawn_upgrade(5000)
+
+				print("wave complete")
+				print(wave_number)
+				if wave_number < wave_array.size() - 1:
+					wave_number += 1
+					GlobalVariables.spawned = 0
+				else:
+					print("finished all waves")
+				GlobalVariables.wavecompleted = true
 	
 func spawn_upgrade(xpos):
 	var upgrade = upgrade_chip_scene.instantiate()
