@@ -86,9 +86,8 @@ func spawn_upgrade(xpos):
 	var index = randi_range(1, type_array.size() - 1)
 	upgrade.get_child(1).interact_label = "Press E to Interact"
 	upgrade.get_child(1).interact_value = [index, type_array[index][0], type_array[index][1], type_array[index][2]]
-	
+	upgrade.change_art()
 	add_child(upgrade)
-	#upgrade.change_art()
 	
 
 	
