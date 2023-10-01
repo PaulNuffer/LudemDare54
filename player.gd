@@ -4,6 +4,9 @@ extends CharacterBody2D
 @onready var all_interactions = []
 @onready var interactLabel = $"Interaction Components/InteractLabel"
 
+signal show_textbox
+signal hide_textbox
+
 const bulletPath = preload('res://bullet.tscn')
 
 #array of arrays representing the upgrades, master array pos is slot number, first element of child array is type, second element of child array is index
@@ -261,8 +264,11 @@ func _on_interaction_area_area_exited(area):
 func update_interactions():
 	if(all_interactions):
 		interactLabel.text = all_interactions[0].interact_label
+		emit_signal("show_textbox")
 	else:
 		interactLabel.text = ""
+		emit_signal("hide_textbox")
+		
 
 func execute_interaction():
 	if(all_interactions):

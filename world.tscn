@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://pulv50b8war6"]
+[gd_scene load_steps=11 format=3 uid="uid://pulv50b8war6"]
 
 [ext_resource type="Texture2D" uid="uid://b5ks5xb4pi4ww" path="res://white_square.png" id="1_6g3vl"]
 [ext_resource type="Script" path="res://world.gd" id="1_h3xci"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://b3ioob0g7m7ks" path="res://worker.tscn" id="3_m4cf5"]
 [ext_resource type="Texture2D" uid="uid://c4f2hv3iuglvq" path="res://gamejam_level.png" id="4_diebm"]
 [ext_resource type="PackedScene" uid="uid://c3yw3svctplxj" path="res://upgrade_chip.tscn" id="7_o5fc3"]
+[ext_resource type="PackedScene" uid="uid://dqggbqb4kj4jw" path="res://textbox.tscn" id="8_hktru"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bcm6k"]
 size = Vector2(170.804, 194.451)
@@ -107,5 +108,8 @@ curve = SubResource("Curve2D_xn16m")
 
 [node name="SpawnLocation" type="PathFollow2D" parent="SpawnPath"]
 position = Vector2(3, -5039)
+
+[node name="Textbox" parent="." instance=ExtResource("8_hktru")]
+visible = false
 
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

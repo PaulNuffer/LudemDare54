@@ -10,8 +10,16 @@ var wave_array = [[1, .5], [15, .7], [20, 1]]
 
 var spawned = 0
 
+func _ready():
+	var player = get_node("Player")
+	player.show_textbox.connect(show_textbox)
+	player.hide_textbox.connect(hide_textbox)
 
+func show_textbox():
+	$Textbox.show()
 
+func hide_textbox():
+	$Textbox.hide()
 
 
 func _on_spawn_timer_timeout():
