@@ -24,16 +24,19 @@ shape = SubResource("RectangleShape2D_co1bf")
 [node name="Graphics" type="Node2D" parent="."]
 
 [node name="Back" type="Sprite2D" parent="Graphics"]
+visible = false
 position = Vector2(0, -14)
 scale = Vector2(0.129, 0.129)
 texture = ExtResource("2_xxlac")
 
 [node name="Right" type="Sprite2D" parent="Graphics"]
+visible = false
 position = Vector2(11, -5)
 scale = Vector2(0.129, 0.129)
 texture = ExtResource("3_f7v4y")
 
 [node name="Left" type="Sprite2D" parent="Graphics"]
+visible = false
 position = Vector2(2.08165e-12, 2.08165e-12)
 scale = Vector2(0.129, 0.129)
 texture = ExtResource("4_xcbl8")
@@ -66,7 +69,7 @@ bus = &"sfx"
 
 [node name="ShootSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_ko4eh")
-volume_db = 24.0
+volume_db = -20.0
 bus = &"sfx"
 
 [node name="MuzzleFlash" type="Sprite2D" parent="."]

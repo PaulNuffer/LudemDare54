@@ -5,7 +5,7 @@ extends CharacterBody2D
 const bulletPath = preload('res://bullet.tscn')
 
 #array of arrays representing the upgrades, master array pos is slot number, first element of child array is type, second element of child array is index
-var upgrades = [["none", 0], ["none", 0], ["none", 0]]
+var upgrades = [["weapon", 2], ["none", 0], ["none", 0]]
 
 #default variables (any variables not specified here are false or 0 by default
 var dspeed = 2000
@@ -57,7 +57,9 @@ func _physics_process(delta):
 	if dead:
 		return
 	var move_dir = Input.get_vector("move_left", "move_right", "move_up", "move_down")
-	if(move_dir.angle() > -PI/4 && move_dir.angle() < PI/4):
+	if(move_dir.is_zero_approx()):
+		pass
+	elif(move_dir.angle() > -PI/4 && move_dir.angle() < PI/4):
 		hideGraphics()
 		$Graphics/Right.show()
 	elif(move_dir.angle() > PI/4 && move_dir.angle() < 3*PI/4):
