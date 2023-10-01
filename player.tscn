@@ -1,13 +1,12 @@
 [gd_scene load_steps=7 format=3 uid="uid://dyj383tmdfjq0"]
 
-[ext_resource type="Texture2D" uid="uid://bolwfgoxhpm1e" path="res://shooter.png" id="1_54h2a"]
 [ext_resource type="Script" path="res://player.gd" id="1_arttm"]
 [ext_resource type="Texture2D" uid="uid://ckl6f2ibslqq4" path="res://splatter.png" id="2_5etr6"]
+[ext_resource type="Texture2D" uid="uid://dfdnrtlv4tp8c" path="res://player_sprite_front.png" id="2_rbcma"]
 [ext_resource type="AudioStream" uid="uid://bj5b2m0dmc71d" path="res://death.wav" id="3_esu3y"]
 [ext_resource type="AudioStream" uid="uid://dd18ahss4rhma" path="res://gunshoot.wav" id="4_ko4eh"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_rvocp"]
-radius = 4.55759
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_co1bf"]
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 2
@@ -15,13 +14,16 @@ collision_mask = 3
 script = ExtResource("1_arttm")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-scale = Vector2(50, 50)
-shape = SubResource("CircleShape2D_rvocp")
+position = Vector2(-6, -5)
+scale = Vector2(8.48552, 18.2062)
+shape = SubResource("RectangleShape2D_co1bf")
 
 [node name="Graphics" type="Node2D" parent="."]
 
 [node name="Alive" type="Sprite2D" parent="Graphics"]
-texture = ExtResource("1_54h2a")
+position = Vector2(0, 4)
+scale = Vector2(0.129473, 0.129473)
+texture = ExtResource("2_rbcma")
 
 [node name="Dead" type="Sprite2D" parent="Graphics"]
 visible = false

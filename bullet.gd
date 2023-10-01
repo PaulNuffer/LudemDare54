@@ -19,8 +19,8 @@ func _physics_process(delta):
 	move_and_collide(velocity.normalized() * delta * bullet_speed) 
 	
 	if ray_cast_2d.is_colliding():
-		if ray_cast_2d.get_collider().has_method("kill"):
-			ray_cast_2d.get_collider().kill()
+		if ray_cast_2d.get_collider().has_method("hurt"):
+			ray_cast_2d.get_collider().hurt(damage)
 		queue_free()
 
 func _ready():
