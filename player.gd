@@ -59,12 +59,6 @@ func resetvars():
 var dead = false
 
 func _process(delta):
-	if Input.is_action_just_pressed("exit"):
-		get_tree().quit()
-	if Input.is_action_just_pressed("restart"):
-		restart()
-
-		
 	if hitscan:
 		#if the hitscan distance is zero we need to calculate it so its roughly the same as where the bullet would have ended up
 		if hitscandist == 0:
@@ -152,10 +146,6 @@ func kill():
 	hideGraphics()
 	$CanvasLayer/DeathScreen.show()
 	z_index = -1
-	
-		
-func restart():
-	get_tree().reload_current_scene()
 	
 func recalculate(): #recalculates all player variables
 	resetvars() # reset variables to base

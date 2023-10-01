@@ -21,12 +21,17 @@ func _ready():
 	player.hide_textbox.connect(hide_textbox)
 	player.textbox_fields.connect(textbox_fields)
 	main_menu.start_game.connect(start_game)
+	pause_menu.show_pop_up.connect(show_pop_up)
 	pause_menu.hide_pop_up.connect(hide_pop_up)
 	get_tree().paused = true
 
 func start_game():
 	$Menu.hide()
 	get_tree().paused = false
+
+func show_pop_up():
+	$PauseMenu.show()
+	get_tree().paused = true
 
 func hide_pop_up():
 	$PauseMenu.hide()
