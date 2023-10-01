@@ -35,11 +35,11 @@ func kill():
 	$Graphics/Alive.hide()
 	$CollisionShape2D.disabled = true
 	z_index = -1
-		
+	GlobalVariables.enemy_count -= 1
 
 
 func _on_death_cull_timer_timeout():
 	opacity = opacity - 5
 	$Graphics/Dead/Splatter.self_modulate.a8 = opacity
 	$Graphics/Dead.self_modulate.a8 = opacity - 150
-	print(opacity)
+	#print(opacity)
