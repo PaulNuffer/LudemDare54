@@ -3,6 +3,11 @@ extends Node2D
 @export var guard_scene: PackedScene
 @export var worker_scene: PackedScene
 
+var wave_number = 1
+
+var wave_array = [[10, .5], [15, .7], [20, 1]]
+
+var alive_guards = 0
 
 
 func _on_spawn_timer_timeout():
