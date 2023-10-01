@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://pulv50b8war6"]
+[gd_scene load_steps=15 format=3 uid="uid://pulv50b8war6"]
 
 [ext_resource type="Texture2D" uid="uid://b5ks5xb4pi4ww" path="res://white_square.png" id="1_6g3vl"]
 [ext_resource type="Script" path="res://world.gd" id="1_h3xci"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://g1x7f0x0sfd3" path="res://gamejam_door_closed_sprite.png" id="9_dvhd1"]
 [ext_resource type="Texture2D" uid="uid://bl4c1g2g0w3b5" path="res://gamejam_door_open_sprite.png" id="10_x5awx"]
 [ext_resource type="PackedScene" uid="uid://cieatjcoxr11h" path="res://Interact Area.tscn" id="11_38g7i"]
+[ext_resource type="PackedScene" uid="uid://fig3oo0l870o" path="res://main_menu.tscn" id="12_27cs4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bcm6k"]
 size = Vector2(170.804, 194.451)
@@ -136,5 +137,8 @@ position = Vector2(0, 1161.29)
 scale = Vector2(18.4376, 18.4376)
 interact_label = "Press E to Interact"
 interact_type = "door"
+
+[node name="CanvasLayer" parent="." instance=ExtResource("12_27cs4")]
+visible = false
 
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

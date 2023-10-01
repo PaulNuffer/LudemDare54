@@ -1,0 +1,66 @@
+[gd_scene load_steps=6 format=3 uid="uid://fig3oo0l870o"]
+
+[ext_resource type="FontFile" uid="uid://df2y2tsnkt706" path="res://Born2bSportyV2.ttf" id="1_xt8s0"]
+[ext_resource type="FontFile" uid="uid://dpcnnl8v24k5w" path="res://HelvetiPixel.ttf" id="2_buies"]
+[ext_resource type="Script" path="res://menu.gd" id="3_0pwvw"]
+[ext_resource type="Texture2D" uid="uid://0fnqtr75ener" path="res://The_Android.PNG" id="3_i31om"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fsne0"]
+bg_color = Color(0.00784314, 0.00784314, 0.00784314, 1)
+
+[node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="MarginContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_fsne0")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0, 1, 1, 1)
+theme_override_fonts/font = ExtResource("1_xt8s0")
+theme_override_font_sizes/font_size = 1000
+text = "Mindwipe"
+
+[node name="Space" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("2_buies")
+theme_override_font_sizes/font_size = 300
+text = " "
+
+[node name="Start" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("2_buies")
+theme_override_font_sizes/font_size = 500
+text = "Start"
+
+[node name="Settings" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("2_buies")
+theme_override_font_sizes/font_size = 500
+text = "Settings"
+
+[node name="Graphic" type="TextureRect" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("3_i31om")
+expand_mode = 3
+stretch_mode = 4
+script = ExtResource("3_0pwvw")
