@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://pulv50b8war6"]
+[gd_scene load_steps=10 format=3 uid="uid://pulv50b8war6"]
 
 [ext_resource type="Texture2D" uid="uid://b5ks5xb4pi4ww" path="res://white_square.png" id="1_6g3vl"]
 [ext_resource type="Script" path="res://world.gd" id="1_h3xci"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://7q48jmg6staf" path="res://guard.tscn" id="2_ct77u"]
 [ext_resource type="PackedScene" uid="uid://b3ioob0g7m7ks" path="res://worker.tscn" id="3_m4cf5"]
 [ext_resource type="Texture2D" uid="uid://c4f2hv3iuglvq" path="res://gamejam_level.png" id="4_diebm"]
+[ext_resource type="PackedScene" uid="uid://c3yw3svctplxj" path="res://upgrade_chip.tscn" id="7_o5fc3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bcm6k"]
 size = Vector2(170.804, 194.451)
@@ -108,5 +109,9 @@ curve = SubResource("Curve2D_hx86s")
 [node name="SpawnLocation" type="PathFollow2D" parent="SpawnPath"]
 position = Vector2(-2773, -7957)
 rotation = 0.00393399
+
+[node name="UpgradeChip" parent="." instance=ExtResource("7_o5fc3")]
+position = Vector2(5431, -1564)
+scale = Vector2(0.171794, 0.171794)
 
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

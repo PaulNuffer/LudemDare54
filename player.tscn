@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dyj383tmdfjq0"]
+[gd_scene load_steps=11 format=3 uid="uid://dyj383tmdfjq0"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_arttm"]
 [ext_resource type="Texture2D" uid="uid://ckl6f2ibslqq4" path="res://splatter.png" id="2_5etr6"]
@@ -10,6 +10,8 @@
 [ext_resource type="Texture2D" uid="uid://dccx1ax2txcdm" path="res://player_sprite_left.png" id="4_xcbl8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_co1bf"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qx3hm"]
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 2
@@ -153,5 +155,28 @@ limit_bottom = 3977
 position = Vector2(214, -62)
 scale = Vector2(50, 50)
 
+[node name="Interaction Components" type="Node2D" parent="."]
+z_index = 3
+
+[node name="Interaction Area" type="Area2D" parent="Interaction Components"]
+collision_layer = 0
+collision_mask = 32
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interaction Components/Interaction Area"]
+scale = Vector2(-44.6637, -44.577)
+shape = SubResource("CircleShape2D_qx3hm")
+
+[node name="InteractLabel" type="Label" parent="Interaction Components"]
+offset_left = -162.0
+offset_top = -520.0
+offset_right = -122.0
+offset_bottom = -494.0
+scale = Vector2(8.36754, 8.36754)
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [connection signal="timeout" from="MuzzleFlash/Timer" to="MuzzleFlash" method="hide"]
 [connection signal="button_up" from="CanvasLayer/DeathScreen/Panel/Button" to="." method="restart"]
+[connection signal="area_entered" from="Interaction Components/Interaction Area" to="." method="_on_interaction_area_area_entered"]
+[connection signal="area_exited" from="Interaction Components/Interaction Area" to="." method="_on_interaction_area_area_exited"]

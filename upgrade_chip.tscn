@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://c3yw3svctplxj"]
+
+[ext_resource type="Script" path="res://upgradechip.gd" id="1_sga4h"]
+[ext_resource type="Texture2D" uid="uid://1tiekp0o4fqq" path="res://test_upgrade_chip_weapon.png" id="2_mc1tj"]
+[ext_resource type="PackedScene" uid="uid://cieatjcoxr11h" path="res://Interact Area.tscn" id="3_b5jku"]
+
+[node name="UpgradeChip" type="CharacterBody2D"]
+scale = Vector2(0.0958563, 0.0958563)
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("1_sga4h")
+
+[node name="Graphics" type="Node2D" parent="."]
+
+[node name="UpgradeChipArt" type="Sprite2D" parent="Graphics"]
+position = Vector2(1440, 699)
+texture = ExtResource("2_mc1tj")
+
+[node name="InteractArea" parent="." instance=ExtResource("3_b5jku")]
+position = Vector2(1418.79, 709.395)
+scale = Vector2(-50.0376, -50.0376)
+interact_label = "Shotgun"
