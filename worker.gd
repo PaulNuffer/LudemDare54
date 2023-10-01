@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@onready var ray_cast_2d = $RayCast2D
+#@onready var ray_cast_2d = $RayCast2D
 
 @export var move_speed = 800
 @export var health = 4
@@ -8,6 +8,9 @@ extends CharacterBody2D
 
 var dead = false
 var opacity = 500
+
+func _ready():
+	$Graphics/Alive.play()
 
 func _physics_process(delta):
 	if dead:
@@ -21,10 +24,10 @@ func _physics_process(delta):
 	
 	#if colliding with wall, enter cower state
 	
-	global_rotation = dir_to_player.angle()
+	#global_rotation = dir_to_player.angle()
 
-	if ray_cast_2d.is_colliding() and ray_cast_2d.get_collider() == player:
-		player.kill()
+	#if ray_cast_2d.is_colliding() and ray_cast_2d.get_collider() == player:
+		#player.kill()
 
 func hurt(damage):
 	health -= damage

@@ -1,10 +1,25 @@
-[gd_scene load_steps=7 format=3 uid="uid://7q48jmg6staf"]
+[gd_scene load_steps=9 format=3 uid="uid://7q48jmg6staf"]
 
 [ext_resource type="Script" path="res://guard.gd" id="1_au868"]
-[ext_resource type="Texture2D" uid="uid://bp4redxvs5nlm" path="res://guard.png" id="2_8rkp8"]
+[ext_resource type="Texture2D" uid="uid://csgkopvwmvduh" path="res://enemy_sprite_guard_leftleg.png" id="2_jma86"]
 [ext_resource type="Texture2D" uid="uid://dxowcefwl7pqw" path="res://dead_body.png" id="3_58yx4"]
+[ext_resource type="Texture2D" uid="uid://de6jq437rwlj1" path="res://enemy_sprite_guard_rightleg.png" id="3_p4y2e"]
 [ext_resource type="Texture2D" uid="uid://ckl6f2ibslqq4" path="res://splatter.png" id="4_s8ucs"]
 [ext_resource type="AudioStream" uid="uid://bj5b2m0dmc71d" path="res://death.wav" id="5_fb3vs"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5wp7l"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_jma86")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_p4y2e")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_54b51"]
 radius = 237.079
@@ -17,8 +32,10 @@ script = ExtResource("1_au868")
 [node name="Graphics" type="Node2D" parent="."]
 scale = Vector2(1, 0.98223)
 
-[node name="Alive" type="Sprite2D" parent="Graphics"]
-texture = ExtResource("2_8rkp8")
+[node name="Alive" type="AnimatedSprite2D" parent="Graphics"]
+position = Vector2(-15, -18.3256)
+scale = Vector2(0.203975, 0.203975)
+sprite_frames = SubResource("SpriteFrames_5wp7l")
 
 [node name="Dead" type="Sprite2D" parent="Graphics"]
 visible = false
@@ -44,7 +61,8 @@ bus = &"sfx"
 wait_time = 0.05
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-scale = Vector2(1, 0.98223)
+position = Vector2(-36, -8)
+scale = Vector2(0.798387, 1.61288)
 shape = SubResource("CircleShape2D_54b51")
 
 [connection signal="timeout" from="DeathCullTimer" to="." method="_on_death_cull_timer_timeout"]

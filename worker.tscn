@@ -1,13 +1,28 @@
-[gd_scene load_steps=7 format=3 uid="uid://b3ioob0g7m7ks"]
+[gd_scene load_steps=9 format=3 uid="uid://b3ioob0g7m7ks"]
 
-[ext_resource type="Texture2D" uid="uid://xrscyphyro6a" path="res://worker.png" id="1_ovuxo"]
 [ext_resource type="Script" path="res://worker.gd" id="1_sw1sg"]
 [ext_resource type="Texture2D" uid="uid://ckl6f2ibslqq4" path="res://splatter.png" id="2_2ew75"]
+[ext_resource type="Texture2D" uid="uid://chn0hfmqq7ngx" path="res://enemy_sprite_worker_leftleg.png" id="2_3dcfi"]
 [ext_resource type="Texture2D" uid="uid://dxowcefwl7pqw" path="res://dead_body.png" id="2_7smkk"]
+[ext_resource type="Texture2D" uid="uid://ceqxtiuxtkd6x" path="res://enemy_sprite_worker_rightleg.png" id="3_k0alt"]
 [ext_resource type="AudioStream" uid="uid://bj5b2m0dmc71d" path="res://death.wav" id="5_506rq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_54b51"]
 radius = 237.079
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_buy24"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_3dcfi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_k0alt")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="Worker" type="CharacterBody2D"]
 collision_layer = 4
@@ -15,14 +30,17 @@ collision_mask = 3
 script = ExtResource("1_sw1sg")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-scale = Vector2(1, 0.98223)
+position = Vector2(-3, 0)
+scale = Vector2(0.506818, 1.483)
 shape = SubResource("CircleShape2D_54b51")
 
 [node name="Graphics" type="Node2D" parent="."]
 scale = Vector2(1, 0.98223)
 
-[node name="Alive" type="Sprite2D" parent="Graphics"]
-texture = ExtResource("1_ovuxo")
+[node name="Alive" type="AnimatedSprite2D" parent="Graphics"]
+position = Vector2(-15, -18.3256)
+scale = Vector2(0.203975, 0.203975)
+sprite_frames = SubResource("SpriteFrames_buy24")
 
 [node name="Dead" type="Sprite2D" parent="Graphics"]
 visible = false
@@ -33,10 +51,6 @@ texture = ExtResource("2_7smkk")
 show_behind_parent = true
 position = Vector2(11, -3)
 texture = ExtResource("2_2ew75")
-
-[node name="RayCast2D" type="RayCast2D" parent="."]
-target_position = Vector2(0, -400)
-collision_mask = 3
 
 [node name="DeathSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_506rq")

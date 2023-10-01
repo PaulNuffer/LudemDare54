@@ -17,6 +17,9 @@ var disttoplayer
 var shootoffset = randf_range(-500, 2000) #random offset of how far away from player guard will stop and shoot
 var reloadtimer = 0;
 
+func _ready():
+	$Graphics/Alive.play()
+
 func _physics_process(delta):
 	if dead:
 		if opacity < 1:
@@ -41,7 +44,7 @@ func _physics_process(delta):
 	if disttoplayer < 1300 + shootoffset and disttoplayer > 1100 + shootoffset:
 		shoot()
 		
-	global_rotation = dir_to_player.angle()
+	#global_rotation = dir_to_player.angle()
 	
 	#code for stopping moving and shooting instead if close enough, randomized
 	
