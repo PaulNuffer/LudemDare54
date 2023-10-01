@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://pulv50b8war6"]
+[gd_scene load_steps=14 format=3 uid="uid://pulv50b8war6"]
 
 [ext_resource type="Texture2D" uid="uid://b5ks5xb4pi4ww" path="res://white_square.png" id="1_6g3vl"]
 [ext_resource type="Script" path="res://world.gd" id="1_h3xci"]
@@ -8,6 +8,9 @@
 [ext_resource type="Texture2D" uid="uid://c4f2hv3iuglvq" path="res://gamejam_level.png" id="4_diebm"]
 [ext_resource type="PackedScene" uid="uid://c3yw3svctplxj" path="res://upgrade_chip.tscn" id="7_o5fc3"]
 [ext_resource type="PackedScene" uid="uid://dqggbqb4kj4jw" path="res://textbox.tscn" id="8_hktru"]
+[ext_resource type="Texture2D" uid="uid://g1x7f0x0sfd3" path="res://gamejam_door_closed_sprite.png" id="9_dvhd1"]
+[ext_resource type="Texture2D" uid="uid://bl4c1g2g0w3b5" path="res://gamejam_door_open_sprite.png" id="10_x5awx"]
+[ext_resource type="PackedScene" uid="uid://cieatjcoxr11h" path="res://Interact Area.tscn" id="11_38g7i"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bcm6k"]
 size = Vector2(170.804, 194.451)
@@ -34,6 +37,7 @@ scale = Vector2(1.454, 1.454)
 texture = ExtResource("4_diebm")
 
 [node name="Block" type="Sprite2D" parent="Environment"]
+visible = false
 modulate = Color(0, 0, 0, 1)
 position = Vector2(3556, -5802)
 scale = Vector2(20.164, 1)
@@ -57,6 +61,7 @@ scale = Vector2(2.51166, 2.17536)
 shape = SubResource("RectangleShape2D_bcm6k")
 
 [node name="Block2" type="Sprite2D" parent="Environment"]
+visible = false
 modulate = Color(0, 0, 0, 1)
 position = Vector2(-797, -1399)
 scale = Vector2(0.91, 20.164)
@@ -69,6 +74,7 @@ scale = Vector2(2.51166, 2.17536)
 shape = SubResource("RectangleShape2D_bcm6k")
 
 [node name="Block3" type="Sprite2D" parent="Environment"]
+visible = false
 modulate = Color(0, 0, 0, 1)
 position = Vector2(7838, -1396)
 scale = Vector2(1, 20.164)
@@ -81,6 +87,7 @@ scale = Vector2(2.51166, 2.17536)
 shape = SubResource("RectangleShape2D_bcm6k")
 
 [node name="Block4" type="Sprite2D" parent="Environment"]
+visible = false
 modulate = Color(0, 0, 0, 1)
 position = Vector2(3631, 2865)
 scale = Vector2(20.164, 1.095)
@@ -111,5 +118,25 @@ position = Vector2(3, -5039)
 
 [node name="Textbox" parent="." instance=ExtResource("8_hktru")]
 visible = false
+
+[node name="ClosedDoorArt" type="Sprite2D" parent="."]
+position = Vector2(3512, -6064)
+scale = Vector2(0.502887, 0.502887)
+texture = ExtResource("9_dvhd1")
+
+[node name="OpenDoor" type="Node2D" parent="."]
+visible = false
+position = Vector2(3512, -6064)
+scale = Vector2(0.502887, 0.502887)
+
+[node name="OpenDoorArt" type="Sprite2D" parent="OpenDoor"]
+scale = Vector2(1, 1)
+texture = ExtResource("10_x5awx")
+
+[node name="InteractArea" parent="OpenDoor" instance=ExtResource("11_38g7i")]
+position = Vector2(0, 1161.29)
+scale = Vector2(28.6749, 28.6749)
+interact_label = "Press E to Interact"
+interact_type = "door"
 
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

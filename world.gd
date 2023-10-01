@@ -29,6 +29,8 @@ func hide_textbox():
 func textbox_fields(info):
 	if(info.interact_type == 'dialogue'):
 		pass
+	elif(info.interact_type == 'door'):
+		pass
 	else:
 		var upgradeField = info.interact_value
 		$Textbox.set_upgrade(info.interact_type, upgradeField[1], upgradeField[2], upgradeField[3])
