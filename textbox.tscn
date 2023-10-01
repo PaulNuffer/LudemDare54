@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://dqggbqb4kj4jw"]
+[gd_scene load_steps=4 format=3 uid="uid://dqggbqb4kj4jw"]
 
-[ext_resource type="FontFile" uid="uid://df2y2tsnkt706" path="res://Born2bSportyV2.ttf" id="1_omhwr"]
+[ext_resource type="Texture2D" uid="uid://dapslddujndtc" path="res://upgrade_weapon.png" id="1_gbngi"]
+[ext_resource type="FontFile" uid="uid://dpcnnl8v24k5w" path="res://HelvetiPixel.ttf" id="2_0fiul"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3qatg"]
 bg_color = Color(0, 0, 0, 1)
@@ -40,30 +41,72 @@ theme_override_constants/margin_bottom = 100
 [node name="Panel" type="Panel" parent="MarginContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/MarginContainer"]
+[node name="HSplitContainer" type="HSplitContainer" parent="MarginContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="Start" type="Label" parent="MarginContainer/MarginContainer/HBoxContainer"]
+[node name="TextBoxImage" type="TextureRect" parent="MarginContainer/MarginContainer/HSplitContainer"]
+layout_mode = 2
+texture = ExtResource("1_gbngi")
+expand_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/MarginContainer/HSplitContainer"]
+layout_mode = 2
+
+[node name="Start" type="Label" parent="MarginContainer/MarginContainer/HSplitContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
-theme_override_fonts/font = ExtResource("1_omhwr")
+theme_override_fonts/font = ExtResource("2_0fiul")
 theme_override_font_sizes/font_size = 150
 text = "* "
 
-[node name="Label" type="Label" parent="MarginContainer/MarginContainer/HBoxContainer"]
+[node name="Dialogue" type="Label" parent="MarginContainer/MarginContainer/HSplitContainer/HBoxContainer"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
-theme_override_fonts/font = ExtResource("1_omhwr")
+theme_override_fonts/font = ExtResource("2_0fiul")
 theme_override_font_sizes/font_size = 150
-text = "Shotgun. Kablow! 5 shots, high spread."
+text = "Your mind has been wiped. Please try again."
 autowrap_mode = 2
 
-[node name="End" type="Label" parent="MarginContainer/MarginContainer/HBoxContainer"]
+[node name="Upgrade Text" type="VSplitContainer" parent="MarginContainer/MarginContainer/HSplitContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Title" type="Label" parent="MarginContainer/MarginContainer/HSplitContainer/HBoxContainer/Upgrade Text"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(1, 0.137255, 0.0980392, 1)
+theme_override_fonts/font = ExtResource("2_0fiul")
+theme_override_font_sizes/font_size = 150
+text = "Shotgun"
+autowrap_mode = 2
+
+[node name="Description" type="Label" parent="MarginContainer/MarginContainer/HSplitContainer/HBoxContainer/Upgrade Text"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("2_0fiul")
+theme_override_font_sizes/font_size = 150
+text = "5 shots, high spread."
+autowrap_mode = 2
+
+[node name="Flavor" type="Label" parent="MarginContainer/MarginContainer/HSplitContainer/HBoxContainer/Upgrade Text"]
+layout_mode = 2
+size_flags_horizontal = 9
+size_flags_vertical = 10
+theme_override_colors/font_color = Color(0.662745, 0.662745, 0.662745, 1)
+theme_override_fonts/font = ExtResource("2_0fiul")
+theme_override_font_sizes/font_size = 150
+text = "Kablow!"
+autowrap_mode = 2
+
+[node name="End" type="Label" parent="MarginContainer/MarginContainer/HSplitContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
-theme_override_fonts/font = ExtResource("1_omhwr")
+theme_override_fonts/font = ExtResource("2_0fiul")
 theme_override_font_sizes/font_size = 150
 text = " *"
