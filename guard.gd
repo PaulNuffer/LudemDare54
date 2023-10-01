@@ -56,8 +56,8 @@ func createbullet():
 	#bullet code
 	var bullet = bulletPath.instantiate()
 	get_parent().add_child(bullet)
-	bullet.set_collision_layer_value(2, true)
-	bullet.set_collision_layer_value(3, false)
+	bullet.ray_cast_2d.set_collision_mask_value(2, true)
+	bullet.ray_cast_2d.set_collision_mask_value(3, false)
 	bullet.position = global_position
 	
 	#this code is totally fucked because in theory it does nothing (bullet calcs its own spread) but if i remove it the game crashes lol
