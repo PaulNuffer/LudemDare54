@@ -56,6 +56,8 @@ func createbullet():
 	#bullet code
 	var bullet = bulletPath.instantiate()
 	get_parent().add_child(bullet)
+	bullet.set_collision_layer_value(2, true)
+	bullet.set_collision_layer_value(3, false)
 	bullet.position = global_position
 	
 	#this code is totally fucked because in theory it does nothing (bullet calcs its own spread) but if i remove it the game crashes lol
@@ -63,6 +65,7 @@ func createbullet():
 	var newDir = (standardDir + randf_range(-10, 10)) * PI / 180
 	bullet.velocity = Vector2.from_angle(newDir)
 	
+	bullet.enemy = true
 	bullet.spread = 10
 	bullet.damage = 1
 	bullet.bullet_speed = 2000

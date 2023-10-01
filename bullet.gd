@@ -7,6 +7,8 @@ extends CharacterBody2D
 @export var damage = 1
 @export var spread = 100
 @export var lifetime = 400
+@export var enemy = false
+
 
 func _physics_process(delta):
 	
@@ -14,11 +16,15 @@ func _physics_process(delta):
 	if lifetime <= 0:
 		queue_free()
 		
+	if enemy:
+		$BulletSprite.hide()
+		$EnemyBulletSprite.show()
+		
 	global_rotation = velocity.angle()
 	
 	move_and_collide(velocity.normalized() * delta * bullet_speed) 
 	
-	if ray_cast_2d.is_colliding():
+	if ray_cast_2d.is_colliding(): #MAYBE HAVE THE BULLETS COLLIDE WITH EACHOTHER
 		if ray_cast_2d.get_collider().has_method("hurt"):
 			ray_cast_2d.get_collider().hurt(damage)
 		queue_free()
