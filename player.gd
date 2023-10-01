@@ -159,7 +159,7 @@ func recalculate(): #recalculates all player variables
 	
 	
 func shoot():
-	if reloadtimer == 0: #only if we can shoot
+	if reloadtimer <= 0: #only if we can shoot
 		for item in upgrades: #loop through all upgrade slots
 			if item[0] == "weapon": #if any of them are weapons
 				recalculate() # hacky, i dont want to do this every time we shoot
@@ -181,7 +181,7 @@ func createbullet():
 		if ray_cast_2d.is_colliding():
 			if ray_cast_2d.get_collider().has_method("hurt"):
 				ray_cast_2d.get_collider().hurt(damage)
-				print("dealt damage")
+		reloadtimer = reloadtime #start reloading
 				
 		return #dont make a bullet
 		
@@ -228,12 +228,12 @@ func process_passive_slot(i):
 			spread += 20
 		2: #"calculated shot"
 			hitscan = true
-			spread = 0
+			spread -= 20
 			damage -= 2
 		3: #"rapid fire"
 			spread += 60
 			homing = true
-			reloadtime = -1
+			reloadtime -= 30
 		_:
 			pass #default behaviour
 			
@@ -244,15 +244,16 @@ func initialize_weapon_slot(i):
 			damage = 40
 			spread = 0
 			reloadtime = 200
-			bulletspeed = 5000
-			lifetime = 2000
+			hitscandist = 10000
 			hitscan = true
 		2: #shotgun
 			damage = 5
 			spread = 10
-			lifetime = 100
-		3:
+			lifetime = 30
+		3: #sword
 			hitscan = true
+			hitscandist = 600
+			speed += 200
 		_:
 			pass #default behaviour
 	
