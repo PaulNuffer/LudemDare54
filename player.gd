@@ -7,6 +7,7 @@ extends CharacterBody2D
 signal show_textbox
 signal hide_textbox
 signal textbox_fields(info)
+signal door_entered
 
 const bulletPath = preload('res://bullet.tscn')
 
@@ -96,6 +97,7 @@ func _physics_process(delta):
 				#play a door sound here
 				global_position.x = 3528
 				global_position.y = 2000
+				emit_signal("door_entered")
 		else:
 			screenfadetimer-=2
 			$fade/ColorRect.self_modulate.a8 = screenfadetimer

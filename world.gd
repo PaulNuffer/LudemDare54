@@ -20,6 +20,7 @@ func _ready():
 	player.show_textbox.connect(show_textbox)
 	player.hide_textbox.connect(hide_textbox)
 	player.textbox_fields.connect(textbox_fields)
+	player.door_entered.connect(door_entered)
 	main_menu.start_game.connect(start_game)
 	pause_menu.show_pop_up.connect(show_pop_up)
 	pause_menu.hide_pop_up.connect(hide_pop_up)
@@ -50,6 +51,10 @@ func show_textbox():
 
 func hide_textbox():
 	$Textbox.hide()
+
+func door_entered():
+	$ClosedDoorArt.show()
+	$OpenDoor.hide()
 
 func textbox_fields(info):
 	if(info.interact_type == 'dialogue'):
@@ -102,7 +107,12 @@ func _on_spawn_timer_timeout():
 					print("finished all waves")
 					
 				GlobalVariables.wavecompleted = true
+				wave_ended()
 	
+func wave_ended():
+	$OpenDoor.show()
+	$ClosedDoorArt.hide()
+
 func spawn_upgrade(xpos):
 	var upgrade = upgrade_chip_scene.instantiate()
 	upgrade.position = Vector2(xpos, -3000)

@@ -130,6 +130,7 @@ scale = Vector2(0.502887, 0.502887)
 texture = ExtResource("9_dvhd1")
 
 [node name="OpenDoor" type="Node2D" parent="."]
+visible = false
 position = Vector2(3512, -6064)
 scale = Vector2(0.502887, 0.502887)
 
