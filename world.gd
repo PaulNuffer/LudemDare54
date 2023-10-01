@@ -60,14 +60,26 @@ func _on_spawn_timer_timeout():
 				print("finished all waves")
 	
 func spawn_upgrade(xpos):
-	var upgrade1 = upgrade_chip_scene.instantiate()
-	upgrade1.position = Vector2(xpos, -3000)
+	var upgrade = upgrade_chip_scene.instantiate()
+	upgrade.position = Vector2(xpos, -3000)
 	var type = randi_range(0, 2)
+	match type:
+		0:
+			var index = randi_range(0, weapon_array.size())
+			upgrade.get_child(1).interact_label = "Press e"
+			upgrade.get_child(1).interact_type = "weapon"
+			upgrade.get_child(1).interact_value = ["weapon", 2]
+			add_child(upgrade)
+		1:
+			pass
+		2:
+			pass
+		_:
+			pass
 	
-	upgrade1.get_child(1).interact_label = "upgrade 1"
-	upgrade1.get_child(1).interact_type = "weapon"
-	upgrade1.get_child(1).interact_value = ["weapon", 2]
-	add_child(upgrade1)
+	
+
+	
 		
 		
 		
