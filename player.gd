@@ -57,6 +57,10 @@ func _process(delta):
 		reloadtimer-=1
 	if screenfadetimer > 0: #decrement screen fade timer
 		screenfadetimer-=1
+		$fade/ColorRect.self_modulate.a8 = screenfadetimer
+		if(screenfadetimer == 1):
+			$fade/ColorRect.hide()
+			canact = true
 	if dead:
 		return
 		
@@ -260,4 +264,8 @@ func execute_interaction():
 				cur_interaction.get_parent().queue_free()
 			"door" :
 				canact = false
-				screenfadetimer = 4000
+				screenfadetimer = 400
+				$fade/ColorRect.show()
+				#play a door sound here
+				global_position.x = 3528
+				global_position.y = 2000
