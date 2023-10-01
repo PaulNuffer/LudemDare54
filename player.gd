@@ -16,7 +16,7 @@ var upgrades = [["none", 0], ["none", 0], ["none", 0]]
 var dspeed = 2000
 var ddamage = 10
 var dbulletspeed = 3000
-var dlifetime = 200 
+var dlifetime = 100 
 var dreloadtime = 50
 var dbulletsize = 100
 
@@ -28,9 +28,9 @@ var bulletspeed = dbulletspeed
 var lifetime = dlifetime
 var reloadtime = dreloadtime
 var bulletsize = dbulletsize
-var spread = 50 #RESET THIS
-var hitscandist = 1000 #RESET THIS
-var hitscan = true # RESET THIS
+var spread = 0
+var hitscandist = 0
+var hitscan = false
 var homing = false
 var canact = true
 
@@ -67,6 +67,15 @@ func _process(delta):
 		if(screenfadetimer == 1):
 			$fade/ColorRect.hide()
 			canact = true
+		
+	if hitscan:
+		#if the hitscan distance is zero we need to calculate it so its roughly the same as where the bullet would have ended up
+		if hitscandist == 0:
+			hitscandist = (bulletspeed * lifetime) * .007
+
+		ray_cast_2d.target_position.x = hitscandist #set the raycast to the correct length
+		ray_cast_2d.rotation = global_position.direction_to(get_global_mouse_position()).angle() + (randf_range(spread * -1, spread) * PI / 180) #point it at the mouse with a spread
+	
 	if dead:
 		return
 		
@@ -135,50 +144,38 @@ func shoot():
 	if reloadtimer == 0: #only if we can shoot
 		for item in upgrades: #loop through all upgrade slots
 			if item[0] == "weapon": #if any of them are weapons
-				recalculate() # hacky, i dont want to do this every time we shoot		
+				recalculate() # hacky, i dont want to do this every time we shoot
 				process_weapon_slot(item[1]) #activate them
 				return #and then get outta here
 		process_weapon_slot(0) #if none are weapons, use default shooting behaviour
 		
 #creates a bullet, or a hitscan raycast
-func createbullet(hscan):
-	#code for both
-	
-	#convert radians to degrees
-	var standardDir = (get_global_mouse_position() - $Marker2D.global_position).normalized().angle() * 180 / PI
-	var newDir = (standardDir + randf_range(spread * -1, spread)) * PI / 180
-	
+func createbullet():
 	#hitscan code
-	if (hscan):
-		ray_cast_2d.target_position.x = hitscandist #set the raycast to the correct length
-		
-		
-		
-		ray_cast_2d.rotation = global_position.direction_to(get_global_mouse_position()).angle() + newDir #point it at the mouse
-		
+	if (hitscan):
 		#hurt whatever if it has a hurt method
 		if ray_cast_2d.is_colliding():
 			if ray_cast_2d.get_collider().has_method("hurt"):
 				ray_cast_2d.get_collider().hurt(damage)
+				print("dealt damage")
 				
-		
-		
-		#return #dont make a bullet
+		return #dont make a bullet
 		
 	#bullet code
 	var bullet = bulletPath.instantiate()
 	get_parent().add_child(bullet)
 	bullet.position = global_position
+	
+	#this code is totally fucked because in theory it does nothing (bullet calcs its own spread) but if i remove it the game crashes lol
+	var standardDir = (get_global_mouse_position() - $Marker2D.global_position).normalized().angle() * 180 / PI
+	var newDir = (standardDir + randf_range(spread * -1, spread)) * PI / 180
 	bullet.velocity = Vector2.from_angle(newDir)
+	
 	bullet.spread = spread
 	bullet.damage = damage
 	bullet.bullet_speed = bulletspeed
 	bullet.lifetime = lifetime
 	reloadtimer = reloadtime #start reloading
-		
-	#below code is hitscan stuff, will need it later probably
-	#if ray_cast_2d.is_colliding() and ray_cast_2d.get_collider().has_method("kill"):
-		#ray_cast_2d.get_collider().kill()
 	
 	#call this for stuff that is activated by the player (ie right click to go invisible) (need generic timer for temporary effects and cooldowns)
 func process_utility_slot(i):
@@ -216,10 +213,13 @@ func initialize_weapon_slot(i):
 			reloadtime = 200
 			bulletspeed = 5000
 			lifetime = 2000
+			hitscan = true
 		2: #shotgun
 			damage = 5
 			spread = 10
 			lifetime = 100
+		3:
+			hitscan = true
 		_:
 			pass #default behaviour
 	
@@ -227,23 +227,23 @@ func initialize_weapon_slot(i):
 func process_weapon_slot(i):
 	match i:
 		1: #sniper rifle (i want this to be hitscan but it doesent need to be if thatd be ass to do)
-			createbullet(true)
+			createbullet()
 			#$MuzzleFlash.show()
 			#$MuzzleFlash/Timer.start()
 			$ShootSound.play()
 
 		2: #shotgun 
 			for n in 5:
-				createbullet(hitscan)
+				createbullet()
 			#$MuzzleFlash.show() # only one muzzleflash
 			#$MuzzleFlash/Timer.start()
 			$ShootSound.play()
 			
 		3: #sword
-			createbullet(true)
+			createbullet()
 			
 		_: #default pistol
-			createbullet(hitscan)
+			createbullet()
 			#$MuzzleFlash.show()
 			#$MuzzleFlash/Timer.start()
 			$ShootSound.play()
