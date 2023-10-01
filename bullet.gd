@@ -6,6 +6,12 @@ extends CharacterBody2D
 
 @export var damage = 1
 @export var spread = 100
+@export var lifetime = 400
+
+func _process(delta):
+	lifetime-=1
+	if lifetime <= 0:
+		queue_free()
 
 func _physics_process(delta):
 	global_rotation = velocity.angle()
