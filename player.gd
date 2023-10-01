@@ -1,24 +1,25 @@
 extends CharacterBody2D
 
-@onready var ray_cast_2d = $RayCast2D
-@export var move_speed = 2800
+@onready var ray_cast_2d = $RayCast2D #move this down and set it in code
 
 const bulletPath = preload('res://bullet.tscn')
 
 #array of arrays representing the upgrades, master array pos is slot number, first element of child array is type, second element of child array is index
-var array = [["none", 0], ["none", 0], ["none", 0]]
+var upgrades = [["none", 0], ["none", 0], ["none", 0]]
 
 #default variables (any variables not specified here are false or 0 by default
-var dspeed = 700
+var dspeed = 2000
 var ddamage = 10
 var dbulletspeed = 3000
+var dlifetime = 3 #in seconds
 
 #modified variables
 var speed = dspeed
 var damage = ddamage
 var bulletspeed = dbulletspeed
-var spread = 10
-var reloadtimemod = 0
+var lifetime = dlifetime
+var spread = 0
+var reloadtimemod = 0 #in seconds
 var hitscan = false
 var homing = false
 
@@ -27,11 +28,12 @@ func resetvars():
 	var speed = dspeed
 	var damage = ddamage
 	var bulletspeed = dbulletspeed
+	var lifetime = dlifetime
 	var spread = 0
-	var reloadtimemod = 0
+	var reloadtimemod = 0 #in seconds
 	var hitscan = false
 	var homing = false
-	
+		
 var dead = false
 	
 func _process(delta):
@@ -49,7 +51,7 @@ func _physics_process(delta):
 	if dead:
 		return
 	var move_dir = Input.get_vector("move_left", "move_right", "move_up", "move_down")
-	velocity = move_dir * move_speed
+	velocity = move_dir * speed
 	move_and_slide()
 	
 func kill():
@@ -66,19 +68,26 @@ func kill():
 func restart():
 	get_tree().reload_current_scene()
 	
+func recalculate(): #recalculates all player variables
+	resetvars() # reset variables to base
+	for item in upgrades: #loop through all upgrade slots
+		if item[0] == "weapon": #if any of them are weapons
+			initialize_weapon_slot(item[1]) #initialize them
+			
+	for item in upgrades: #loop through all upgrade slots
+		if item[0] == "passive": #if any of them are passives
+			process_passive_slot(item[1]) #initialize them
+	
+	
 func shoot():
-	var bullet = bulletPath.instantiate()
-	get_parent().add_child(bullet)
-	bullet.position = $Marker2D.global_position
-	var standardDir = (get_global_mouse_position() - $Marker2D.global_position).normalized().angle() * 180 / PI
-	var newDir = (standardDir + randf_range(spread * -1, spread)) * PI / 180
-	bullet.velocity = Vector2.from_angle(newDir)
-	bullet.spread = spread
-	bullet.damage = damage
-	bullet.bullet_speed = bulletspeed
-	$MuzzleFlash.show()
-	$MuzzleFlash/Timer.start()
-	$ShootSound.play()
+	for item in upgrades: #loop through all upgrade slots
+		if item[0] == "weapon": #if any of them are weapons
+			recalculate() # hacky, i dont want to do this every time we shoot
+			process_weapon_slot(item[1]) #activate them
+			return #and then get outta here
+	process_weapon_slot(0) #if none are weapons, use default shooting behaviour
+		
+	#below code is hitscan stuff, will need it later probably
 	#if ray_cast_2d.is_colliding() and ray_cast_2d.get_collider().has_method("kill"):
 		#ray_cast_2d.get_collider().kill()
 	
@@ -86,7 +95,7 @@ func shoot():
 func process_utility_slot(i):
 	match i:
 		1:
-			global_position = get_global_mouse_position()
+			global_position = get_global_mouse_position() #works but is shit, make it so you cant teleport in walls and you can telefrag
 		2:
 			pass
 		_:
@@ -95,25 +104,81 @@ func process_utility_slot(i):
 	#call this for stuff that is always active (ie +5 weapon damage) (this will be activated once per passive chip every time you upgrade, after resetting all stats to default)
 func process_passive_slot(i):
 	match i:
-		1:
+		1: #"blind rage"
 			damage += 10
 			spread += 20
-		2:
+		2: #"calculated shot"
 			hitscan = true
+			spread = 0
 			damage -= 2
-		3:
+		3: #"rapid fire"
 			spread += 60
 			homing = true
-			reloadtimemod = -20
+			reloadtimemod = -1
+		_:
+			pass #default behaviour
+			
+	#call this whenever you would call process_passive_slot (sets the default stats for each weapon)
+func initialize_weapon_slot(i):
+	match i:
+		1: #sniper rifle
+			damage = 40
+			spread = 0
+			reloadtimemod = 1
+			bulletspeed = 5000
+			lifetime = 10
+		2: #shotgun
+			damage = 5
+			spread = 10
+			lifetime = .5
 		_:
 			pass #default behaviour
 	
-	#call this for stuff that is a weapon (ie i shouldnt have to explain) (setting the weapon sprite will happen elsewhere) (need generic timer for reload time)
+	#call this when you want to shoot (setting the weapon sprite will happen elsewhere)
 func process_weapon_slot(i):
 	match i:
-		1:
-			pass
-		2:
-			pass
-		_:
-			pass #default behaviour
+		1: #sniper rifle (i want this to be hitscan but it doesent need to be if thatd be ass to do)
+			var bullet = bulletPath.instantiate()
+			get_parent().add_child(bullet)
+			bullet.position = $Marker2D.global_position
+			var standardDir = (get_global_mouse_position() - $Marker2D.global_position).normalized().angle() * 180 / PI
+			var newDir = (standardDir + randf_range(spread * -1, spread)) * PI / 180
+			bullet.velocity = Vector2.from_angle(newDir)
+			bullet.spread = spread
+			bullet.damage = damage
+			bullet.bullet_speed = bulletspeed
+			$MuzzleFlash.show()
+			$MuzzleFlash/Timer.start()
+			$ShootSound.play()
+		2: #shotgun 
+			for n in 5:
+				var bullet = bulletPath.instantiate()
+				get_parent().add_child(bullet)
+				bullet.position = $Marker2D.global_position
+				var standardDir = (get_global_mouse_position() - $Marker2D.global_position).normalized().angle() * 180 / PI
+				var newDir = (standardDir + randf_range(spread * -1, spread)) * PI / 180
+				bullet.velocity = Vector2.from_angle(newDir)
+				bullet.spread = spread
+				bullet.damage = damage
+				bullet.bullet_speed = bulletspeed
+			$MuzzleFlash.show() # only one muzzleflash
+			$MuzzleFlash/Timer.start()
+			$ShootSound.play()
+			
+		3: #sword
+			if ray_cast_2d.is_colliding() and ray_cast_2d.get_collider().has_method("kill"):
+				ray_cast_2d.get_collider().kill()
+			
+		_: #default pistol
+			var bullet = bulletPath.instantiate()
+			get_parent().add_child(bullet)
+			bullet.position = $Marker2D.global_position
+			var standardDir = (get_global_mouse_position() - $Marker2D.global_position).normalized().angle() * 180 / PI
+			var newDir = (standardDir + randf_range(spread * -1, spread)) * PI / 180
+			bullet.velocity = Vector2.from_angle(newDir)
+			bullet.spread = spread
+			bullet.damage = damage
+			bullet.bullet_speed = bulletspeed
+			$MuzzleFlash.show()
+			$MuzzleFlash/Timer.start()
+			$ShootSound.play()
