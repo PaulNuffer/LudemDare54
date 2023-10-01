@@ -23,19 +23,27 @@ func _ready():
 	main_menu.start_game.connect(start_game)
 	pause_menu.show_pop_up.connect(show_pop_up)
 	pause_menu.hide_pop_up.connect(hide_pop_up)
+	pause_menu.show_main_menu.connect(show_main_menu)
 	get_tree().paused = true
 
 func start_game():
 	$Menu.hide()
-	get_tree().paused = false
-
-func show_pop_up():
-	$PauseMenu.show()
-	get_tree().paused = true
-
-func hide_pop_up():
 	$PauseMenu.hide()
 	get_tree().paused = false
+
+func show_main_menu():
+	$Menu.show()
+	get_tree().paused = true
+
+func show_pop_up():
+	if(!$Menu.visible):
+		$PauseMenu.show()
+		get_tree().paused = true
+
+func hide_pop_up():
+	if(!$Menu.visible):
+		$PauseMenu.hide()
+		get_tree().paused = false
 
 func show_textbox():
 	$Textbox.show()
