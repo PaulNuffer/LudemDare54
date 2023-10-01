@@ -62,7 +62,7 @@ texture = ExtResource("2_5etr6")
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 position = Vector2(204, -64)
-target_position = Vector2(10000, 0)
+target_position = Vector2(10, 0)
 collision_mask = 3
 
 [node name="DeathSound" type="AudioStreamPlayer" parent="."]
@@ -187,6 +187,13 @@ offset_top = -1.0
 offset_right = 13086.0
 offset_bottom = 7031.0
 color = Color(0, 0, 0, 1)
+
+[node name="MousePos" type="RayCast2D" parent="."]
+position = Vector2(845, -182)
+scale = Vector2(12.54, 1)
+target_position = Vector2(0, -23)
+collision_mask = 5
+hit_from_inside = true
 
 [connection signal="timeout" from="MuzzleFlash/Timer" to="MuzzleFlash" method="hide"]
 [connection signal="button_up" from="CanvasLayer/DeathScreen/Panel/Button" to="." method="restart"]
