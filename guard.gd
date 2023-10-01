@@ -3,7 +3,6 @@ extends CharacterBody2D
 @onready var ray_cast_2d = $RayCast2D
 
 @export var move_speed = 2000
-@export var health = 10
 @onready var player: CharacterBody2D = get_tree().get_first_node_in_group("player")
 
 var dead = false
@@ -26,12 +25,6 @@ func _physics_process(delta):
 	if ray_cast_2d.is_colliding() and ray_cast_2d.get_collider() == player:
 		player.kill()
 		
-func hurt(damage):
-	health -= damage
-	if(health <= 0):
-		kill()
-	
-
 func kill():
 	if dead:
 		return
