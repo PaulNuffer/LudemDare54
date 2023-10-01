@@ -11,7 +11,7 @@ signal textbox_fields(info)
 const bulletPath = preload('res://bullet.tscn')
 
 #array of arrays representing the upgrades, master array pos is slot number, first element of child array is type, second element of child array is index
-var upgrades = [["none", 0], ["none", 0], ["none", 0]]
+var upgrades = [["none", 0], ["none", 0], ["utility", 1]]
 
 #default variables (any variables not specified here are bools or 0 by default) (we could init everything as zero and have all these set in the default weapon shoot case)
 var dspeed = 2000
@@ -79,7 +79,7 @@ func _process(delta):
 	#global_rotation = global_position.direction_to(get_global_mouse_position()).angle()
 	if Input.is_action_just_pressed("shoot") and canact:
 		shoot()
-	if Input.is_action_just_pressed("utlity") and canact:
+	if Input.is_action_just_pressed("utility") and canact:
 		activateUtility()
 		
 		
@@ -209,8 +209,12 @@ func createbullet():
 func process_utility_slot(i):
 	match i:
 		1:
-			utilitytimer = 6000
-			global_position = get_global_mouse_position() #works but is shit, make it so you cant teleport in walls and you can telefrag
+			utilitytimer = 6
+			var wantToGo = get_global_mouse_position()
+			
+			
+			
+			global_position = wantToGo  #works but is shit, make it so you cant teleport in walls and you can telefrag
 		2:
 			pass
 		_:
