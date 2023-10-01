@@ -9,25 +9,30 @@ const bulletPath = preload('res://bullet.tscn')
 #array of arrays representing the upgrades, master array pos is slot number, first element of child array is type, second element of child array is index
 var upgrades = [["none", 0], ["none", 0], ["none", 0]]
 
-#default variables (any variables not specified here are false or 0 by default
+#default variables (any variables not specified here are bools or 0 by default) (we could init everything as zero and have all these set in the default weapon shoot case)
 var dspeed = 2000
 var ddamage = 10
 var dbulletspeed = 3000
 var dlifetime = 200 
 var dreloadtime = 50
+var dbulletsize = 100
 
-#modified variables
+
+#modifiable variables
 var speed = dspeed
 var damage = ddamage
 var bulletspeed = dbulletspeed
 var lifetime = dlifetime
-var spread = 0
 var reloadtime = dreloadtime
+var bulletsize = dbulletsize
+var spread = 0
 var hitscan = false
 var homing = false
+var canact = true
 
 #constantly changing variables
 var reloadtimer = 0;
+var screenfadetimer = 0;
 
 #reset function
 func resetvars():
@@ -35,13 +40,14 @@ func resetvars():
 	var damage = ddamage
 	var bulletspeed = dbulletspeed
 	var lifetime = dlifetime
+	var reloadtime = dreloadtime
+	var bulletsize = dbulletsize
 	var spread = 0
-	var reloadtime = 0 #in seconds
 	var hitscan = false
 	var homing = false
-		
+
 var dead = false
-	
+
 func _process(delta):
 	if Input.is_action_just_pressed("exit"):
 		get_tree().quit()
@@ -49,14 +55,19 @@ func _process(delta):
 		restart()
 	if reloadtimer > 0: #decrement reload timer
 		reloadtimer-=1
+	if screenfadetimer > 0: #decrement screen fade timer
+		screenfadetimer-=1
 	if dead:
 		return
 		
 	#global_rotation = global_position.direction_to(get_global_mouse_position()).angle()
-	if Input.is_action_just_pressed("shoot"):
+	if Input.is_action_just_pressed("shoot") and canact:
 		shoot()
+		
+		
+		
 func _physics_process(delta):
-	if dead:
+	if dead or !canact:
 		return
 	if Input.is_action_just_pressed("interact"):
 		execute_interaction()
@@ -247,3 +258,6 @@ func execute_interaction():
 			"weapon" :
 				upgrades[0] = cur_interaction.interact_value
 				cur_interaction.get_parent().queue_free()
+			"door" :
+				canact = false
+				screenfadetimer = 4000

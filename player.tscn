@@ -176,6 +176,16 @@ scale = Vector2(8.36754, 8.36754)
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="fade" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="fade"]
+z_index = -255
+offset_left = -1919.0
+offset_top = -1080.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0, 0, 0, 1)
+
 [connection signal="timeout" from="MuzzleFlash/Timer" to="MuzzleFlash" method="hide"]
 [connection signal="button_up" from="CanvasLayer/DeathScreen/Panel/Button" to="." method="restart"]
 [connection signal="area_entered" from="Interaction Components/Interaction Area" to="." method="_on_interaction_area_area_entered"]
