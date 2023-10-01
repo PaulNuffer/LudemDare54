@@ -188,6 +188,11 @@ offset_right = 13086.0
 offset_bottom = 7031.0
 color = Color(0, 0, 0, 1)
 
+[node name="MousePos" type="RayCast2D" parent="."]
+target_position = Vector2(1, 1)
+collision_mask = 5
+hit_from_inside = true
+
 [connection signal="timeout" from="MuzzleFlash/Timer" to="MuzzleFlash" method="hide"]
 [connection signal="button_up" from="CanvasLayer/DeathScreen/Panel/Button" to="." method="restart"]
 [connection signal="area_entered" from="Interaction Components/Interaction Area" to="." method="_on_interaction_area_area_entered"]
