@@ -244,4 +244,6 @@ func execute_interaction():
 	if(all_interactions):
 		var cur_interaction = all_interactions[0]
 		match cur_interaction.interact_type:
-			"print_text" : print(cur_interaction.interact_value)
+			"weapon_upgrade" :
+				upgrades[0] = cur_interaction.interact_value
+		cur_interaction.get_parent().queue_free()

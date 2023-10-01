@@ -20,5 +20,5 @@ texture = ExtResource("2_mc1tj")
 position = Vector2(1418.79, 709.395)
 scale = Vector2(-50.0376, -50.0376)
 interact_label = "Shotgun"
-interact_type = "print_text"
-interact_value = "Bam. Shotgun Selected."
+interact_type = "weapon_upgrade"
+interact_value = ["weapon", 2]
