@@ -104,6 +104,9 @@ func _physics_process(delta):
 			$fade/ColorRect.self_modulate.a8 = screenfadetimer
 			if(screenfadetimer <= 160 && !canact):
 				canact = true
+				GlobalVariables.spawned = 0
+				GlobalVariables.enemy_count = 0 
+				GlobalVariables.wavecompleted = false
 			if(screenfadetimer <= 1):
 				$fade/ColorRect.hide()
 				$fade/ColorRect.self_modulate.a8 = 0
@@ -320,3 +323,4 @@ func execute_interaction():
 				maxScreenFade = 350
 				doorFade = false
 				$fade/ColorRect.show()
+

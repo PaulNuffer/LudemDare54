@@ -36,7 +36,7 @@ func textbox_fields(info):
 
 func _on_spawn_timer_timeout():
 	
-	if GlobalVariables.spawned < wave_array[wave_number][0]:
+	if GlobalVariables.spawned < wave_array[wave_number][0] && GlobalVariables.wavecompleted == false:
 		var typerand = randf()
 		if typerand < wave_array[wave_number][1]: #if the random number is below the difficulty, spawn a threat
 			var guard = guard_scene.instantiate()
@@ -64,9 +64,9 @@ func _on_spawn_timer_timeout():
 				print(wave_number)
 				if wave_number < wave_array.size() - 1:
 					wave_number += 1
-					GlobalVariables.spawned = 0
 				else:
 					print("finished all waves")
+					
 				GlobalVariables.wavecompleted = true
 	
 func spawn_upgrade(xpos):
