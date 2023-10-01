@@ -47,13 +47,9 @@ func _on_spawn_timer_timeout():
 			spawned+=1
 	else: 
 		if GlobalVariables.enemy_count == 0:
-			var upgrade1 = upgrade_chip_scene.instantiate()
-			upgrade1.position = Vector2(2000, -3000)
-			upgrade1.get_child(1).interact_label = "upgrade 1"
-			upgrade1.get_child(1).interact_label = "upgrade 1"
-			upgrade1.get_child(1).interact_type = "weapon"
-			upgrade1.get_child(1).interact_value = ["weapon", 2]
-			add_child(upgrade1)
+			spawn_upgrade(2000)
+			spawn_upgrade(3500)
+			spawn_upgrade(5000)
 			#trigger upgrade screen here
 			print("wave complete")
 			print(wave_number)
@@ -63,8 +59,15 @@ func _on_spawn_timer_timeout():
 			else:
 				print("finished all waves")
 	
-		
-		
+func spawn_upgrade(xpos):
+	var upgrade1 = upgrade_chip_scene.instantiate()
+	upgrade1.position = Vector2(xpos, -3000)
+	var type = randi_range(0, 2)
+	
+	upgrade1.get_child(1).interact_label = "upgrade 1"
+	upgrade1.get_child(1).interact_type = "weapon"
+	upgrade1.get_child(1).interact_value = ["weapon", 2]
+	add_child(upgrade1)
 		
 		
 		
