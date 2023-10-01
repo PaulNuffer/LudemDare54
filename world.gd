@@ -35,12 +35,12 @@ func _on_spawn_timer_timeout():
 			spawned+=1
 	else: 
 		if GlobalVariables.enemy_count == 0:
-			#var upgrade1 = upgrade_chip_scene.instantiate()
-			#upgrade1.position = Vector2(2000, -3000)
-			#upgrade1.get_child(1).interact_label = "upgrade 1"
-			#upgrade1.get_child(1).interact_label = "upgrade 1"
-			#upgrade1.get_child(1).interact_type = "Weapon"
-			#upgrade1.get_child(1).interact_value = ["Weapon", 2]
+			var upgrade1 = upgrade_chip_scene.instantiate()
+			upgrade1.position = Vector2(2000, -3000)
+			upgrade1.get_child(1).interact_label = "upgrade 1"
+			upgrade1.get_child(1).interact_label = "upgrade 1"
+			upgrade1.get_child(1).interact_type = "Weapon"
+			upgrade1.get_child(1).interact_value = ["Weapon", 2]
 			#trigger upgrade screen here
 			print("wave complete")
 			print(wave_number)
