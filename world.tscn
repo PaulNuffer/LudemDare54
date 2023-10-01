@@ -11,9 +11,9 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bcm6k"]
 size = Vector2(170.804, 194.451)
 
-[sub_resource type="Curve2D" id="Curve2D_hx86s"]
+[sub_resource type="Curve2D" id="Curve2D_xn16m"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -2773, -7957, 0, 0, 0, 0, 12987, -7895, 0, 0, 0, 0, 13027, 3632, 0, 0, 0, 0, -2804, 3668, 0, 0, 0, 0, -2773, -7953)
+"points": PackedVector2Array(0, 0, 0, 0, 3, -5039, 0, 0, 0, 0, 7059, -5039, 0, 0, 0, 0, 7087, 2074, 0, 0, 0, 0, 3, 2067, 0, 0, 0, 0, 3, -5039)
 }
 point_count = 5
 
@@ -32,7 +32,6 @@ scale = Vector2(1.454, 1.454)
 texture = ExtResource("4_diebm")
 
 [node name="Block" type="Sprite2D" parent="Environment"]
-visible = false
 modulate = Color(0, 0, 0, 1)
 position = Vector2(3556, -5802)
 scale = Vector2(20.164, 1)
@@ -46,7 +45,7 @@ shape = SubResource("RectangleShape2D_bcm6k")
 
 [node name="Block5" type="Sprite2D" parent="Environment"]
 modulate = Color(0, 0, 0, 1)
-position = Vector2(6959, 1370)
+position = Vector2(5467, 1070)
 texture = ExtResource("1_6g3vl")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Environment/Block5"]
@@ -56,7 +55,6 @@ scale = Vector2(2.51166, 2.17536)
 shape = SubResource("RectangleShape2D_bcm6k")
 
 [node name="Block2" type="Sprite2D" parent="Environment"]
-visible = false
 modulate = Color(0, 0, 0, 1)
 position = Vector2(-797, -1399)
 scale = Vector2(0.91, 20.164)
@@ -69,7 +67,6 @@ scale = Vector2(2.51166, 2.17536)
 shape = SubResource("RectangleShape2D_bcm6k")
 
 [node name="Block3" type="Sprite2D" parent="Environment"]
-visible = false
 modulate = Color(0, 0, 0, 1)
 position = Vector2(7838, -1396)
 scale = Vector2(1, 20.164)
@@ -82,7 +79,6 @@ scale = Vector2(2.51166, 2.17536)
 shape = SubResource("RectangleShape2D_bcm6k")
 
 [node name="Block4" type="Sprite2D" parent="Environment"]
-visible = false
 modulate = Color(0, 0, 0, 1)
 position = Vector2(3631, 2865)
 scale = Vector2(20.164, 1.095)
@@ -101,17 +97,14 @@ position = Vector2(3528, -1571)
 wait_time = 1.316
 autostart = true
 
-[node name="SpawnPath" type="Path2D" parent="."]
-position = Vector2(964, -1.90735e-06)
-scale = Vector2(0.5, 0.68)
-curve = SubResource("Curve2D_hx86s")
-
-[node name="SpawnLocation" type="PathFollow2D" parent="SpawnPath"]
-position = Vector2(-2773, -7957)
-rotation = 0.00393399
-
 [node name="UpgradeChip" parent="." instance=ExtResource("7_o5fc3")]
 position = Vector2(5431, -1564)
 scale = Vector2(0.171794, 0.171794)
+
+[node name="SpawnPath" type="Path2D" parent="."]
+curve = SubResource("Curve2D_xn16m")
+
+[node name="SpawnLocation" type="PathFollow2D" parent="SpawnPath"]
+position = Vector2(3, -5039)
 
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
