@@ -39,6 +39,7 @@ var hitscan = false
 var homing = false
 var canact = true
 var doorFade = false
+var doorOpen = false
 
 #constantly changing variables
 var reloadtimer = 0;
@@ -100,6 +101,7 @@ func _physics_process(delta):
 				#play a door sound here
 				global_position.x = 3528
 				global_position.y = 2000
+				doorOpen = false
 				emit_signal("door_entered")
 		else:
 			screenfadetimer-=2
@@ -307,12 +309,16 @@ func _on_interaction_area_area_exited(area):
 	
 func update_interactions():
 	if(all_interactions):
-		interactLabel.text = all_interactions[0].interact_label
-		if(all_interactions[0].interact_type != 'door'):
-			emit_signal("show_textbox")
-			emit_signal("textbox_fields", all_interactions[0])
-		else:
+		if(all_interactions[0].interact_type == 'door' && !doorOpen):
+			interactLabel.text = ""
 			emit_signal("hide_textbox")
+		else:
+			interactLabel.text = all_interactions[0].interact_label
+			if(all_interactions[0].interact_type != 'door'):
+				emit_signal("show_textbox")
+				emit_signal("textbox_fields", all_interactions[0])
+			else:
+				emit_signal("hide_textbox")
 	else:
 		interactLabel.text = ""
 		emit_signal("hide_textbox")
@@ -340,8 +346,11 @@ func execute_interaction():
 				cur_interaction.get_parent().queue_free()
 				GlobalVariables.upgraded = true
 			"door" :
-				canact = false
-				maxScreenFade = 350
-				doorFade = false
-				$fade/ColorRect.show()
+				if(doorOpen == true):
+					canact = false
+					maxScreenFade = 350
+					doorFade = false
+					$fade/ColorRect.show()
 
+func _on_world_wave_finished():
+	doorOpen = true

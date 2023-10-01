@@ -4,6 +4,8 @@ extends Node2D
 @export var worker_scene: PackedScene
 @export var upgrade_chip_scene: PackedScene
 
+signal wave_finished
+
 var wave_number = 0
 
 var wave_array = [[1, .5], [5, .7], [7, 1]]
@@ -112,6 +114,7 @@ func _on_spawn_timer_timeout():
 func wave_ended():
 	$OpenDoor.show()
 	$ClosedDoorArt.hide()
+	emit_signal("wave_finished")
 
 func spawn_upgrade(xpos):
 	var upgrade = upgrade_chip_scene.instantiate()
