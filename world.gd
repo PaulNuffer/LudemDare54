@@ -6,7 +6,7 @@ extends Node2D
 
 var wave_number = 0
 
-var wave_array = [[1, .5], [15, .7], [20, 1]]
+var wave_array = [[1, .5], [5, .7], [7, 1]]
 
 var weapon_array = [["Default", "Default description", "Default Flavortext"], ["Sniper Rifle", "High damage and accuracy, low rate of fire", "oh wow big gun there big boy"], ["Shotgun", "5 bullets, high spread, low range", "big boom oh man"], ["Sword", "Melee weapon, high movespeed", "mall ninja"]]
 var utility_array = [["Default", "Default description", "Default Flavortext"], ["Teleport", "Right click to go to that location", "teleports behind you"]]
@@ -62,8 +62,11 @@ func textbox_fields(info):
 		
 func _process(delta):
 	if GlobalVariables.upgraded == true:
-		get_tree().get_nodes_in_group("upgrade_chip")
-	pass
+		var remaining = get_tree().get_nodes_in_group("upgrade_chips")
+		for chip in remaining:
+			chip.queue_free()
+		GlobalVariables.upgraded = false
+	
 
 func _on_spawn_timer_timeout():
 	
