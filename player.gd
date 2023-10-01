@@ -58,6 +58,9 @@ func _process(delta):
 func _physics_process(delta):
 	if dead:
 		return
+	if Input.is_action_just_pressed("interact"):
+		execute_interaction()
+
 	var move_dir = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	if(move_dir.is_zero_approx()):
 		pass
@@ -236,3 +239,9 @@ func update_interactions():
 		interactLabel.text = all_interactions[0].interact_label
 	else:
 		interactLabel.text = ""
+
+func execute_interaction():
+	if(all_interactions):
+		var cur_interaction = all_interactions[0]
+		match cur_interaction.interact_type:
+			"print_text" : print(cur_interaction.interact_value)
