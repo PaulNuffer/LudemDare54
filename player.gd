@@ -228,7 +228,7 @@ func process_passive_slot(i):
 			spread += 20
 		2: #"calculated shot"
 			hitscan = true
-			spread -= 20
+			spread = 0
 			damage -= 2
 		3: #"rapid fire"
 			spread += 60
@@ -243,7 +243,7 @@ func initialize_weapon_slot(i):
 		1: #sniper rifle
 			damage = 40
 			spread = 0
-			reloadtime = 200
+			reloadtime = 60
 			hitscandist = 10000
 			hitscan = true
 		2: #shotgun
