@@ -11,7 +11,7 @@ signal textbox_fields(info)
 const bulletPath = preload('res://bullet.tscn')
 
 #array of arrays representing the upgrades, master array pos is slot number, first element of child array is type, second element of child array is index
-var upgrades = [["none", 0], ["none", 0], ["none", 0]]
+var upgrades = [["none", 0], ["none", 0], ["utility", 1]]
 
 #default variables (any variables not specified here are bools or 0 by default) (we could init everything as zero and have all these set in the default weapon shoot case)
 var dspeed = 2000
@@ -73,8 +73,6 @@ func _process(delta):
 		ray_cast_2d.target_position.x = hitscandist #set the raycast to the correct length
 		ray_cast_2d.rotation = global_position.direction_to(get_global_mouse_position()).angle() + (randf_range(spread * -1, spread) * PI / 180) #point it at the mouse with a spread
 	
-	$MousePos.position = get_global_mouse_position() - $".".global_position
-	
 	if dead:
 		return
 		
@@ -91,7 +89,6 @@ func _physics_process(delta):
 			reloadtimer-=1
 	if utilitytimer > 0: #decrement reload timer
 		utilitytimer-=1
-		
 	if (screenfadetimer > 0 || !doorFade): #decrement screen fade timer
 		if !doorFade:
 			if(screenfadetimer < maxScreenFade):
@@ -215,16 +212,12 @@ func createbullet():
 func process_utility_slot(i):
 	match i:
 		1:
-			utilitytimer = 600
+			utilitytimer = 6
+			var wantToGo = get_global_mouse_position()
 			
-			if $MousePos.is_colliding():
-				if $MousePos.get_collider().has_method("hurt"):
-					$MousePos.get_collider().hurt(10000)
-				elif $MousePos.get_collider().get_collision_mask_value(1) == true:
-					return
-				
 			
-			global_position = $MousePos.position + $".".global_position  #works but is shit, make it so you cant teleport in walls and you can telefrag
+			
+			global_position = wantToGo  #works but is shit, make it so you cant teleport in walls and you can telefrag
 		2:
 			pass
 		_:
@@ -324,14 +317,6 @@ func execute_interaction():
 			"weapon" :
 				upgrades[0][0] = cur_interaction.interact_type
 				upgrades[0][1] = cur_interaction.interact_value[0]
-				cur_interaction.get_parent().queue_free()
-			"modifier" :
-				upgrades[1][0] = cur_interaction.interact_type
-				upgrades[1][1] = cur_interaction.interact_value[0]
-				cur_interaction.get_parent().queue_free()
-			"utility" :
-				upgrades[2][0] = cur_interaction.interact_type
-				upgrades[2][1] = cur_interaction.interact_value[0]
 				cur_interaction.get_parent().queue_free()
 			"door" :
 				canact = false

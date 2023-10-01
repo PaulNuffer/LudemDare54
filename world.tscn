@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://pulv50b8war6"]
+[gd_scene load_steps=16 format=3 uid="uid://pulv50b8war6"]
 
 [ext_resource type="Texture2D" uid="uid://b5ks5xb4pi4ww" path="res://white_square.png" id="1_6g3vl"]
 [ext_resource type="Script" path="res://world.gd" id="1_h3xci"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://7q48jmg6staf" path="res://guard.tscn" id="2_ct77u"]
 [ext_resource type="PackedScene" uid="uid://b3ioob0g7m7ks" path="res://worker.tscn" id="3_m4cf5"]
 [ext_resource type="Texture2D" uid="uid://c4f2hv3iuglvq" path="res://gamejam_level.png" id="4_diebm"]
+[ext_resource type="PackedScene" uid="uid://c27jqagt4t75x" path="res://pause_menu.tscn" id="5_8j0py"]
 [ext_resource type="PackedScene" uid="uid://c3yw3svctplxj" path="res://upgrade_chip.tscn" id="7_o5fc3"]
 [ext_resource type="PackedScene" uid="uid://dqggbqb4kj4jw" path="res://textbox.tscn" id="8_hktru"]
 [ext_resource type="Texture2D" uid="uid://g1x7f0x0sfd3" path="res://gamejam_door_closed_sprite.png" id="9_dvhd1"]
@@ -27,6 +28,8 @@ script = ExtResource("1_h3xci")
 guard_scene = ExtResource("2_ct77u")
 worker_scene = ExtResource("3_m4cf5")
 upgrade_chip_scene = ExtResource("7_o5fc3")
+
+[node name="PauseMenu" parent="." instance=ExtResource("5_8j0py")]
 
 [node name="Environment" type="Node2D" parent="."]
 
