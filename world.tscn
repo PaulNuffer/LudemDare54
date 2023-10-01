@@ -129,7 +129,6 @@ position = Vector2(3512, -6064)
 scale = Vector2(0.502887, 0.502887)
 
 [node name="OpenDoorArt" type="Sprite2D" parent="OpenDoor"]
-scale = Vector2(1, 1)
 texture = ExtResource("10_x5awx")
 
 [node name="InteractArea" parent="OpenDoor" instance=ExtResource("11_38g7i")]
