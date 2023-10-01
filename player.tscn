@@ -60,8 +60,9 @@ position = Vector2(11, -3)
 texture = ExtResource("2_5etr6")
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(204, -64)
 target_position = Vector2(10000, 0)
-collision_mask = 4
+collision_mask = 3
 
 [node name="DeathSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_esu3y")

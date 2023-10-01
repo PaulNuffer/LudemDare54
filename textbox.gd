@@ -10,11 +10,6 @@ extends CanvasLayer
 @onready var dialogueImage = $MarginContainer/MarginContainer/HSplitContainer/DialogueImage
 @onready var upgradeFields = $MarginContainer/MarginContainer/HSplitContainer/HBoxContainer/UpgradeText
 
-func _ready():
-	set_upgrade('utility','Laser Pointer','Constant fire, low damage','Ah! My eyes!')
-	#set_dialogue("res://bullet_player.png", "HELP ME! I have become bullet.")
-	pass
-
 func set_dialogue(imgPath, dialogueText):
 	dialogueImage.texture = ResourceLoader.load(imgPath)
 	dialogue.text = dialogueText
@@ -24,7 +19,6 @@ func set_dialogue(imgPath, dialogueText):
 	weapon.hide()
 	passive.hide()
 	utility.hide()
-	
 
 func set_upgrade(type, titleText, descriptionText, flavorText):
 	swap_upgrade_type(type)

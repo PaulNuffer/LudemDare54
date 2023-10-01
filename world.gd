@@ -18,6 +18,7 @@ func _ready():
 	var player = get_node("Player")
 	player.show_textbox.connect(show_textbox)
 	player.hide_textbox.connect(hide_textbox)
+	player.textbox_fields.connect(textbox_fields)
 
 func show_textbox():
 	$Textbox.show()
@@ -25,6 +26,11 @@ func show_textbox():
 func hide_textbox():
 	$Textbox.hide()
 
+func textbox_fields(info):
+	if(info.interact_type == 'dialogue'):
+		pass
+	else:
+		$Textbox.set_upgrade(info.interact_type, "Test", "Test2", "Test3")
 
 func _on_spawn_timer_timeout():
 	

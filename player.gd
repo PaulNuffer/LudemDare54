@@ -6,6 +6,7 @@ extends CharacterBody2D
 
 signal show_textbox
 signal hide_textbox
+signal textbox_fields(info)
 
 const bulletPath = preload('res://bullet.tscn')
 
@@ -265,6 +266,7 @@ func update_interactions():
 	if(all_interactions):
 		interactLabel.text = all_interactions[0].interact_label
 		emit_signal("show_textbox")
+		emit_signal("textbox_fields", all_interactions[0])
 	else:
 		interactLabel.text = ""
 		emit_signal("hide_textbox")
