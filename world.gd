@@ -46,6 +46,11 @@ func textbox_fields(info):
 	else:
 		var upgradeField = info.interact_value
 		$Textbox.set_upgrade(info.interact_type, upgradeField[1], upgradeField[2], upgradeField[3])
+		
+func _process(delta):
+	if GlobalVariables.upgraded == true:
+		get_tree().get_nodes_in_group("upgrade_chip")
+	pass
 
 func _on_spawn_timer_timeout():
 	
