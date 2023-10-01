@@ -1,10 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://dyj383tmdfjq0"]
+[gd_scene load_steps=10 format=3 uid="uid://dyj383tmdfjq0"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_arttm"]
 [ext_resource type="Texture2D" uid="uid://ckl6f2ibslqq4" path="res://splatter.png" id="2_5etr6"]
 [ext_resource type="Texture2D" uid="uid://dfdnrtlv4tp8c" path="res://player_sprite_front.png" id="2_rbcma"]
+[ext_resource type="Texture2D" uid="uid://kdij0q2d6nrj" path="res://player_sprite_back.png" id="2_xxlac"]
 [ext_resource type="AudioStream" uid="uid://bj5b2m0dmc71d" path="res://death.wav" id="3_esu3y"]
+[ext_resource type="Texture2D" uid="uid://d0hyh7l3iofu8" path="res://player_sprite_right.png" id="3_f7v4y"]
 [ext_resource type="AudioStream" uid="uid://dd18ahss4rhma" path="res://gunshoot.wav" id="4_ko4eh"]
+[ext_resource type="Texture2D" uid="uid://dccx1ax2txcdm" path="res://player_sprite_left.png" id="4_xcbl8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_co1bf"]
 
@@ -20,8 +23,23 @@ shape = SubResource("RectangleShape2D_co1bf")
 
 [node name="Graphics" type="Node2D" parent="."]
 
-[node name="Alive" type="Sprite2D" parent="Graphics"]
-position = Vector2(0, 4)
+[node name="Back" type="Sprite2D" parent="Graphics"]
+position = Vector2(0, -14)
+scale = Vector2(0.129, 0.129)
+texture = ExtResource("2_xxlac")
+
+[node name="Right" type="Sprite2D" parent="Graphics"]
+position = Vector2(11, -5)
+scale = Vector2(0.129, 0.129)
+texture = ExtResource("3_f7v4y")
+
+[node name="Left" type="Sprite2D" parent="Graphics"]
+position = Vector2(2.08165e-12, 2.08165e-12)
+scale = Vector2(0.129, 0.129)
+texture = ExtResource("4_xcbl8")
+
+[node name="Front" type="Sprite2D" parent="Graphics"]
+position = Vector2(2.08165e-12, 2.08165e-12)
 scale = Vector2(0.129473, 0.129473)
 texture = ExtResource("2_rbcma")
 
@@ -31,6 +49,7 @@ z_index = -1
 texture = ExtResource("2_5etr6")
 
 [node name="Splatter" type="Sprite2D" parent="Graphics/Dead"]
+visible = false
 show_behind_parent = true
 position = Vector2(11, -3)
 texture = ExtResource("2_5etr6")
@@ -42,10 +61,12 @@ collision_mask = 3
 
 [node name="DeathSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_esu3y")
+volume_db = -20.0
 bus = &"sfx"
 
 [node name="ShootSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_ko4eh")
+volume_db = 24.0
 bus = &"sfx"
 
 [node name="MuzzleFlash" type="Sprite2D" parent="."]

@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 @onready var ray_cast_2d = $RayCast2D
 
-@export var move_speed = 1000
+@export var move_speed = 800
 @export var health = 4
 @onready var player: CharacterBody2D = get_tree().get_first_node_in_group("player")
 

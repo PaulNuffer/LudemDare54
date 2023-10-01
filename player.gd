@@ -50,15 +50,33 @@ func _process(delta):
 	if dead:
 		return
 		
-	global_rotation = global_position.direction_to(get_global_mouse_position()).angle()
+	#global_rotation = global_position.direction_to(get_global_mouse_position()).angle()
 	if Input.is_action_just_pressed("shoot"):
 		shoot()
 func _physics_process(delta):
 	if dead:
 		return
 	var move_dir = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+	if(move_dir.angle() > -PI/4 && move_dir.angle() < PI/4):
+		hideGraphics()
+		$Graphics/Right.show()
+	elif(move_dir.angle() > PI/4 && move_dir.angle() < 3*PI/4):
+		hideGraphics()
+		$Graphics/Front.show()
+	elif(move_dir.angle() > 3*PI/4 || move_dir.angle() < -3*PI/4):
+		hideGraphics()
+		$Graphics/Left.show()
+	elif(move_dir.angle() > -3*PI/4 && move_dir.angle() < -PI/4):
+		hideGraphics()
+		$Graphics/Back.show()
 	velocity = move_dir * speed
 	move_and_slide()
+	
+func hideGraphics():
+	$Graphics/Front.hide()
+	$Graphics/Back.hide()
+	$Graphics/Right.hide()
+	$Graphics/Left.hide()
 	
 func kill():
 	if dead:
@@ -66,7 +84,7 @@ func kill():
 	dead = true
 	$DeathSound.play()
 	$Graphics/Dead.show()
-	$Graphics/Alive.hide()
+	hideGraphics()
 	$CanvasLayer/DeathScreen.show()
 	z_index = -1
 	
@@ -147,7 +165,7 @@ func process_weapon_slot(i):
 		1: #sniper rifle (i want this to be hitscan but it doesent need to be if thatd be ass to do)
 			var bullet = bulletPath.instantiate()
 			get_parent().add_child(bullet)
-			bullet.position = $Marker2D.global_position
+			bullet.position = global_position
 			var standardDir = (get_global_mouse_position() - $Marker2D.global_position).normalized().angle() * 180 / PI
 			var newDir = (standardDir + randf_range(spread * -1, spread)) * PI / 180
 			bullet.velocity = Vector2.from_angle(newDir)
@@ -155,15 +173,15 @@ func process_weapon_slot(i):
 			bullet.damage = damage
 			bullet.bullet_speed = bulletspeed
 			bullet.lifetime = lifetime
-			$MuzzleFlash.show()
-			$MuzzleFlash/Timer.start()
+			#$MuzzleFlash.show()
+			#$MuzzleFlash/Timer.start()
 			$ShootSound.play()
 			reloadtimer = reloadtime #start reloading
 		2: #shotgun 
 			for n in 5:
 				var bullet = bulletPath.instantiate()
 				get_parent().add_child(bullet)
-				bullet.position = $Marker2D.global_position
+				bullet.position = global_position
 				var standardDir = (get_global_mouse_position() - $Marker2D.global_position).normalized().angle() * 180 / PI
 				var newDir = (standardDir + randf_range(spread * -1, spread)) * PI / 180
 				bullet.velocity = Vector2.from_angle(newDir)
@@ -171,8 +189,8 @@ func process_weapon_slot(i):
 				bullet.damage = damage
 				bullet.bullet_speed = bulletspeed
 				bullet.lifetime = lifetime
-			$MuzzleFlash.show() # only one muzzleflash
-			$MuzzleFlash/Timer.start()
+			#$MuzzleFlash.show() # only one muzzleflash
+			#$MuzzleFlash/Timer.start()
 			$ShootSound.play()
 			reloadtimer = reloadtime #start reloading
 			
@@ -183,7 +201,7 @@ func process_weapon_slot(i):
 		_: #default pistol
 			var bullet = bulletPath.instantiate()
 			get_parent().add_child(bullet)
-			bullet.position = $Marker2D.global_position
+			bullet.position = global_position
 			var standardDir = (get_global_mouse_position() - $Marker2D.global_position).normalized().angle() * 180 / PI
 			var newDir = (standardDir + randf_range(spread * -1, spread)) * PI / 180
 			bullet.velocity = Vector2.from_angle(newDir)
@@ -191,7 +209,7 @@ func process_weapon_slot(i):
 			bullet.damage = damage
 			bullet.bullet_speed = bulletspeed
 			bullet.lifetime = lifetime
-			$MuzzleFlash.show()
-			$MuzzleFlash/Timer.start()
+			#$MuzzleFlash.show()
+			#$MuzzleFlash/Timer.start()
 			$ShootSound.play()
 			reloadtimer = reloadtime #start reloading
