@@ -9,6 +9,8 @@
 bg_color = Color(0.00784314, 0.00784314, 0.00784314, 1)
 
 [node name="CanvasLayer" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("3_0pwvw")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchors_preset = 15
@@ -43,19 +45,40 @@ theme_override_fonts/font = ExtResource("2_buies")
 theme_override_font_sizes/font_size = 300
 text = " "
 
-[node name="Start" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="StartButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_fonts/font = ExtResource("2_buies")
 theme_override_font_sizes/font_size = 500
 text = "Start"
 
-[node name="Settings" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="Space2" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("2_buies")
+theme_override_font_sizes/font_size = 300
+text = " "
+
+[node name="SettingsButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_fonts/font = ExtResource("2_buies")
 theme_override_font_sizes/font_size = 500
 text = "Settings"
+
+[node name="Space3" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("2_buies")
+theme_override_font_sizes/font_size = 300
+text = " "
+
+[node name="Quit" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("2_buies")
+theme_override_font_sizes/font_size = 500
+text = "Quit"
 
 [node name="Graphic" type="TextureRect" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
@@ -63,4 +86,6 @@ size_flags_vertical = 3
 texture = ExtResource("3_i31om")
 expand_mode = 3
 stretch_mode = 4
-script = ExtResource("3_0pwvw")
+
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

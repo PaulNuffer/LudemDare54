@@ -138,7 +138,6 @@ scale = Vector2(18.4376, 18.4376)
 interact_label = "Press E to Interact"
 interact_type = "door"
 
-[node name="CanvasLayer" parent="." instance=ExtResource("12_27cs4")]
-visible = false
+[node name="Menu" parent="." instance=ExtResource("12_27cs4")]
 
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

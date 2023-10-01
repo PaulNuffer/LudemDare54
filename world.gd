@@ -15,9 +15,16 @@ var passive_array = [["Default", "Default description", "Default Flavortext"], [
 
 func _ready():
 	var player = get_node("Player")
+	var menu = get_node("Menu")
 	player.show_textbox.connect(show_textbox)
 	player.hide_textbox.connect(hide_textbox)
 	player.textbox_fields.connect(textbox_fields)
+	menu.start_game.connect(start_game)
+	get_tree().paused = true
+
+func start_game():
+	$Menu.hide()
+	get_tree().paused = false
 
 func show_textbox():
 	$Textbox.show()
