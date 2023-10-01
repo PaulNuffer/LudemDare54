@@ -9,6 +9,7 @@ size = Vector2(257.561, 209.747)
 [node name="Bullet" type="CharacterBody2D"]
 scale = Vector2(0.143079, 0.144117)
 collision_layer = 8
+collision_mask = 0
 script = ExtResource("1_sj6e0")
 
 [node name="Fakebullet" type="Sprite2D" parent="."]
@@ -22,6 +23,6 @@ shape = SubResource("RectangleShape2D_ltp72")
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 position = Vector2(-398.381, -6.93881)
-scale = Vector2(1, 100)
+scale = Vector2(1, 320)
 target_position = Vector2(800, 2.08165e-12)
 collision_mask = 5
