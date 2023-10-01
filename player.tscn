@@ -144,6 +144,10 @@ grow_vertical = 0
 text = "restart"
 
 [node name="Camera2D" type="Camera2D" parent="."]
+limit_left = -1940
+limit_top = -6926
+limit_right = 8965
+limit_bottom = 3977
 
 [node name="Marker2D" type="Marker2D" parent="."]
 position = Vector2(214, -62)

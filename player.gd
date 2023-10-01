@@ -5,7 +5,7 @@ extends CharacterBody2D
 const bulletPath = preload('res://bullet.tscn')
 
 #array of arrays representing the upgrades, master array pos is slot number, first element of child array is type, second element of child array is index
-var upgrades = [["weapon", 2], ["none", 0], ["none", 0]]
+var upgrades = [["none", 0], ["none", 0], ["none", 0]]
 
 #default variables (any variables not specified here are false or 0 by default
 var dspeed = 2000
