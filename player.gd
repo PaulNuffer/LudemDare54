@@ -40,6 +40,7 @@ var doorFade = false
 var reloadtimer = 0;
 var screenfadetimer = 0;
 var maxScreenFade = 0
+var utilitytimer = 0
 
 #reset function
 func resetvars():
@@ -78,12 +79,16 @@ func _process(delta):
 	#global_rotation = global_position.direction_to(get_global_mouse_position()).angle()
 	if Input.is_action_just_pressed("shoot") and canact:
 		shoot()
+	if Input.is_action_just_pressed("utlity") and canact:
+		activateUtility()
 		
 		
 		
 func _physics_process(delta):
 	if reloadtimer > 0: #decrement reload timer
 			reloadtimer-=1
+	if utilitytimer > 0: #decrement reload timer
+		utilitytimer-=1
 	if (screenfadetimer > 0 || !doorFade): #decrement screen fade timer
 		if !doorFade:
 			if(screenfadetimer < maxScreenFade):
@@ -166,6 +171,12 @@ func shoot():
 				return #and then get outta here
 		process_weapon_slot(0) #if none are weapons, use default shooting behaviour
 		
+func activateUtility():
+		if utilitytimer == 0: #only if we can use the utility
+			for item in upgrades: #loop through all upgrade slots
+				if item[0] == "utility": #if any of them are utilities
+					process_utility_slot(item[1]) #activate them
+		
 #creates a bullet, or a hitscan raycast
 func createbullet():
 	#hitscan code
@@ -198,6 +209,7 @@ func createbullet():
 func process_utility_slot(i):
 	match i:
 		1:
+			utilitytimer = 6000
 			global_position = get_global_mouse_position() #works but is shit, make it so you cant teleport in walls and you can telefrag
 		2:
 			pass
