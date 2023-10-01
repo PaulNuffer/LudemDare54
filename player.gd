@@ -11,7 +11,8 @@ var upgrades = [["none", 0], ["none", 0], ["none", 0]]
 var dspeed = 2000
 var ddamage = 10
 var dbulletspeed = 3000
-var dlifetime = 3 #in seconds
+var dlifetime = 3 
+var dreloadtime = 40
 
 #modified variables
 var speed = dspeed
@@ -19,9 +20,12 @@ var damage = ddamage
 var bulletspeed = dbulletspeed
 var lifetime = dlifetime
 var spread = 0
-var reloadtimemod = 0 #in seconds
+var reloadtimemod = dreloadtime
 var hitscan = false
 var homing = false
+
+#constantly changing variables
+var reloadtimer = 0;
 
 #reset function
 func resetvars():
@@ -41,6 +45,8 @@ func _process(delta):
 		get_tree().quit()
 	if Input.is_action_just_pressed("restart"):
 		restart()
+	if reloadtimer > 0: #decrement reload timer
+		reloadtimer-=1
 	if dead:
 		return
 		
@@ -80,12 +86,17 @@ func recalculate(): #recalculates all player variables
 	
 	
 func shoot():
-	for item in upgrades: #loop through all upgrade slots
-		if item[0] == "weapon": #if any of them are weapons
-			recalculate() # hacky, i dont want to do this every time we shoot
-			process_weapon_slot(item[1]) #activate them
-			return #and then get outta here
-	process_weapon_slot(0) #if none are weapons, use default shooting behaviour
+	if reloadtimer == 0: #only if we can shoot
+		for item in upgrades: #loop through all upgrade slots
+			if item[0] == "weapon": #if any of them are weapons
+				recalculate() # hacky, i dont want to do this every time we shoot
+				
+				#do global code (move more stuff from the various shoot weapon processors to here (ie muzzleflash))
+				
+				
+				process_weapon_slot(item[1]) #activate them
+				return #and then get outta here
+		process_weapon_slot(0) #if none are weapons, use default shooting behaviour
 		
 	#below code is hitscan stuff, will need it later probably
 	#if ray_cast_2d.is_colliding() and ray_cast_2d.get_collider().has_method("kill"):
