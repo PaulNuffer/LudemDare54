@@ -317,11 +317,13 @@ func execute_interaction():
 				upgrades[0][1] = cur_interaction.interact_value[0]
 				cur_interaction.get_parent().queue_free()
 				GlobalVariables.upgraded = true
+				recalculate()
 			"passive" :
 				upgrades[1][0] = cur_interaction.interact_type
 				upgrades[1][1] = cur_interaction.interact_value[0]
 				cur_interaction.get_parent().queue_free()
 				GlobalVariables.upgraded = true
+				recalculate()
 			"utility" :
 				upgrades[2][0] = cur_interaction.interact_type
 				upgrades[2][1] = cur_interaction.interact_value[0]
