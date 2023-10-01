@@ -39,8 +39,9 @@ func _on_spawn_timer_timeout():
 			upgrade1.position = Vector2(2000, -3000)
 			upgrade1.get_child(1).interact_label = "upgrade 1"
 			upgrade1.get_child(1).interact_label = "upgrade 1"
-			upgrade1.get_child(1).interact_type = "Weapon"
-			upgrade1.get_child(1).interact_value = ["Weapon", 2]
+			upgrade1.get_child(1).interact_type = "weapon"
+			upgrade1.get_child(1).interact_value = ["weapon", 2]
+			add_child(upgrade1)
 			#trigger upgrade screen here
 			print("wave complete")
 			print(wave_number)
