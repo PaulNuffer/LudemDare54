@@ -14,6 +14,9 @@ const bulletPath = preload('res://bullet.tscn')
 #array of arrays representing the upgrades, master array pos is slot number, first element of child array is type, second element of child array is index
 var upgrades = [["none", 0], ["none", 0], ["none", 0]]
 
+var maxHealth = 4
+var health = maxHealth
+
 #default variables (any variables not specified here are bools or 0 by default) (we could init everything as zero and have all these set in the default weapon shoot case)
 var dspeed = 2000
 var ddamage = 10
@@ -138,6 +141,11 @@ func hideGraphics():
 	$Graphics/Back.hide()
 	$Graphics/Right.hide()
 	$Graphics/Left.hide()
+	
+func hurt(damage):
+	health -= damage
+	if(health <= 0):
+		kill()
 	
 func kill():
 	if dead:
