@@ -11,7 +11,7 @@ var upgrades = [["none", 0], ["none", 0], ["none", 0]]
 var dspeed = 2000
 var ddamage = 10
 var dbulletspeed = 3000
-var dlifetime = 3 
+var dlifetime = 200 
 var dreloadtime = 50
 
 #modified variables
@@ -133,11 +133,11 @@ func initialize_weapon_slot(i):
 			spread = 0
 			reloadtime = 200
 			bulletspeed = 5000
-			lifetime = 10
+			lifetime = 2000
 		2: #shotgun
 			damage = 5
 			spread = 10
-			lifetime = .5
+			lifetime = 100
 		_:
 			pass #default behaviour
 	
@@ -154,6 +154,7 @@ func process_weapon_slot(i):
 			bullet.spread = spread
 			bullet.damage = damage
 			bullet.bullet_speed = bulletspeed
+			bullet.lifetime = lifetime
 			$MuzzleFlash.show()
 			$MuzzleFlash/Timer.start()
 			$ShootSound.play()
@@ -169,6 +170,7 @@ func process_weapon_slot(i):
 				bullet.spread = spread
 				bullet.damage = damage
 				bullet.bullet_speed = bulletspeed
+				bullet.lifetime = lifetime
 			$MuzzleFlash.show() # only one muzzleflash
 			$MuzzleFlash/Timer.start()
 			$ShootSound.play()
@@ -188,6 +190,7 @@ func process_weapon_slot(i):
 			bullet.spread = spread
 			bullet.damage = damage
 			bullet.bullet_speed = bulletspeed
+			bullet.lifetime = lifetime
 			$MuzzleFlash.show()
 			$MuzzleFlash/Timer.start()
 			$ShootSound.play()
