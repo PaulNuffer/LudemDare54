@@ -34,10 +34,12 @@ var hitscandist = 0
 var hitscan = false
 var homing = false
 var canact = true
+var doorFade = false
 
 #constantly changing variables
 var reloadtimer = 0;
 var screenfadetimer = 0;
+var maxScreenFade = 0
 
 #reset function
 func resetvars():
@@ -80,19 +82,31 @@ func _process(delta):
 		
 		
 func _physics_process(delta):
+	if reloadtimer > 0: #decrement reload timer
+			reloadtimer-=1
+	if (screenfadetimer > 0 || !doorFade): #decrement screen fade timer
+		if !doorFade:
+			if(screenfadetimer < maxScreenFade):
+				screenfadetimer += 10
+				$fade/ColorRect.self_modulate.a8 = screenfadetimer
+			else:
+				doorFade = true
+				#play a door sound here
+				global_position.x = 3528
+				global_position.y = 2000
+		else:
+			screenfadetimer-=2
+			$fade/ColorRect.self_modulate.a8 = screenfadetimer
+			if(screenfadetimer <= 160 && !canact):
+				canact = true
+			if(screenfadetimer <= 1):
+				$fade/ColorRect.hide()
+				$fade/ColorRect.self_modulate.a8 = 0
+	
 	if dead or !canact:
 		return
 	if Input.is_action_just_pressed("interact"):
 		execute_interaction()
-		
-	if reloadtimer > 0: #decrement reload timer
-			reloadtimer-=1
-	if screenfadetimer > 0: #decrement screen fade timer
-		screenfadetimer-=1
-		$fade/ColorRect.self_modulate.a8 = screenfadetimer
-		if(screenfadetimer == 1):
-			$fade/ColorRect.hide()
-			canact = true
 
 	var move_dir = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	if(move_dir.is_zero_approx()):
@@ -267,8 +281,11 @@ func _on_interaction_area_area_exited(area):
 func update_interactions():
 	if(all_interactions):
 		interactLabel.text = all_interactions[0].interact_label
-		emit_signal("show_textbox")
-		emit_signal("textbox_fields", all_interactions[0])
+		if(all_interactions[0].interact_type != 'door'):
+			emit_signal("show_textbox")
+			emit_signal("textbox_fields", all_interactions[0])
+		else:
+			emit_signal("hide_textbox")
 	else:
 		interactLabel.text = ""
 		emit_signal("hide_textbox")
@@ -284,8 +301,6 @@ func execute_interaction():
 				cur_interaction.get_parent().queue_free()
 			"door" :
 				canact = false
-				screenfadetimer = 400
+				maxScreenFade = 350
+				doorFade = false
 				$fade/ColorRect.show()
-				#play a door sound here
-				global_position.x = 3528
-				global_position.y = 2000
