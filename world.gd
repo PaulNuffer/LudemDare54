@@ -70,20 +70,25 @@ func spawn_upgrade(xpos):
 	var upgrade = upgrade_chip_scene.instantiate()
 	upgrade.position = Vector2(xpos, -3000)
 	var type = randi_range(0, 2)
+	var type_array
 	match type:
 		0:
-			var index = randi_range(0, weapon_array.size())
-			upgrade.get_child(1).interact_label = "Press E to Interact"
+			type_array = weapon_array
 			upgrade.get_child(1).interact_type = "weapon"
-			upgrade.get_child(1).interact_value = [2, "title", "description", "flavor"]
-			add_child(upgrade)
 		1:
-			pass
+			type_array = utility_array
+			upgrade.get_child(1).interact_type = "utility"
 		2:
-			pass
+			type_array = passive_array
+			upgrade.get_child(1).interact_type = "passive"
 		_:
 			pass
+	var index = randi_range(1, type_array.size() - 1)
+	upgrade.get_child(1).interact_label = "Press E to Interact"
+	upgrade.get_child(1).interact_value = [index, type_array[index][0], type_array[index][1], type_array[index][2]]
 	
+	add_child(upgrade)
+	#upgrade.change_art()
 	
 
 	
