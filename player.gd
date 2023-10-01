@@ -25,8 +25,9 @@ var bulletspeed = dbulletspeed
 var lifetime = dlifetime
 var reloadtime = dreloadtime
 var bulletsize = dbulletsize
-var spread = 0
-var hitscan = false
+var spread = 50 #RESET THIS
+var hitscandist = 1000 #RESET THIS
+var hitscan = true # RESET THIS
 var homing = false
 var canact = true
 
@@ -43,8 +44,10 @@ func resetvars():
 	var reloadtime = dreloadtime
 	var bulletsize = dbulletsize
 	var spread = 0
+	var hitscandist = 0
 	var hitscan = false
 	var homing = false
+	var canact = true
 
 var dead = false
 
@@ -134,6 +137,42 @@ func shoot():
 				return #and then get outta here
 		process_weapon_slot(0) #if none are weapons, use default shooting behaviour
 		
+#creates a bullet, or a hitscan raycast
+func createbullet(hscan):
+	#code for both
+	
+	#convert radians to degrees
+	var standardDir = (get_global_mouse_position() - $Marker2D.global_position).normalized().angle() * 180 / PI
+	var newDir = (standardDir + randf_range(spread * -1, spread)) * PI / 180
+	
+	#hitscan code
+	if (hscan):
+		ray_cast_2d.target_position.x = hitscandist #set the raycast to the correct length
+		
+		
+		
+		ray_cast_2d.rotation = global_position.direction_to(get_global_mouse_position()).angle() + newDir #point it at the mouse
+		
+		#hurt whatever if it has a hurt method
+		if ray_cast_2d.is_colliding():
+			if ray_cast_2d.get_collider().has_method("hurt"):
+				ray_cast_2d.get_collider().hurt(damage)
+				
+		
+		
+		#return #dont make a bullet
+		
+	#bullet code
+	var bullet = bulletPath.instantiate()
+	get_parent().add_child(bullet)
+	bullet.position = global_position
+	bullet.velocity = Vector2.from_angle(newDir)
+	bullet.spread = spread
+	bullet.damage = damage
+	bullet.bullet_speed = bulletspeed
+	bullet.lifetime = lifetime
+	reloadtimer = reloadtime #start reloading
+		
 	#below code is hitscan stuff, will need it later probably
 	#if ray_cast_2d.is_colliding() and ray_cast_2d.get_collider().has_method("kill"):
 		#ray_cast_2d.get_collider().kill()
@@ -185,56 +224,26 @@ func initialize_weapon_slot(i):
 func process_weapon_slot(i):
 	match i:
 		1: #sniper rifle (i want this to be hitscan but it doesent need to be if thatd be ass to do)
-			var bullet = bulletPath.instantiate()
-			get_parent().add_child(bullet)
-			bullet.position = global_position
-			var standardDir = (get_global_mouse_position() - $Marker2D.global_position).normalized().angle() * 180 / PI
-			var newDir = (standardDir + randf_range(spread * -1, spread)) * PI / 180
-			bullet.velocity = Vector2.from_angle(newDir)
-			bullet.spread = spread
-			bullet.damage = damage
-			bullet.bullet_speed = bulletspeed
-			bullet.lifetime = lifetime
+			createbullet(true)
 			#$MuzzleFlash.show()
 			#$MuzzleFlash/Timer.start()
 			$ShootSound.play()
-			reloadtimer = reloadtime #start reloading
+
 		2: #shotgun 
 			for n in 5:
-				var bullet = bulletPath.instantiate()
-				get_parent().add_child(bullet)
-				bullet.position = global_position
-				var standardDir = (get_global_mouse_position() - $Marker2D.global_position).normalized().angle() * 180 / PI
-				var newDir = (standardDir + randf_range(spread * -1, spread)) * PI / 180
-				bullet.velocity = Vector2.from_angle(newDir)
-				bullet.spread = spread
-				bullet.damage = damage
-				bullet.bullet_speed = bulletspeed
-				bullet.lifetime = lifetime
+				createbullet(hitscan)
 			#$MuzzleFlash.show() # only one muzzleflash
 			#$MuzzleFlash/Timer.start()
 			$ShootSound.play()
-			reloadtimer = reloadtime #start reloading
 			
 		3: #sword
-			if ray_cast_2d.is_colliding() and ray_cast_2d.get_collider().has_method("kill"):
-				ray_cast_2d.get_collider().kill()
+			createbullet(true)
 			
 		_: #default pistol
-			var bullet = bulletPath.instantiate()
-			get_parent().add_child(bullet)
-			bullet.position = global_position
-			var standardDir = (get_global_mouse_position() - $Marker2D.global_position).normalized().angle() * 180 / PI
-			var newDir = (standardDir + randf_range(spread * -1, spread)) * PI / 180
-			bullet.velocity = Vector2.from_angle(newDir)
-			bullet.spread = spread
-			bullet.damage = damage
-			bullet.bullet_speed = bulletspeed
-			bullet.lifetime = lifetime
+			createbullet(hitscan)
 			#$MuzzleFlash.show()
 			#$MuzzleFlash/Timer.start()
 			$ShootSound.play()
-			reloadtimer = reloadtime #start reloading
 
 
 
