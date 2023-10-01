@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://c3yw3svctplxj"]
+[gd_scene load_steps=6 format=3 uid="uid://c3yw3svctplxj"]
 
 [ext_resource type="Script" path="res://upgradechip.gd" id="1_sga4h"]
-[ext_resource type="Texture2D" uid="uid://1tiekp0o4fqq" path="res://test_upgrade_chip_weapon.png" id="2_mc1tj"]
+[ext_resource type="Texture2D" uid="uid://dapslddujndtc" path="res://upgrade_weapon.png" id="2_jxbs7"]
 [ext_resource type="PackedScene" uid="uid://cieatjcoxr11h" path="res://Interact Area.tscn" id="3_b5jku"]
+[ext_resource type="Texture2D" uid="uid://cd72p18scgpqa" path="res://upgrade_modifier.png" id="3_kfjnx"]
+[ext_resource type="Texture2D" uid="uid://b1157hmxhlpge" path="res://upgrade_esoteric.png" id="4_1dmbw"]
 
 [node name="UpgradeChip" type="CharacterBody2D"]
 scale = Vector2(0.0958563, 0.0958563)
@@ -12,12 +14,22 @@ script = ExtResource("1_sga4h")
 
 [node name="Graphics" type="Node2D" parent="."]
 
-[node name="UpgradeChipArt" type="Sprite2D" parent="Graphics"]
+[node name="Weapon" type="Sprite2D" parent="Graphics"]
 position = Vector2(1440, 699)
-texture = ExtResource("2_mc1tj")
+texture = ExtResource("2_jxbs7")
+
+[node name="Passive" type="Sprite2D" parent="Graphics"]
+visible = false
+position = Vector2(1377.06, 699)
+texture = ExtResource("3_kfjnx")
+
+[node name="Utility" type="Sprite2D" parent="Graphics"]
+visible = false
+position = Vector2(1408.36, 699)
+texture = ExtResource("4_1dmbw")
 
 [node name="InteractArea" parent="." instance=ExtResource("3_b5jku")]
-position = Vector2(1418.79, 709.395)
+position = Vector2(1408.36, 709.395)
 scale = Vector2(-50.0376, -50.0376)
 interact_label = "Press E to Interact"
 interact_type = "weapon"

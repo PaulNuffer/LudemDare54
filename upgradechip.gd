@@ -4,9 +4,16 @@ extends CharacterBody2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+	match $InteractArea.interact_type:
+		"weapon" :
+			$Graphics/Weapon.show()
+			$Graphics/Passive.hide()
+			$Graphics/Utility.hide()
+		"passive" :
+			$Graphics/Weapon.hide()
+			$Graphics/Passive.show()
+			$Graphics/Utility.hide()
+		"utility" :
+			$Graphics/Weapon.hide()
+			$Graphics/Passive.hide()
+			$Graphics/Utility.show()
