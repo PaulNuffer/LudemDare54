@@ -30,7 +30,8 @@ func textbox_fields(info):
 	if(info.interact_type == 'dialogue'):
 		pass
 	else:
-		$Textbox.set_upgrade(info.interact_type, "Test", "Test2", "Test3")
+		var upgradeField = info.interact_value
+		$Textbox.set_upgrade(info.interact_type, upgradeField[1], upgradeField[2], upgradeField[3])
 
 func _on_spawn_timer_timeout():
 	
@@ -72,9 +73,9 @@ func spawn_upgrade(xpos):
 	match type:
 		0:
 			var index = randi_range(0, weapon_array.size())
-			upgrade.get_child(1).interact_label = "Press e"
+			upgrade.get_child(1).interact_label = "Press E to Interact"
 			upgrade.get_child(1).interact_type = "weapon"
-			upgrade.get_child(1).interact_value = ["weapon", 2]
+			upgrade.get_child(1).interact_value = [2, "title", "description", "flavor"]
 			add_child(upgrade)
 		1:
 			pass

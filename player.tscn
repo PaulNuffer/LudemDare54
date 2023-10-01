@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dyj383tmdfjq0"]
+[gd_scene load_steps=12 format=3 uid="uid://dyj383tmdfjq0"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_arttm"]
 [ext_resource type="Texture2D" uid="uid://ckl6f2ibslqq4" path="res://splatter.png" id="2_5etr6"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://d0hyh7l3iofu8" path="res://player_sprite_right.png" id="3_f7v4y"]
 [ext_resource type="AudioStream" uid="uid://dd18ahss4rhma" path="res://gunshoot.wav" id="4_ko4eh"]
 [ext_resource type="Texture2D" uid="uid://dccx1ax2txcdm" path="res://player_sprite_left.png" id="4_xcbl8"]
+[ext_resource type="FontFile" uid="uid://dpcnnl8v24k5w" path="res://HelvetiPixel.ttf" id="9_2cera"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_co1bf"]
 
@@ -168,11 +169,13 @@ scale = Vector2(-44.6637, -44.577)
 shape = SubResource("CircleShape2D_qx3hm")
 
 [node name="InteractLabel" type="Label" parent="Interaction Components"]
-offset_left = -162.0
-offset_top = -520.0
-offset_right = -122.0
-offset_bottom = -494.0
-scale = Vector2(8.36754, 8.36754)
+offset_left = -396.0
+offset_top = -392.0
+offset_right = 571.0
+offset_bottom = -260.0
+scale = Vector2(0.9058, 0.9058)
+theme_override_fonts/font = ExtResource("9_2cera")
+theme_override_font_sizes/font_size = 150
 horizontal_alignment = 1
 vertical_alignment = 1
 

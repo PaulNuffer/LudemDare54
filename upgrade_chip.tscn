@@ -19,6 +19,6 @@ texture = ExtResource("2_mc1tj")
 [node name="InteractArea" parent="." instance=ExtResource("3_b5jku")]
 position = Vector2(1418.79, 709.395)
 scale = Vector2(-50.0376, -50.0376)
-interact_label = "Shotgun"
+interact_label = "Press E to Interact"
 interact_type = "weapon"
-interact_value = ["weapon", 2]
+interact_value = [2, "title", "description", "flavor"]

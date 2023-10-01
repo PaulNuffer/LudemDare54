@@ -277,7 +277,8 @@ func execute_interaction():
 		var cur_interaction = all_interactions[0]
 		match cur_interaction.interact_type:
 			"weapon" :
-				upgrades[0] = cur_interaction.interact_value
+				upgrades[0][0] = cur_interaction.interact_type
+				upgrades[0][1] = cur_interaction.interact_value[0]
 				cur_interaction.get_parent().queue_free()
 			"door" :
 				canact = false
