@@ -12,7 +12,7 @@ var dspeed = 2000
 var ddamage = 10
 var dbulletspeed = 3000
 var dlifetime = 3 
-var dreloadtime = 40
+var dreloadtime = 50
 
 #modified variables
 var speed = dspeed
@@ -20,7 +20,7 @@ var damage = ddamage
 var bulletspeed = dbulletspeed
 var lifetime = dlifetime
 var spread = 0
-var reloadtimemod = dreloadtime
+var reloadtime = dreloadtime
 var hitscan = false
 var homing = false
 
@@ -34,7 +34,7 @@ func resetvars():
 	var bulletspeed = dbulletspeed
 	var lifetime = dlifetime
 	var spread = 0
-	var reloadtimemod = 0 #in seconds
+	var reloadtime = 0 #in seconds
 	var hitscan = false
 	var homing = false
 		
@@ -89,11 +89,7 @@ func shoot():
 	if reloadtimer == 0: #only if we can shoot
 		for item in upgrades: #loop through all upgrade slots
 			if item[0] == "weapon": #if any of them are weapons
-				recalculate() # hacky, i dont want to do this every time we shoot
-				
-				#do global code (move more stuff from the various shoot weapon processors to here (ie muzzleflash))
-				
-				
+				recalculate() # hacky, i dont want to do this every time we shoot		
 				process_weapon_slot(item[1]) #activate them
 				return #and then get outta here
 		process_weapon_slot(0) #if none are weapons, use default shooting behaviour
@@ -125,7 +121,7 @@ func process_passive_slot(i):
 		3: #"rapid fire"
 			spread += 60
 			homing = true
-			reloadtimemod = -1
+			reloadtime = -1
 		_:
 			pass #default behaviour
 			
@@ -135,7 +131,7 @@ func initialize_weapon_slot(i):
 		1: #sniper rifle
 			damage = 40
 			spread = 0
-			reloadtimemod = 1
+			reloadtime = 200
 			bulletspeed = 5000
 			lifetime = 10
 		2: #shotgun
@@ -161,6 +157,7 @@ func process_weapon_slot(i):
 			$MuzzleFlash.show()
 			$MuzzleFlash/Timer.start()
 			$ShootSound.play()
+			reloadtimer = reloadtime #start reloading
 		2: #shotgun 
 			for n in 5:
 				var bullet = bulletPath.instantiate()
@@ -175,6 +172,7 @@ func process_weapon_slot(i):
 			$MuzzleFlash.show() # only one muzzleflash
 			$MuzzleFlash/Timer.start()
 			$ShootSound.play()
+			reloadtimer = reloadtime #start reloading
 			
 		3: #sword
 			if ray_cast_2d.is_colliding() and ray_cast_2d.get_collider().has_method("kill"):
@@ -193,3 +191,4 @@ func process_weapon_slot(i):
 			$MuzzleFlash.show()
 			$MuzzleFlash/Timer.start()
 			$ShootSound.play()
+			reloadtimer = reloadtime #start reloading
