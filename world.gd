@@ -2,10 +2,11 @@ extends Node2D
 
 @export var guard_scene: PackedScene
 @export var worker_scene: PackedScene
+@export var upgrade_chip_scene: PackedScene
 
 var wave_number = 0
 
-var wave_array = [[10, .5], [15, .7], [20, 1]]
+var wave_array = [[1, .5], [15, .7], [20, 1]]
 
 var spawned = 0
 
@@ -34,6 +35,12 @@ func _on_spawn_timer_timeout():
 			spawned+=1
 	else: 
 		if GlobalVariables.enemy_count == 0:
+			#var upgrade1 = upgrade_chip_scene.instantiate()
+			#upgrade1.position = Vector2(2000, -3000)
+			#upgrade1.get_child(1).interact_label = "upgrade 1"
+			#upgrade1.get_child(1).interact_label = "upgrade 1"
+			#upgrade1.get_child(1).interact_type = "Weapon"
+			#upgrade1.get_child(1).interact_value = ["Weapon", 2]
 			#trigger upgrade screen here
 			print("wave complete")
 			print(wave_number)
