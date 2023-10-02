@@ -77,6 +77,7 @@ func hide_textbox():
 func door_entered():
 	$ClosedDoorArt.show()
 	$OpenDoor.hide()
+	GlobalVariables.upgraded = true
 	check_for_cutscenes()
 
 func textbox_fields(info):
