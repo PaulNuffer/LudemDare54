@@ -11,8 +11,8 @@ var wave_number = 0
 var wave_array = [[1, .5], [5, .7], [7, 1]]
 
 var weapon_array = [["Default", "Default description", "Default Flavortext"], ["Sniper Rifle", "High damage and accuracy, low rate of fire", "oh wow big gun there big boy"], ["Shotgun", "5 bullets, high spread, low range", "big boom oh man"], ["Sword", "Melee weapon, high movespeed", "mall ninja"]]
-var utility_array = [["Default", "Default description", "Default Flavortext"], ["Teleport", "Right click to go to that location", "teleports behind you"]]
-var passive_array = [["Default", "Default description", "Default Flavortext"], ["Blind Rage", "High damage, high spread", "RRRRAAAAAAHHHH"], ["Calculated Shot", "Bullets are hitscan, but lower damage", "point and click game"], ["Rapid Fire", "Faster firing, more spread, and homing", "the game plays itself"]]
+var utility_array = [["Default", "Default description", "Default Flavortext"], ["Teleport", "Right click to go to that location", "teleports behind you"], ["Invulnerability", "Right click for one second of invulnerability", "title card"], ["Dash", "Right click to gain a burst of increased movespeed", "sonic high school"], ["Rapid Fire", "Right click to breifly increase fire speed", "brrrrrrrrrrrt"]]
+var passive_array = [["Default", "Default description", "Default Flavortext"], ["Blind Rage", "High damage, high spread", "RRRRAAAAAAHHHH"], ["Calculated Shot", "Bullets are hitscan, but lower damage", "point and click game"], ["Rapid Fire", "Faster firing, more spread, and homing", "the game plays itself"], ["Titanium Plating", "Increased health", "i rembred I'm strong"], ["Boosted Core", "Increased move speed", "wheeEeEeEEeeeE~~*~``"]]
 
 
 func _ready():
