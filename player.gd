@@ -12,7 +12,7 @@ signal door_entered
 const bulletPath = preload('res://bullet.tscn')
 
 #array of arrays representing the upgrades, master array pos is slot number, first element of child array is type, second element of child array is index
-var upgrades = [["weapon", 0], ["utility", 4], ["none", 0]]
+var upgrades = [["weapon", 0], ["utility", 3], ["none", 0]]
 
 var doorOpen = false
 var doorFade = false
@@ -278,17 +278,21 @@ func process_utility_slot(i):
 	#call this for stuff that is always active (ie +5 weapon damage) (this will be activated once per passive chip every time you upgrade, after resetting all stats to default)
 func process_passive_slot(i):
 	match i:
-		1: #"blind rage"
+		1: #blind rage
 			damage += 10
 			spread += 20
-		2: #"calculated shot"
+		2: #calculated shot
 			hitscan = true
 			spread = 0
 			damage -= 2
-		3: #"rapid fire"
+		3: #rapid fire
 			spread += 60
 			homing = true
 			reloadtime -= 30
+		4: #titanium plating
+			GlobalVariables.maxPlayerHealth+=2
+		5: #boosted core
+			speed += 500
 		_:
 			pass #default behaviour
 			
