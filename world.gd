@@ -9,9 +9,11 @@ signal player_died_signal
 signal start_cutscene(cutsceneID)
 signal restart_game
 
+var run_won = false
+
 var wave_number = 0
 
-var wave_array = [[1, .5], [5, .7], [7, 1]]
+var wave_array = [[6, .5], [8, .6]]
 
 var weapon_array = [["Default", "Default description", "Default Flavortext"], ["Sniper Rifle", "High damage and accuracy, instantly hits, low rate of fire", "The sniper was introduced to train the AI with stealth and ranged combat. "], ["Shotgun", "5 bullets, high spread, low range", "Kablow!"], ["Sword", "Melee weapon, high movespeed", "The sword was introduced to train the AI with swift melee combat."]]
 var utility_array = [["Default", "Default description", "Default Flavortext"], ["Teleport", "Right click to go to that location", "Advanced tech created and used to test the AI’s capability of trans-space movement."], ["Invulnerability", "Right click for one second of invulnerability", "Tech that was created to strengthen the AI’s current shell during testing."], ["Dash", "Right click to gain a burst of increased movespeed", "A program designed to disable the AI’s shell weapon speed capacity limitors."], ["Rapid Fire", "Right click to briefly increase fire speed", "A program designed to disable the AI’s weapon safety protocol during testing."]]
@@ -89,9 +91,12 @@ func hide_textbox():
 	$Textbox.hide()
 
 func door_entered():
+	if(run_won):
+		player_died()
 	$ClosedDoorArt.show()
 	$OpenDoor.hide()
 	GlobalVariables.upgraded = true
+	$InfoBars/VBoxContainer/Wave/WaveNum.text = str(wave_number + 1) + " of 10"
 
 func textbox_fields(info):
 	if(info.interact_type == 'dialogue'):
@@ -193,6 +198,10 @@ func _on_spawn_timer_timeout():
 				print(wave_number)
 				if wave_number < wave_array.size() - 1:
 					wave_number += 1
+				elif(wave_number == wave_array.size() - 1):
+					run_won = true
+					GlobalVariables.numWins = GlobalVariables.numWins + 1
+					GlobalVariables.numResets = GlobalVariables.numResets + 1
 				else:
 					print("finished all waves")
 					
@@ -233,6 +242,11 @@ func _on_death_game_reset_timer_timeout():
 	
 func player_died():
 	#$DeathGameResetTimer.start()
+	if(run_won):
+		$"DeathMenu/MarginContainer/HBoxContainer/VBoxContainer/You won!".show()
+		run_won = false
+	else:
+		$"DeathMenu/MarginContainer/HBoxContainer/VBoxContainer/You won!".hide()
 	$InfoBars/VBoxContainer/Health/HealthBar.value = 0
 	$CutsceneSoundtrack.play($MainSoundtrack.get_playback_position())
 	$MainSoundtrack.stop()

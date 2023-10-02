@@ -33,6 +33,14 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 
+[node name="You won!" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_14x4g")
+theme_override_font_sizes/font_size = 500
+text = "You won!"
+horizontal_alignment = 1
+
 [node name="Restart" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3

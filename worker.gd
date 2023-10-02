@@ -11,6 +11,10 @@ var opacity = 500
 
 func _ready():
 	$Graphics/Alive.play()
+	player.door_entered.connect(despawn)
+
+func despawn():
+	queue_free()
 
 func _physics_process(delta):
 	if dead:

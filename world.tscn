@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://pulv50b8war6"]
+[gd_scene load_steps=24 format=3 uid="uid://pulv50b8war6"]
 
 [ext_resource type="Texture2D" uid="uid://b5ks5xb4pi4ww" path="res://white_square.png" id="1_6g3vl"]
 [ext_resource type="Script" path="res://world.gd" id="1_h3xci"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://c3yw3svctplxj" path="res://upgrade_chip.tscn" id="7_o5fc3"]
 [ext_resource type="PackedScene" uid="uid://dqggbqb4kj4jw" path="res://textbox.tscn" id="8_hktru"]
 [ext_resource type="Texture2D" uid="uid://g1x7f0x0sfd3" path="res://gamejam_door_closed_sprite.png" id="9_dvhd1"]
+[ext_resource type="Texture2D" uid="uid://dpj1cqedjyskb" path="res://sprite_barricade.png" id="10_tsvm5"]
 [ext_resource type="Texture2D" uid="uid://bl4c1g2g0w3b5" path="res://gamejam_door_open_sprite.png" id="10_x5awx"]
 [ext_resource type="PackedScene" uid="uid://cieatjcoxr11h" path="res://Interact Area.tscn" id="11_38g7i"]
 [ext_resource type="PackedScene" uid="uid://fig3oo0l870o" path="res://main_menu.tscn" id="12_27cs4"]
@@ -21,7 +22,7 @@
 [ext_resource type="AudioStream" uid="uid://b1bh1demi4ldd" path="res://title_track.wav" id="17_pq2lf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bcm6k"]
-size = Vector2(170.804, 194.451)
+size = Vector2(172.324, 198.662)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q7vow"]
 bg_color = Color(0.145098, 0.545098, 0, 0.756863)
@@ -84,14 +85,15 @@ scale = Vector2(2.51166, 2.17536)
 shape = SubResource("RectangleShape2D_bcm6k")
 
 [node name="Block5" type="Sprite2D" parent="Environment"]
-modulate = Color(0, 0, 0, 1)
 position = Vector2(5467, 1070)
-texture = ExtResource("1_6g3vl")
+scale = Vector2(0.299075, 0.299075)
+texture = ExtResource("10_tsvm5")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Environment/Block5"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Block5/StaticBody2D"]
-scale = Vector2(2.51166, 2.17536)
+position = Vector2(13.6211, 32.6858)
+scale = Vector2(17.9258, 15.5256)
 shape = SubResource("RectangleShape2D_bcm6k")
 
 [node name="Block2" type="Sprite2D" parent="Environment"]
@@ -142,6 +144,23 @@ offset_top = 57.0
 offset_right = 1095.0
 offset_bottom = 413.0
 
+[node name="Wave" type="HBoxContainer" parent="InfoBars/VBoxContainer"]
+layout_mode = 2
+
+[node name="WaveText" type="Label" parent="InfoBars/VBoxContainer/Wave"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("14_ydl87")
+theme_override_font_sizes/font_size = 200
+text = "Wave:  "
+
+[node name="WaveNum" type="Label" parent="InfoBars/VBoxContainer/Wave"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.678431, 0, 0, 1)
+theme_override_fonts/font = ExtResource("14_ydl87")
+theme_override_font_sizes/font_size = 200
+text = "1 of 10"
+
 [node name="Health" type="HBoxContainer" parent="InfoBars/VBoxContainer"]
 layout_mode = 2
 
@@ -184,7 +203,7 @@ max_value = 4.0
 position = Vector2(3528, -1571)
 
 [node name="SpawnTimer" type="Timer" parent="."]
-wait_time = 1.316
+wait_time = 0.5
 autostart = true
 
 [node name="SpawnPath" type="Path2D" parent="."]
@@ -233,6 +252,42 @@ visible = false
 process_priority = 98
 layer = 128
 visible = false
+
+[node name="Block5" type="Sprite2D" parent="."]
+position = Vector2(1509, -4269)
+scale = Vector2(0.299075, 0.299075)
+texture = ExtResource("10_tsvm5")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Block5"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Block5/StaticBody2D"]
+position = Vector2(13.6211, 32.6858)
+scale = Vector2(17.9258, 15.5256)
+shape = SubResource("RectangleShape2D_bcm6k")
+
+[node name="Block6" type="Sprite2D" parent="."]
+position = Vector2(5467, -4269)
+scale = Vector2(0.299075, 0.299075)
+texture = ExtResource("10_tsvm5")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Block6"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Block6/StaticBody2D"]
+position = Vector2(13.6211, 32.6858)
+scale = Vector2(17.9258, 15.5256)
+shape = SubResource("RectangleShape2D_bcm6k")
+
+[node name="Block7" type="Sprite2D" parent="."]
+position = Vector2(1554, 1070)
+scale = Vector2(0.299075, 0.299075)
+texture = ExtResource("10_tsvm5")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Block7"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Block7/StaticBody2D"]
+position = Vector2(13.6211, 32.6858)
+scale = Vector2(17.9258, 15.5256)
+shape = SubResource("RectangleShape2D_bcm6k")
 
 [connection signal="player_died_signal" from="." to="DeathMenu" method="_on_world_player_died_signal"]
 [connection signal="restart_game" from="." to="Player" method="_on_world_restart_game"]
