@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://pulv50b8war6"]
+[gd_scene load_steps=25 format=3 uid="uid://pulv50b8war6"]
 
 [ext_resource type="Texture2D" uid="uid://b5ks5xb4pi4ww" path="res://white_square.png" id="1_6g3vl"]
 [ext_resource type="Script" path="res://world.gd" id="1_h3xci"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://c27jqagt4t75x" path="res://pause_menu.tscn" id="5_8j0py"]
 [ext_resource type="PackedScene" uid="uid://c3yw3svctplxj" path="res://upgrade_chip.tscn" id="7_o5fc3"]
 [ext_resource type="PackedScene" uid="uid://dqggbqb4kj4jw" path="res://textbox.tscn" id="8_hktru"]
+[ext_resource type="Texture2D" uid="uid://cb114bhn2wif4" path="res://door_final_sprite.png" id="8_w1074"]
 [ext_resource type="Texture2D" uid="uid://g1x7f0x0sfd3" path="res://gamejam_door_closed_sprite.png" id="9_dvhd1"]
 [ext_resource type="Texture2D" uid="uid://dpj1cqedjyskb" path="res://sprite_barricade.png" id="10_tsvm5"]
 [ext_resource type="Texture2D" uid="uid://bl4c1g2g0w3b5" path="res://gamejam_door_open_sprite.png" id="10_x5awx"]
@@ -55,6 +56,10 @@ scale = Vector2(0.502887, 0.502887)
 
 [node name="OpenDoorArt" type="Sprite2D" parent="OpenDoor"]
 texture = ExtResource("10_x5awx")
+
+[node name="FinalOpenDoorArt" type="Sprite2D" parent="OpenDoor"]
+visible = false
+texture = ExtResource("8_w1074")
 
 [node name="InteractArea" parent="OpenDoor" instance=ExtResource("11_38g7i")]
 position = Vector2(0, 1161.29)
