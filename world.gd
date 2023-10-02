@@ -73,7 +73,8 @@ func _process(delta):
 		for chip in remaining:
 			chip.queue_free()
 		GlobalVariables.upgraded = false
-	
+	$HealthCanvas/HBoxContainer/HealthBar.max_value = GlobalVariables.maxPlayerHealth
+	$HealthCanvas/HBoxContainer/HealthBar.value = GlobalVariables.playerHealth
 
 func _on_spawn_timer_timeout():
 	
