@@ -12,7 +12,7 @@ signal door_entered
 const bulletPath = preload('res://bullet.tscn')
 
 #array of arrays representing the upgrades, master array pos is slot number, first element of child array is type, second element of child array is index
-var upgrades = [["weapon", 0], ["utility", 3], ["none", 0]]
+var upgrades = [["weapon", 0], ["none", 0], ["none", 0]]
 
 var doorOpen = false
 var doorFade = false
@@ -394,6 +394,7 @@ func execute_interaction():
 				upgrades[2][1] = cur_interaction.interact_value[0]
 				cur_interaction.get_parent().queue_free()
 				GlobalVariables.upgraded = true
+				GlobalVariables.utilitytimermax = 1 #hacky fix to make it so the bar appears lol
 			"door" :
 				if(doorOpen == true):
 					canact = false
