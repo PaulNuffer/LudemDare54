@@ -43,7 +43,8 @@ func kill():
 		return
 	dead = true
 	$DeathCullTimer.start()
-	$DeathSound.play()
+	#$DeathSound.play()
+	$WorkerDeathSounds.play()
 	$Graphics/Dead.show()
 	$Graphics/Alive.hide()
 	$CollisionShape2D.disabled = true

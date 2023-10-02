@@ -52,7 +52,7 @@ func shoot():
 	if reloadtimer == 0:
 		reloadtimer = 60
 		createbullet()
-
+		$GuardShootSounds.play()
 
 func createbullet():
 
@@ -85,7 +85,8 @@ func kill():
 		return
 	dead = true
 	$DeathCullTimer.start()
-	$DeathSound.play()
+	#$DeathSound.play()
+	$GuardDeathSounds.play()
 	$Graphics/Dead.show()
 	$Graphics/Alive.hide()
 	$CollisionShape2D.disabled = true

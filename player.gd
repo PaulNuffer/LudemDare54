@@ -346,6 +346,7 @@ func process_weapon_slot(i):
 			
 		3: #sword
 			createbullet()
+			$SwordSounds.play()
 			
 		_: #default pistol
 			createbullet()
@@ -410,7 +411,7 @@ func execute_interaction():
 					canact = false
 					maxScreenFade = 350
 					doorFade = false
-
+					$DoorSound.play()
 
 func _on_world_wave_finished():
 	doorOpen = true
