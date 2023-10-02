@@ -27,6 +27,7 @@ var dbulletspeed = 3000
 var dlifetime = 100 
 var dreloadtime = 50
 var dbulletsize = 100
+var dmaxhealth = 4
 @onready var dbulletspawnpos = $"WeaponGraphics/Pistol/Marker2D"
 
 
@@ -63,6 +64,7 @@ func resetvars():
 	hitscan = false
 	homing = false
 	invulnerable = false
+	GlobalVariables.maxPlayerHealth = dmaxhealth
 
 var dead = false
 
@@ -298,7 +300,7 @@ func process_passive_slot(i):
 			homing = true
 			reloadtime -= 30
 		4: #titanium plating
-			GlobalVariables.maxPlayerHealth = 6
+			GlobalVariables.maxPlayerHealth += 2
 		5: #boosted core
 			speed += 500
 		_:
