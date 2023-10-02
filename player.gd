@@ -104,10 +104,12 @@ func _physics_process(delta):
 				screenfadetimer += 10
 				$fade/ColorRect.self_modulate.a8 = screenfadetimer
 			else:
+				#this is the middle of the fade
 				doorFade = true
 				#play a door sound here
 				global_position.x = 3528
 				global_position.y = 2000
+				GlobalVariables.playerHealth = GlobalVariables.maxPlayerHealth
 				doorOpen = false
 				emit_signal("door_entered")
 		else:
