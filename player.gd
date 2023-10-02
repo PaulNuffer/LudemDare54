@@ -77,6 +77,12 @@ func _process(delta):
 	$MousePos.position = get_global_mouse_position() - $".".global_position
 	
 	$WeaponGraphics.rotation = global_position.direction_to(get_global_mouse_position()).angle()
+	
+	if $WeaponGraphics.rotation > PI/2 - PI && $WeaponGraphics.rotation < 3*PI/2 - PI:
+		$WeaponGraphics.scale.y = -1
+	else:
+		$WeaponGraphics.scale.y = 1
+	
 	if dead:
 		return
 		
@@ -285,13 +291,13 @@ func process_passive_slot(i):
 	match i:
 		1: #blind rage
 			damage += 10
-			spread += 20
+			spread += 10
 		2: #calculated shot
 			hitscan = true
 			spread = 0
 			damage -= 2
 		3: #rapid fire
-			spread += 60
+			spread += 30
 			homing = true
 			reloadtime -= 30
 		4: #titanium plating
