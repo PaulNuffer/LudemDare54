@@ -18,14 +18,14 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bcm6k"]
 size = Vector2(170.804, 194.451)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q7vow"]
+bg_color = Color(0.145098, 0.545098, 0, 0.756863)
+
 [sub_resource type="Curve2D" id="Curve2D_xn16m"]
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 3, -5039, 0, 0, 0, 0, 7059, -5039, 0, 0, 0, 0, 7087, 2074, 0, 0, 0, 0, 3, 2067, 0, 0, 0, 0, 3, -5039)
 }
 point_count = 5
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q7vow"]
-bg_color = Color(0.145098, 0.545098, 0, 0.756863)
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_h3xci")
@@ -128,6 +128,52 @@ texture = ExtResource("1_6g3vl")
 scale = Vector2(2.51166, 2.17536)
 shape = SubResource("RectangleShape2D_bcm6k")
 
+[node name="InfoBars" type="CanvasLayer" parent="."]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="InfoBars"]
+offset_left = 64.0
+offset_top = 57.0
+offset_right = 1095.0
+offset_bottom = 413.0
+
+[node name="Health" type="HBoxContainer" parent="InfoBars/VBoxContainer"]
+layout_mode = 2
+
+[node name="HealthText" type="Label" parent="InfoBars/VBoxContainer/Health"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("14_ydl87")
+theme_override_font_sizes/font_size = 200
+text = "Health: "
+
+[node name="HealthBar" type="ProgressBar" parent="InfoBars/VBoxContainer/Health"]
+custom_minimum_size = Vector2(500, 2.08165e-12)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_fonts/font = ExtResource("14_ydl87")
+theme_override_font_sizes/font_size = 200
+theme_override_styles/fill = SubResource("StyleBoxFlat_q7vow")
+max_value = 4.0
+
+[node name="Utility" type="HBoxContainer" parent="InfoBars/VBoxContainer"]
+layout_mode = 2
+
+[node name="UtilityText" type="Label" parent="InfoBars/VBoxContainer/Utility"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("14_ydl87")
+theme_override_font_sizes/font_size = 200
+text = "Utility: "
+
+[node name="UtilityBar" type="ProgressBar" parent="InfoBars/VBoxContainer/Utility"]
+custom_minimum_size = Vector2(500, 2.08165e-12)
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_fonts/font = ExtResource("14_ydl87")
+theme_override_font_sizes/font_size = 200
+theme_override_styles/fill = SubResource("StyleBoxFlat_q7vow")
+max_value = 4.0
+
 [node name="Player" parent="." instance=ExtResource("2_b2s1h")]
 position = Vector2(3528, -1571)
 
@@ -146,30 +192,7 @@ visible = false
 
 [node name="Menu" parent="." instance=ExtResource("12_27cs4")]
 layer = 100
-
-[node name="HealthCanvas" type="CanvasLayer" parent="."]
-
-[node name="HBoxContainer" type="HBoxContainer" parent="HealthCanvas"]
-offset_left = 100.0
-offset_top = 100.0
-offset_right = 600.0
-offset_bottom = 276.0
-
-[node name="Label" type="Label" parent="HealthCanvas/HBoxContainer"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("14_ydl87")
-theme_override_font_sizes/font_size = 200
-text = "Health: "
-
-[node name="HealthBar" type="ProgressBar" parent="HealthCanvas/HBoxContainer"]
-custom_minimum_size = Vector2(500, 2.08165e-12)
-layout_mode = 2
-size_flags_horizontal = 0
-theme_override_fonts/font = ExtResource("14_ydl87")
-theme_override_font_sizes/font_size = 200
-theme_override_styles/fill = SubResource("StyleBoxFlat_q7vow")
-max_value = 4.0
+visible = false
 
 [connection signal="wave_finished" from="." to="Player" method="_on_world_wave_finished"]
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

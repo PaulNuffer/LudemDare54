@@ -73,8 +73,16 @@ func _process(delta):
 		for chip in remaining:
 			chip.queue_free()
 		GlobalVariables.upgraded = false
-	$HealthCanvas/HBoxContainer/HealthBar.max_value = GlobalVariables.maxPlayerHealth
-	$HealthCanvas/HBoxContainer/HealthBar.value = GlobalVariables.playerHealth
+	var healthBar = $InfoBars/VBoxContainer/Health/HealthBar
+	var utilityBar = $InfoBars/VBoxContainer/Utility/UtilityBar
+	healthBar.max_value = GlobalVariables.maxPlayerHealth
+	healthBar.value = GlobalVariables.playerHealth
+	if(GlobalVariables.utilitytimermax == 0):
+		$InfoBars/VBoxContainer/Utility.hide()
+	else:
+		$InfoBars/VBoxContainer/Utility.show()
+		utilityBar.max_value = GlobalVariables.utilitytimermax
+		utilityBar.value = GlobalVariables.utilitytimermax - GlobalVariables.utilitytimer
 
 func _on_spawn_timer_timeout():
 	
