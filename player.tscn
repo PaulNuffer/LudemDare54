@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dyj383tmdfjq0"]
+[gd_scene load_steps=25 format=3 uid="uid://dyj383tmdfjq0"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_arttm"]
 [ext_resource type="Texture2D" uid="uid://ckl6f2ibslqq4" path="res://splatter.png" id="2_5etr6"]
@@ -14,10 +14,34 @@
 [ext_resource type="Texture2D" uid="uid://60fam4vcrb5" path="res://weapon_sprite_shotgun.png" id="11_dw84u"]
 [ext_resource type="Texture2D" uid="uid://bsyu7wpacq2ya" path="res://weapon_sprite_sniper.png" id="12_u1ho8"]
 [ext_resource type="Texture2D" uid="uid://bp1nofe8fqgwa" path="res://weapon_sprite_sword.png" id="13_dyty1"]
+[ext_resource type="AudioStream" uid="uid://c4xinioyt8q01" path="res://PlayerShootSounds/PlayerShoot1.wav" id="15_64sw5"]
+[ext_resource type="AudioStream" uid="uid://bvkje5xwt6ywp" path="res://PlayerShootSounds/PlayerShoot2.wav" id="16_kn5jy"]
+[ext_resource type="AudioStream" uid="uid://chyikq7b3yf7e" path="res://PlayerShootSounds/PlayerShoot3.wav" id="17_qyctd"]
+[ext_resource type="AudioStream" uid="uid://17njoyruly52" path="res://PlayerShootSounds/PlayerShoot4.wav" id="18_yee4l"]
+[ext_resource type="AudioStream" uid="uid://crq4u4k2r76o" path="res://PlayerShootSounds/PlayerShoot5.wav" id="19_m0mt6"]
+[ext_resource type="AudioStream" uid="uid://dsnifknq0qf8s" path="res://PlayerShootSounds/PlayerShoot6.wav" id="20_ou2nb"]
+[ext_resource type="AudioStream" uid="uid://gwve3tmqehj6" path="res://PlayerShootSounds/PlayerShoot7.wav" id="21_hlupu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_co1bf"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qx3hm"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_a47r1"]
+streams_count = 7
+stream_0/stream = ExtResource("15_64sw5")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("16_kn5jy")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("17_qyctd")
+stream_2/weight = 1.0
+stream_3/stream = ExtResource("18_yee4l")
+stream_3/weight = 1.0
+stream_4/stream = ExtResource("19_m0mt6")
+stream_4/weight = 1.0
+stream_5/stream = ExtResource("20_ou2nb")
+stream_5/weight = 1.0
+stream_6/stream = ExtResource("21_hlupu")
+stream_6/weight = 1.0
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 2
@@ -73,12 +97,10 @@ hit_from_inside = true
 
 [node name="DeathSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_esu3y")
-volume_db = -20.0
 bus = &"sfx"
 
 [node name="ShootSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_ko4eh")
-volume_db = -20.0
 bus = &"sfx"
 
 [node name="MuzzleFlash" type="Sprite2D" parent="."]
@@ -231,6 +253,9 @@ texture = ExtResource("13_dyty1")
 [node name="Marker2D" type="Marker2D" parent="."]
 position = Vector2(478, 0)
 scale = Vector2(50, 50)
+
+[node name="PlayerShootSounds" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_a47r1")
 
 [connection signal="timeout" from="MuzzleFlash/Timer" to="MuzzleFlash" method="hide"]
 [connection signal="button_up" from="CanvasLayer/DeathScreen/Panel/Button" to="." method="restart"]

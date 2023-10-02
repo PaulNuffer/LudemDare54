@@ -15,11 +15,11 @@
 [ext_resource type="PackedScene" uid="uid://cieatjcoxr11h" path="res://Interact Area.tscn" id="11_38g7i"]
 [ext_resource type="PackedScene" uid="uid://fig3oo0l870o" path="res://main_menu.tscn" id="12_27cs4"]
 [ext_resource type="FontFile" uid="uid://dpcnnl8v24k5w" path="res://HelvetiPixel.ttf" id="14_ydl87"]
-[ext_resource type="AudioStream" uid="uid://bq7vkq0flvsvm" path="res://make_a_break_for_it.wav" id="15_3axyb"]
 [ext_resource type="PackedScene" uid="uid://bw5fd470mt7gv" path="res://cutscene.tscn" id="15_6qeyi"]
 [ext_resource type="PackedScene" uid="uid://b41wckkqdp72i" path="res://death_menu.tscn" id="15_jp0rs"]
-[ext_resource type="AudioStream" uid="uid://6fgg7hbjbvej" path="res://make_a_break_for_it_lofi_version.wav" id="16_wooic"]
-[ext_resource type="AudioStream" uid="uid://b1bh1demi4ldd" path="res://title_track.wav" id="17_pq2lf"]
+[ext_resource type="AudioStream" uid="uid://iri0frc72vg2" path="res://make_a_break_for_it.mp3" id="16_x2mdu"]
+[ext_resource type="AudioStream" uid="uid://dp2fpyy0unwnv" path="res://make_a_break_for_it_lofi_version.mp3" id="17_s5ack"]
+[ext_resource type="AudioStream" uid="uid://bnrhuixh4huw8" path="res://title_track.mp3" id="18_xuht5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bcm6k"]
 size = Vector2(172.324, 198.662)
@@ -224,15 +224,18 @@ one_shot = true
 
 [node name="MainSoundtrack" type="AudioStreamPlayer" parent="."]
 process_mode = 3
-stream = ExtResource("15_3axyb")
+stream = ExtResource("16_x2mdu")
+bus = &"music"
 
 [node name="CutsceneSoundtrack" type="AudioStreamPlayer" parent="."]
 process_mode = 3
-stream = ExtResource("16_wooic")
+stream = ExtResource("17_s5ack")
+bus = &"music"
 
 [node name="TitleSoundtrack" type="AudioStreamPlayer" parent="."]
 process_mode = 3
-stream = ExtResource("17_pq2lf")
+stream = ExtResource("18_xuht5")
+bus = &"music"
 
 [node name="fade" type="CanvasLayer" parent="."]
 layer = 0

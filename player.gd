@@ -331,7 +331,7 @@ func initialize_weapon_slot(i):
 	#call this when you want to shoot (setting the weapon sprite will happen elsewhere)
 func process_weapon_slot(i):
 	match i:
-		1: #sniper rifle (i want this to be hitscan but it doesent need to be if thatd be ass to do)
+		1: #sniper rifle 
 			createbullet()
 			#$MuzzleFlash.show()
 			#$MuzzleFlash/Timer.start()
@@ -351,7 +351,7 @@ func process_weapon_slot(i):
 			createbullet()
 			#$MuzzleFlash.show()
 			#$MuzzleFlash/Timer.start()
-			$ShootSound.play()
+			$PlayerShootSounds.play()
 
 
 
