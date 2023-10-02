@@ -12,7 +12,7 @@ signal door_entered
 const bulletPath = preload('res://bullet.tscn')
 
 #array of arrays representing the upgrades, master array pos is slot number, first element of child array is type, second element of child array is index
-var upgrades = [["weapon", 0], ["none", 0], ["none", 0]]
+var upgrades = [["weapon", 0], ["utility", 4], ["none", 0]]
 
 var doorOpen = false
 var doorFade = false
@@ -202,7 +202,6 @@ func shoot():
 	if reloadtimer <= 0: #only if we can shoot
 		for item in upgrades: #loop through all upgrade slots
 			if item[0] == "weapon": #if any of them are weapons
-				recalculate() # hacky, i dont want to do this every time we shoot
 				process_weapon_slot(item[1]) #activate them
 				return #and then get outta here
 		process_weapon_slot(0) #if none are weapons, use default shooting behaviour
@@ -261,6 +260,18 @@ func process_utility_slot(i):
 			GlobalVariables.utilitytimermax = GlobalVariables.utilitytimer
 			utilityactivetimer = 60
 			invulnerable = true
+			
+		3: #dash
+			GlobalVariables.utilitytimer = 60
+			GlobalVariables.utilitytimermax = GlobalVariables.utilitytimer
+			utilityactivetimer = 20
+			speed *= 3
+		4: # rapid fire
+			GlobalVariables.utilitytimer = 500
+			GlobalVariables.utilitytimermax = GlobalVariables.utilitytimer
+			utilityactivetimer = 60
+			reloadtime = -1
+			
 		_:
 			pass #default behaviour
 	
