@@ -35,11 +35,15 @@ func _ready():
 	death_menu.show_main_menu.connect(show_main_menu)
 	death_menu.hide_death_menu.connect(hide_death_menu)
 	cutscene.end_cutscene.connect(end_cutscene)
+	player.set_fade.connect(set_fade)
+	$fade/ColorRect.self_modulate.a8 = 0
 	get_tree().paused = true
 	if(GlobalVariables.immediateStart):
 		start_game()
 		GlobalVariables.immediateStart = false
 	
+func set_fade(value):
+	$fade/ColorRect.self_modulate.a8 = value
 
 func start_game():
 	$Menu.hide()

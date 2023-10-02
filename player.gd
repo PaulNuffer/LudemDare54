@@ -9,6 +9,7 @@ signal hide_textbox
 signal textbox_fields(info)
 signal door_entered
 signal player_died
+signal set_fade(value)
 
 const bulletPath = preload('res://bullet.tscn')
 
@@ -109,7 +110,7 @@ func _physics_process(delta):
 		if !doorFade:
 			if(screenfadetimer < maxScreenFade):
 				screenfadetimer += 10
-				$fade/ColorRect.self_modulate.a8 = screenfadetimer
+				emit_signal("set_fade", screenfadetimer)
 			else:
 				#this is the middle of the fade
 				doorFade = true
@@ -121,15 +122,14 @@ func _physics_process(delta):
 				emit_signal("door_entered")
 		else:
 			screenfadetimer-=2
-			$fade/ColorRect.self_modulate.a8 = screenfadetimer
+			emit_signal("set_fade", screenfadetimer)
 			if(screenfadetimer <= 160 && !canact):
 				canact = true
 				GlobalVariables.spawned = 0
 				GlobalVariables.enemy_count = 0 
 				GlobalVariables.wavecompleted = false
 			if(screenfadetimer <= 1):
-				$fade/ColorRect.hide()
-				$fade/ColorRect.self_modulate.a8 = 0
+				emit_signal("set_fade", 0)
 	
 	if dead or !canact:
 		return
@@ -411,7 +411,7 @@ func execute_interaction():
 					canact = false
 					maxScreenFade = 350
 					doorFade = false
-					$fade/ColorRect.show()
+
 
 func _on_world_wave_finished():
 	doorOpen = true
