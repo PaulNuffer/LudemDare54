@@ -204,10 +204,6 @@ func recalculate(): #recalculates all player variables
 	for item in upgrades: #loop through all upgrade slots
 		if item[0] == "passive": #if any of them are passives
 			process_passive_slot(item[1]) #initialize them
-			
-	
-		
-	
 	
 func shoot():
 	if reloadtimer <= 0: #only if we can shoot
@@ -302,7 +298,7 @@ func process_passive_slot(i):
 			homing = true
 			reloadtime -= 30
 		4: #titanium plating
-			GlobalVariables.maxPlayerHealth+=2
+			GlobalVariables.maxPlayerHealth = 6
 		5: #boosted core
 			speed += 500
 		_:
