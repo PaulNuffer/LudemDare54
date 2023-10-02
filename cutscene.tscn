@@ -1,10 +1,22 @@
-[gd_scene load_steps=3 format=3 uid="uid://bw5fd470mt7gv"]
+[gd_scene load_steps=4 format=3 uid="uid://bw5fd470mt7gv"]
 
 [ext_resource type="Script" path="res://cutscene.gd" id="1_x4m6q"]
+[ext_resource type="Texture2D" uid="uid://bexe3fx167ypp" path="res://The_Head_Scientist.PNG" id="2_a8l0c"]
 [ext_resource type="PackedScene" uid="uid://dqggbqb4kj4jw" path="res://textbox.tscn" id="2_l67xs"]
 
 [node name="Node2D" type="Node2D"]
 process_mode = 3
 script = ExtResource("1_x4m6q")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Image" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_a8l0c")
+stretch_mode = 4
 
 [node name="DialogueBox" parent="." instance=ExtResource("2_l67xs")]
