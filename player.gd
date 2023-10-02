@@ -15,7 +15,6 @@ const bulletPath = preload('res://bullet.tscn')
 var upgrades = [["weapon", 0], ["none", 0], ["none", 0]]
 
 var maxHealth = 4
-var health = maxHealth
 var doorOpen = false
 var doorFade = false
 var canact = true
@@ -154,8 +153,8 @@ func hideGraphics():
 	
 func hurt(damage):
 	if (!invulnerable):
-		health -= damage
-		if(health <= 0):
+		GlobalVariables.playerHealth -= damage
+		if(GlobalVariables.playerHealth <= 0):
 			kill()
 	
 func kill():
