@@ -49,17 +49,17 @@ var utilitytimer = 0
 
 #reset function
 func resetvars():
-	var speed = dspeed
-	var damage = ddamage
-	var bulletspeed = dbulletspeed
-	var lifetime = dlifetime
-	var reloadtime = dreloadtime
-	var bulletsize = dbulletsize
-	var spread = 0
-	var hitscandist = 0
-	var hitscan = false
-	var homing = false
-	var canact = true
+	speed = dspeed
+	damage = ddamage
+	bulletspeed = dbulletspeed
+	lifetime = dlifetime
+	reloadtime = dreloadtime
+	bulletsize = dbulletsize
+	spread = 0
+	hitscandist = 0
+	hitscan = false
+	homing = false
+	canact = true
 
 var dead = false
 
