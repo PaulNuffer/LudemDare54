@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://pulv50b8war6"]
+[gd_scene load_steps=19 format=3 uid="uid://pulv50b8war6"]
 
 [ext_resource type="Texture2D" uid="uid://b5ks5xb4pi4ww" path="res://white_square.png" id="1_6g3vl"]
 [ext_resource type="Script" path="res://world.gd" id="1_h3xci"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://cieatjcoxr11h" path="res://Interact Area.tscn" id="11_38g7i"]
 [ext_resource type="PackedScene" uid="uid://fig3oo0l870o" path="res://main_menu.tscn" id="12_27cs4"]
 [ext_resource type="FontFile" uid="uid://dpcnnl8v24k5w" path="res://HelvetiPixel.ttf" id="14_ydl87"]
+[ext_resource type="AudioStream" uid="uid://bq7vkq0flvsvm" path="res://make_a_break_for_it.wav" id="15_3axyb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bcm6k"]
 size = Vector2(170.804, 194.451)
@@ -196,6 +197,10 @@ layer = 100
 [node name="DeathGameResetTimer" type="Timer" parent="."]
 wait_time = 2.0
 one_shot = true
+
+[node name="MainSoundtrack" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("15_3axyb")
+bus = &"music"
 
 [connection signal="wave_finished" from="." to="Player" method="_on_world_wave_finished"]
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

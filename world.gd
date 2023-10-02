@@ -29,11 +29,13 @@ func _ready():
 	pause_menu.hide_pop_up.connect(hide_pop_up)
 	pause_menu.show_main_menu.connect(show_main_menu)
 	get_tree().paused = true
+	
 
 func start_game():
 	$Menu.hide()
 	$PauseMenu.hide()
 	get_tree().paused = false
+	$MainSoundtrack.play()
 
 func show_main_menu(): #we are treating this as a time the game should be totally reset
 	reset_game()
