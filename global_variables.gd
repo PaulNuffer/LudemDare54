@@ -1,5 +1,6 @@
 extends Node2D
 
+var immediateStart = false
 var enemy_count = 0
 var spawned = 0
 var wavecompleted = false

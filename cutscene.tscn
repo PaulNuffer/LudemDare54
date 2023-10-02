@@ -9,6 +9,7 @@ process_mode = 3
 script = ExtResource("1_x4m6q")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="Image" type="TextureRect" parent="CanvasLayer"]
 anchors_preset = 15
@@ -20,3 +21,4 @@ texture = ExtResource("2_a8l0c")
 stretch_mode = 4
 
 [node name="DialogueBox" parent="." instance=ExtResource("2_l67xs")]
+visible = false
