@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://pulv50b8war6"]
+[gd_scene load_steps=23 format=3 uid="uid://pulv50b8war6"]
 
 [ext_resource type="Texture2D" uid="uid://b5ks5xb4pi4ww" path="res://white_square.png" id="1_6g3vl"]
 [ext_resource type="Script" path="res://world.gd" id="1_h3xci"]
@@ -17,6 +17,8 @@
 [ext_resource type="AudioStream" uid="uid://bq7vkq0flvsvm" path="res://make_a_break_for_it.wav" id="15_3axyb"]
 [ext_resource type="PackedScene" uid="uid://bw5fd470mt7gv" path="res://cutscene.tscn" id="15_6qeyi"]
 [ext_resource type="PackedScene" uid="uid://b41wckkqdp72i" path="res://death_menu.tscn" id="15_jp0rs"]
+[ext_resource type="AudioStream" uid="uid://6fgg7hbjbvej" path="res://make_a_break_for_it_lofi_version.wav" id="16_wooic"]
+[ext_resource type="AudioStream" uid="uid://b1bh1demi4ldd" path="res://title_track.wav" id="17_pq2lf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bcm6k"]
 size = Vector2(170.804, 194.451)
@@ -202,7 +204,16 @@ wait_time = 2.0
 one_shot = true
 
 [node name="MainSoundtrack" type="AudioStreamPlayer" parent="."]
+process_mode = 3
 stream = ExtResource("15_3axyb")
+
+[node name="CutsceneSoundtrack" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("16_wooic")
+
+[node name="TitleSoundtrack" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("17_pq2lf")
 
 [node name="fade" type="CanvasLayer" parent="."]
 layer = 0

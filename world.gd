@@ -38,6 +38,7 @@ func _ready():
 	cutscene.end_cutscene.connect(end_cutscene)
 	player.set_fade.connect(set_fade)
 	$fade/ColorRect.self_modulate.a8 = 0
+	$TitleSoundtrack.play()
 	get_tree().paused = true
 	if(GlobalVariables.immediateStart):
 		start_game()
@@ -52,7 +53,8 @@ func start_game():
 	$Menu.hide()
 	$PauseMenu.hide()
 	get_tree().paused = false
-	$MainSoundtrack.play()
+	$MainSoundtrack.play($TitleSoundtrack.get_playback_position())
+	$TitleSoundtrack.stop()
 	emit_signal("restart_game")
 
 func show_main_menu(): #we are treating this as a time the game should be totally reset
@@ -65,11 +67,15 @@ func show_pop_up():
 	if(!$Menu.visible):
 		$PauseMenu.show()
 		get_tree().paused = true
+		$CutsceneSoundtrack.play($MainSoundtrack.get_playback_position())
+		$MainSoundtrack.stop()
 
 func hide_pop_up():
 	if(!$Menu.visible):
 		$PauseMenu.hide()
 		get_tree().paused = false
+		$MainSoundtrack.play($CutsceneSoundtrack.get_playback_position())
+		$CutsceneSoundtrack.stop()
 		
 func hide_death_menu():
 	GlobalVariables.immediateStart = true
@@ -122,6 +128,8 @@ func check_for_cutscenes():
 func check_and_play_cutscene(num, condition):
 	var viewed = GlobalVariables.viewedCutscenes
 	if(!viewed.has(num) && condition):
+		$CutsceneSoundtrack.play($MainSoundtrack.get_playback_position())
+		$MainSoundtrack.stop()
 		$Cutscene.show()
 		$Cutscene/CanvasLayer.show()
 		$Cutscene/DialogueBox.show()
@@ -133,6 +141,8 @@ func end_cutscene():
 	$Cutscene.hide()
 	$Cutscene/CanvasLayer.hide()
 	$Cutscene/DialogueBox.hide()
+	$MainSoundtrack.play($CutsceneSoundtrack.get_playback_position())
+	$CutsceneSoundtrack.stop()
 	get_tree().paused = false
 
 func _process(delta):
@@ -223,6 +233,8 @@ func _on_death_game_reset_timer_timeout():
 	
 func player_died():
 	#$DeathGameResetTimer.start()
+	$CutsceneSoundtrack.play($MainSoundtrack.get_playback_position())
+	$MainSoundtrack.stop()
 	emit_signal("player_died_signal")
 	$DeathMenu.show()
 	get_tree().paused = true
