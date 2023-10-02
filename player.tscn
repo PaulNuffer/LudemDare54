@@ -156,9 +156,6 @@ limit_top = -6926
 limit_right = 8965
 limit_bottom = 3977
 
-[node name="Marker2D" type="Marker2D" parent="."]
-scale = Vector2(50, 50)
-
 [node name="Interaction Components" type="Node2D" parent="."]
 z_index = 3
 
@@ -220,6 +217,10 @@ visible = false
 position = Vector2(613, 13)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("13_dyty1")
+
+[node name="Marker2D" type="Marker2D" parent="WeaponGraphics"]
+position = Vector2(497, 0)
+scale = Vector2(50, 50)
 
 [connection signal="timeout" from="MuzzleFlash/Timer" to="MuzzleFlash" method="hide"]
 [connection signal="button_up" from="CanvasLayer/DeathScreen/Panel/Button" to="." method="restart"]

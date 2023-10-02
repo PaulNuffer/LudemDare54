@@ -14,7 +14,6 @@ const bulletPath = preload('res://bullet.tscn')
 #array of arrays representing the upgrades, master array pos is slot number, first element of child array is type, second element of child array is index
 var upgrades = [["weapon", 0], ["none", 0], ["none", 0]]
 
-var maxHealth = 4
 var doorOpen = false
 var doorFade = false
 var canact = true
@@ -229,7 +228,7 @@ func createbullet():
 	bullet.position = global_position
 	
 	#this code is totally fucked because in theory it does nothing (bullet calcs its own spread) but if i remove it the game crashes lol
-	var standardDir = (get_global_mouse_position() - $Marker2D.global_position).normalized().angle() * 180 / PI
+	var standardDir = (get_global_mouse_position() - $WeaponGraphics/Marker2D.global_position).normalized().angle() * 180 / PI
 	var newDir = (standardDir + randf_range(spread * -1, spread)) * PI / 180
 	bullet.velocity = Vector2.from_angle(newDir)
 	
