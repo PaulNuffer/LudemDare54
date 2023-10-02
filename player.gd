@@ -25,6 +25,7 @@ var dbulletspeed = 3000
 var dlifetime = 100 
 var dreloadtime = 50
 var dbulletsize = 100
+@onready var dbulletspawnpos = $"WeaponGraphics/Pistol/Marker2D"
 
 
 #modifiable variables
@@ -39,12 +40,12 @@ var hitscandist = 0
 var hitscan = false
 var homing = false
 var invulnerable = false
+var bulletspawnpos = dbulletspawnpos
 
 #constantly changing variables
 var reloadtimer = 0;
 var screenfadetimer = 0;
 var maxScreenFade = 0
-var utilitytimer = 0
 var utilityactivetimer = 0
 
 #reset function
@@ -89,8 +90,8 @@ func _process(delta):
 func _physics_process(delta):
 	if reloadtimer > 0: #decrement reload timer
 			reloadtimer-=1
-	if utilitytimer > 0: #decrement reload timer
-		utilitytimer-=1
+	if GlobalVariables.utilitytimer > 0: #decrement reload timer
+		GlobalVariables.utilitytimer -= 1
 	if utilityactivetimer > 0: #decrement reload timer
 		utilityactivetimer-=1
 		
@@ -182,11 +183,13 @@ func recalculate(): #recalculates all player variables
 					$WeaponGraphics/Sniper.show()
 				2:
 					$WeaponGraphics/Shotgun.show()
+					bulletspawnpos = $"WeaponGraphics/Shotgun/Marker2D"
 				3:
 					$WeaponGraphics/Sword.show()
 				_:
 					$WeaponGraphics/Pistol.show()
-			
+					bulletspawnpos = $"WeaponGraphics/Pistol/Marker2D"
+				
 	for item in upgrades: #loop through all upgrade slots
 		if item[0] == "passive": #if any of them are passives
 			process_passive_slot(item[1]) #initialize them
@@ -205,7 +208,7 @@ func shoot():
 		process_weapon_slot(0) #if none are weapons, use default shooting behaviour
 		
 func activateUtility():
-		if utilitytimer == 0: #only if we can use the utility
+		if GlobalVariables.utilitytimer == 0: #only if we can use the utility
 			for item in upgrades: #loop through all upgrade slots
 				if item[0] == "utility": #if any of them are utilities
 					process_utility_slot(item[1]) #activate them
@@ -225,10 +228,10 @@ func createbullet():
 	#bullet code
 	var bullet = bulletPath.instantiate()
 	get_parent().add_child(bullet)
-	bullet.position = global_position
+	bullet.position = bulletspawnpos.global_position
 	
 	#this code is totally fucked because in theory it does nothing (bullet calcs its own spread) but if i remove it the game crashes lol
-	var standardDir = (get_global_mouse_position() - $WeaponGraphics/Marker2D.global_position).normalized().angle() * 180 / PI
+	var standardDir = (get_global_mouse_position() - bulletspawnpos.global_position).normalized().angle() * 180 / PI
 	var newDir = (standardDir + randf_range(spread * -1, spread)) * PI / 180
 	bullet.velocity = Vector2.from_angle(newDir)
 	
@@ -242,7 +245,8 @@ func createbullet():
 func process_utility_slot(i):
 	match i:
 		1:
-			utilitytimer = 600
+			GlobalVariables.utilitytimer = 600
+			GlobalVariables.utilitytimermax = GlobalVariables.utilitytimer
 			
 			if $MousePos.is_colliding():
 				if $MousePos.get_collider().has_method("hurt"):
@@ -253,7 +257,8 @@ func process_utility_slot(i):
 			
 			global_position = $MousePos.position + $".".global_position  #works but is shit, make it so you cant teleport in walls and you can telefrag
 		2: #invulnerability
-			utilitytimer = 600
+			GlobalVariables.utilitytimer = 600
+			GlobalVariables.utilitytimermax = GlobalVariables.utilitytimer
 			utilityactivetimer = 60
 			invulnerable = true
 		_:
@@ -294,6 +299,7 @@ func initialize_weapon_slot(i):
 			hitscandist = 1000
 			speed += 600
 			damage += 10
+			reloadtime = 10
 		_:
 			pass #default behaviour
 	

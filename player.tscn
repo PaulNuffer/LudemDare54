@@ -200,11 +200,19 @@ position = Vector2(348, 12)
 scale = Vector2(0.15, 0.15)
 texture = ExtResource("10_jw3dk")
 
+[node name="Marker2D" type="Marker2D" parent="WeaponGraphics/Pistol"]
+position = Vector2(866.667, -80)
+scale = Vector2(333.333, 333.333)
+
 [node name="Shotgun" type="Sprite2D" parent="WeaponGraphics"]
 visible = false
 position = Vector2(526, 34)
 scale = Vector2(0.15, 0.15)
 texture = ExtResource("11_dw84u")
+
+[node name="Marker2D" type="Marker2D" parent="WeaponGraphics/Shotgun"]
+position = Vector2(-320, -226.667)
+scale = Vector2(333.333, 333.333)
 
 [node name="Sniper" type="Sprite2D" parent="WeaponGraphics"]
 visible = false
@@ -218,8 +226,8 @@ position = Vector2(613, 13)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("13_dyty1")
 
-[node name="Marker2D" type="Marker2D" parent="WeaponGraphics"]
-position = Vector2(497, 0)
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(478, 0)
 scale = Vector2(50, 50)
 
 [connection signal="timeout" from="MuzzleFlash/Timer" to="MuzzleFlash" method="hide"]
