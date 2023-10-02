@@ -1,15 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://c27jqagt4t75x"]
+[gd_scene load_steps=5 format=3 uid="uid://b41wckkqdp72i"]
 
-[ext_resource type="FontFile" uid="uid://dpcnnl8v24k5w" path="res://HelvetiPixel.ttf" id="1_mhxft"]
-[ext_resource type="Script" path="res://pausemenu.gd" id="1_ymwuw"]
-[ext_resource type="Texture2D" uid="uid://bexe3fx167ypp" path="res://The_Head_Scientist.PNG" id="2_lwasj"]
+[ext_resource type="Script" path="res://pausemenu.gd" id="1_8a35s"]
+[ext_resource type="FontFile" uid="uid://dpcnnl8v24k5w" path="res://HelvetiPixel.ttf" id="2_14x4g"]
+[ext_resource type="Texture2D" uid="uid://bexe3fx167ypp" path="res://The_Head_Scientist.PNG" id="3_fgn7y"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7snh2"]
 bg_color = Color(0, 0, 0, 0.568627)
 
 [node name="CanvasLayer" type="CanvasLayer"]
 process_mode = 3
-script = ExtResource("1_ymwuw")
+script = ExtResource("1_8a35s")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchors_preset = 15
@@ -36,29 +36,21 @@ size_flags_horizontal = 3
 [node name="Close Pop-Up" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_fonts/font = ExtResource("1_mhxft")
+theme_override_fonts/font = ExtResource("2_14x4g")
 theme_override_font_sizes/font_size = 500
-text = "Close"
+text = "Escape Again?"
 
 [node name="Menu" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_fonts/font = ExtResource("1_mhxft")
+theme_override_fonts/font = ExtResource("2_14x4g")
 theme_override_font_sizes/font_size = 500
 text = "Menu"
-
-[node name="Settings" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
-visible = false
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_fonts/font = ExtResource("1_mhxft")
-theme_override_font_sizes/font_size = 500
-text = "Settings"
 
 [node name="Exit" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_fonts/font = ExtResource("1_mhxft")
+theme_override_fonts/font = ExtResource("2_14x4g")
 theme_override_font_sizes/font_size = 500
 text = "Exit Game"
 
@@ -73,7 +65,7 @@ text = "   "
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer"]
 visible = false
 layout_mode = 2
-texture = ExtResource("2_lwasj")
+texture = ExtResource("3_fgn7y")
 expand_mode = 3
 
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/Close Pop-Up" to="." method="_on_close_pop_up_pressed"]

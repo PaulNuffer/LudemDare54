@@ -61,6 +61,7 @@ theme_override_font_sizes/font_size = 300
 text = " "
 
 [node name="SettingsButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+visible = false
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_fonts/font = ExtResource("2_buies")
@@ -68,6 +69,7 @@ theme_override_font_sizes/font_size = 500
 text = "Settings"
 
 [node name="Space3" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+visible = false
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_fonts/font = ExtResource("2_buies")
