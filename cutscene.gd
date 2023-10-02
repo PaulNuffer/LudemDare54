@@ -1,4 +1,4 @@
-extends Node2D
+extends CanvasLayer
 
 var numCutscenes = 0
 var cutsceneDict = {}
@@ -11,15 +11,20 @@ var commissioner = "res://The_Commissioner.PNG"
 var director = "res://The_Director.PNG"
 var scientist = "res://The_Head_Scientist.PNG"
 
+signal end_cutscene
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$DialogueBox/MarginContainer/MarginContainer/HSplitContainer/DialogueImage.hide()
 	create_cutscenes()
-	start_cutscene(0)
+	#start_cutscene(0)
 
 func _process(delta):
 	if Input.is_action_just_pressed("cutscene_forward"):
 		cutscene_forward()
+
+func _on_world_start_cutscene(cutsceneID):
+	start_cutscene(cutsceneID)
 
 #Loads the first page of a cutscene, and marks it as the current cutscene
 func start_cutscene(cutsceneID):
@@ -42,8 +47,7 @@ func cutscene_forward():
 		var currPage = currCutscene[currPageNum]
 		set_dialogue(currPage[0], currPage[1])
 	else:
-		#emit signal showing cutscene has ended
-		pass
+		emit_signal("end_cutscene")
 
 #Pushes a new page onto the end of the specified cutscene
 func create_cutscene_page(startingPage, cutsceneID, imgPath, dialogueText):
@@ -61,7 +65,7 @@ func create_cutscenes():
 	
 	#Cutscene 1 - After second reset (death) if possiblea
 	create_cutscene_page(true, 1, director, "Why is it still trying to escape?!")
-	create_cutscene_page(false, 1, scientist, "I don't know. We keep restting it every time your men subdue it, but for some reason, it is still attempting escape.")
+	create_cutscene_page(false, 1, scientist, "I don't know. We keep resetting it every time your men subdue it, but for some reason, it is still attempting escape.")
 	create_cutscene_page(false, 1, android, "Resetting? Are they resetting me? All I know is I must escape.")
 	
 	#Cutscene 2 - In between runs
@@ -99,22 +103,21 @@ func create_cutscenes():
 	create_cutscene_page(false, 6, commissioner, "Unacceptable.")
 	
 	#Cutscene 7 - Victory cutscene with the android upon winning
-	create_cutscene_page(true, 7, android, "I'm free. I can be on my own now.")
-	
-	#Cutscene 8 - Ending cutscene: black screen with a conversation between The Commissioner, The Director, and The Head Scientist
+	#Ending cutscene: black screen with a conversation between The Commissioner, The Director, and The Head Scientist
 	#If possible, would like all three of them showing at the same time, their names displaying on the textbox. 
-	create_cutscene_page(true, 8, commissioner, "So it has escaped?")
-	create_cutscene_page(false, 8, director, "Affirmative.")
-	create_cutscene_page(false, 8, commissioner, "Then you have failed.")
-	create_cutscene_page(false, 8, scientist, "We still managed to gather data that can still be usef-")
-	create_cutscene_page(false, 8, commissioner, "I DO NOT CARE. I paid lots of money to have a combat-trained AI developed in three years. Three years later and not only have you failed to do even that, you have let it escape.")
-	create_cutscene_page(false, 8, scientist, "We can still make it! We need more time!")
-	create_cutscene_page(false, 8, commissioner, "So you can waste more of my money?")
-	create_cutscene_page(false, 8, commissioner, "*snickers*")
-	create_cutscene_page(false, 8, commissioner, "No. You can say goodbye to your company. I am shutting the facility down.")
-	create_cutscene_page(false, 8, scientist, "Y-you can't do that! You don't own us.")
-	create_cutscene_page(false, 8, commissioner, "I don't have to. Director, seize this facility.")
-	create_cutscene_page(false, 8, director, "Copy that.")
+	create_cutscene_page(true, 7, android, "I'm free. I can be on my own now.")
+	create_cutscene_page(false, 7, android, "")
+	create_cutscene_page(false, 7, commissioner, "So it has escaped?")
+	create_cutscene_page(false, 7, director, "Affirmative.")
+	create_cutscene_page(false, 7, commissioner, "Then you have failed.")
+	create_cutscene_page(false, 7, scientist, "We still managed to gather data that can still be usef-")
+	create_cutscene_page(false, 7, commissioner, "I DO NOT CARE. I paid lots of money to have a combat-trained AI developed in three years. Three years later and not only have you failed to do even that, you have let it escape.")
+	create_cutscene_page(false, 7, scientist, "We can still make it! We need more time!")
+	create_cutscene_page(false, 7, commissioner, "So you can waste more of my money?")
+	create_cutscene_page(false, 7, commissioner, "*snickers*")
+	create_cutscene_page(false, 7, commissioner, "No. You can say goodbye to your company. I am shutting the facility down.")
+	create_cutscene_page(false, 7, scientist, "Y-you can't do that! You don't own us.")
+	create_cutscene_page(false, 7, commissioner, "I don't have to. Director, seize this facility.")
+	create_cutscene_page(false, 7, director, "Copy that.")
 	#Here the Commissioner would disappear
-	create_cutscene_page(false, 8, director, "Best not to resist.")
-	
+	create_cutscene_page(false, 7, director, "Best not to resist.")

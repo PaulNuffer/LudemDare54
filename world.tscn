@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://pulv50b8war6"]
+[gd_scene load_steps=21 format=3 uid="uid://pulv50b8war6"]
 
 [ext_resource type="Texture2D" uid="uid://b5ks5xb4pi4ww" path="res://white_square.png" id="1_6g3vl"]
 [ext_resource type="Script" path="res://world.gd" id="1_h3xci"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://fig3oo0l870o" path="res://main_menu.tscn" id="12_27cs4"]
 [ext_resource type="FontFile" uid="uid://dpcnnl8v24k5w" path="res://HelvetiPixel.ttf" id="14_ydl87"]
 [ext_resource type="AudioStream" uid="uid://bq7vkq0flvsvm" path="res://make_a_break_for_it.wav" id="15_3axyb"]
+[ext_resource type="PackedScene" uid="uid://bw5fd470mt7gv" path="res://cutscene.tscn" id="15_6qeyi"]
 [ext_resource type="PackedScene" uid="uid://b41wckkqdp72i" path="res://death_menu.tscn" id="15_jp0rs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bcm6k"]
@@ -201,12 +202,16 @@ one_shot = true
 
 [node name="MainSoundtrack" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("15_3axyb")
-bus = &"music"
 
 [node name="DeathMenu" parent="." instance=ExtResource("15_jp0rs")]
 visible = false
 
+[node name="Cutscene" parent="." instance=ExtResource("15_6qeyi")]
+process_priority = 98
+visible = false
+
 [connection signal="player_died_signal" from="." to="DeathMenu" method="_on_world_player_died_signal"]
+[connection signal="start_cutscene" from="." to="Cutscene" method="_on_world_start_cutscene"]
 [connection signal="wave_finished" from="." to="Player" method="_on_world_wave_finished"]
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
 [connection signal="timeout" from="DeathGameResetTimer" to="." method="_on_death_game_reset_timer_timeout"]

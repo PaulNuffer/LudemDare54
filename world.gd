@@ -6,6 +6,7 @@ extends Node2D
 
 signal wave_finished
 signal player_died_signal
+signal start_cutscene(cutsceneID)
 
 var wave_number = 0
 
@@ -21,6 +22,7 @@ func _ready():
 	var main_menu = get_node("Menu")
 	var pause_menu = get_node("PauseMenu")
 	var death_menu = get_node("DeathMenu")
+	var cutscene = get_node("Cutscene")
 	player.show_textbox.connect(show_textbox)
 	player.hide_textbox.connect(hide_textbox)
 	player.textbox_fields.connect(textbox_fields)
@@ -32,6 +34,7 @@ func _ready():
 	pause_menu.show_main_menu.connect(show_main_menu)
 	death_menu.show_main_menu.connect(show_main_menu)
 	death_menu.hide_death_menu.connect(hide_death_menu)
+	cutscene.end_cutscene.connect(end_cutscene)
 	get_tree().paused = true
 	if(GlobalVariables.immediateStart):
 		start_game()
@@ -74,6 +77,7 @@ func hide_textbox():
 func door_entered():
 	$ClosedDoorArt.show()
 	$OpenDoor.hide()
+	check_for_cutscenes()
 
 func textbox_fields(info):
 	if(info.interact_type == 'dialogue'):
@@ -94,6 +98,20 @@ func reset_game():
 	GlobalVariables.maxPlayerHealth = 4
 	GlobalVariables.utilitytimer = 0 #the sudden camel_case has gone
 	GlobalVariables.utilitytimermax = 0
+
+func check_for_cutscenes():
+	if(true):
+		$Cutscene.show()
+		$Cutscene/CanvasLayer.show()
+		$Cutscene/DialogueBox.show()
+		get_tree().paused = true
+		emit_signal("start_cutscene",0)
+
+func end_cutscene():
+	$Cutscene.hide()
+	$Cutscene/CanvasLayer.hide()
+	$Cutscene/DialogueBox.hide()
+	get_tree().paused = false
 
 func _process(delta):
 	if GlobalVariables.upgraded == true:
