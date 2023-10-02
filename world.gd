@@ -82,6 +82,7 @@ func hide_pop_up():
 func hide_death_menu():
 	GlobalVariables.immediateStart = true
 	$DeathMenu.hide()
+	$DeathHumSound.stop()
 	reset_game()
 
 func show_textbox():
@@ -253,6 +254,8 @@ func player_died():
 		run_won = false
 	else:
 		$"DeathMenu/MarginContainer/HBoxContainer/VBoxContainer/You won!".hide()
+		$PlayerDeathSound.play()
+		#$DeathHumSound.play()
 	$InfoBars/VBoxContainer/Health/HealthBar.value = 0
 	$CutsceneSoundtrack.play($MainSoundtrack.get_playback_position())
 	$MainSoundtrack.stop()

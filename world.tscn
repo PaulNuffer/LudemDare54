@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://pulv50b8war6"]
+[gd_scene load_steps=27 format=3 uid="uid://pulv50b8war6"]
 
 [ext_resource type="Texture2D" uid="uid://b5ks5xb4pi4ww" path="res://white_square.png" id="1_6g3vl"]
 [ext_resource type="Script" path="res://world.gd" id="1_h3xci"]
@@ -21,6 +21,8 @@
 [ext_resource type="AudioStream" uid="uid://iri0frc72vg2" path="res://make_a_break_for_it.mp3" id="16_x2mdu"]
 [ext_resource type="AudioStream" uid="uid://dp2fpyy0unwnv" path="res://make_a_break_for_it_lofi_version.mp3" id="17_s5ack"]
 [ext_resource type="AudioStream" uid="uid://bnrhuixh4huw8" path="res://title_track.mp3" id="18_xuht5"]
+[ext_resource type="AudioStream" uid="uid://ca2f32vqlumvt" path="res://PlayerDeath.wav" id="22_xlitm"]
+[ext_resource type="AudioStream" uid="uid://3lhvquy15alp" path="res://DeathScreenLoop.wav" id="23_jpq4n"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bcm6k"]
 size = Vector2(172.324, 198.662)
@@ -296,6 +298,15 @@ texture = ExtResource("10_tsvm5")
 position = Vector2(13.6211, 32.6858)
 scale = Vector2(17.9258, 15.5256)
 shape = SubResource("RectangleShape2D_bcm6k")
+
+[node name="PlayerDeathSound" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("22_xlitm")
+bus = &"sfx"
+
+[node name="DeathHumSound" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("23_jpq4n")
 
 [connection signal="player_died_signal" from="." to="DeathMenu" method="_on_world_player_died_signal"]
 [connection signal="restart_game" from="." to="Player" method="_on_world_restart_game"]

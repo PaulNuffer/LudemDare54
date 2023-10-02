@@ -165,14 +165,17 @@ func hideGraphics():
 func hurt(damage):
 	if (!invulnerable):
 		GlobalVariables.playerHealth -= damage
+		$PlayerHitSounds.play()
 		if(GlobalVariables.playerHealth <= 0):
 			kill()
 	
 func kill():
 	if dead:
 		return
+
 	dead = true
-	$DeathSound.play()
+	#$DeathSound.play()
+
 	$Graphics/Dead.show()
 	hideGraphics()
 	$CanvasLayer/DeathScreen.show()
@@ -389,18 +392,21 @@ func execute_interaction():
 		var cur_interaction = all_interactions[0]
 		match cur_interaction.interact_type:
 			"weapon" :
+				$InstallSounds.play()
 				upgrades[0][0] = cur_interaction.interact_type
 				upgrades[0][1] = cur_interaction.interact_value[0]
 				cur_interaction.get_parent().queue_free()
 				GlobalVariables.upgraded = true
 				recalculate()
 			"passive" :
+				$InstallSounds.play()
 				upgrades[1][0] = cur_interaction.interact_type
 				upgrades[1][1] = cur_interaction.interact_value[0]
 				cur_interaction.get_parent().queue_free()
 				GlobalVariables.upgraded = true
 				recalculate()
 			"utility" :
+				$InstallSounds.play()
 				upgrades[2][0] = cur_interaction.interact_type
 				upgrades[2][1] = cur_interaction.interact_value[0]
 				cur_interaction.get_parent().queue_free()
