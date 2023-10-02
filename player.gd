@@ -8,6 +8,7 @@ signal show_textbox
 signal hide_textbox
 signal textbox_fields(info)
 signal door_entered
+signal player_died
 
 const bulletPath = preload('res://bullet.tscn')
 
@@ -168,6 +169,7 @@ func kill():
 	hideGraphics()
 	$CanvasLayer/DeathScreen.show()
 	z_index = -1
+	emit_signal("player_died")
 	
 func recalculate(): #recalculates all player variables
 	resetvars() # reset variables to base

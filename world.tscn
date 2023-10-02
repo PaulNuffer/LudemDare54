@@ -193,5 +193,10 @@ visible = false
 [node name="Menu" parent="." instance=ExtResource("12_27cs4")]
 layer = 100
 
+[node name="DeathGameResetTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
 [connection signal="wave_finished" from="." to="Player" method="_on_world_wave_finished"]
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
+[connection signal="timeout" from="DeathGameResetTimer" to="." method="_on_death_game_reset_timer_timeout"]

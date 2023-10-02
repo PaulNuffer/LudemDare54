@@ -23,6 +23,7 @@ func _ready():
 	player.hide_textbox.connect(hide_textbox)
 	player.textbox_fields.connect(textbox_fields)
 	player.door_entered.connect(door_entered)
+	player.player_died.connect(player_died)
 	main_menu.start_game.connect(start_game)
 	pause_menu.show_pop_up.connect(show_pop_up)
 	pause_menu.hide_pop_up.connect(hide_pop_up)
@@ -34,7 +35,8 @@ func start_game():
 	$PauseMenu.hide()
 	get_tree().paused = false
 
-func show_main_menu():
+func show_main_menu(): #we are treating this as a time the game should be totally reset
+	reset_game()
 	$Menu.show()
 	get_tree().paused = true
 
@@ -66,6 +68,18 @@ func textbox_fields(info):
 	else:
 		var upgradeField = info.interact_value
 		$Textbox.set_upgrade(info.interact_type, upgradeField[1], upgradeField[2], upgradeField[3])
+		
+func reset_game():
+	get_tree().reload_current_scene()
+	GlobalVariables.enemy_count = 0
+	GlobalVariables.spawned = 0
+	GlobalVariables.wavecompleted = false
+	GlobalVariables.upgraded = false
+	GlobalVariables.playerHealth = 4 #the sudden camel_case has arisen
+	GlobalVariables.maxPlayerHealth = 4
+	GlobalVariables.utilitytimer = 0 #the sudden camel_case has gone
+	GlobalVariables.utilitytimermax = 0
+	
 		
 func _process(delta):
 	if GlobalVariables.upgraded == true:
@@ -149,7 +163,8 @@ func spawn_upgrade(xpos):
 	add_child(upgrade)
 	
 
+func _on_death_game_reset_timer_timeout():
+	reset_game()
 	
-		
-		
-		
+func player_died():
+	$DeathGameResetTimer.start()
