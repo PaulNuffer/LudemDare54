@@ -192,7 +192,6 @@ visible = false
 
 [node name="Menu" parent="." instance=ExtResource("12_27cs4")]
 layer = 100
-visible = false
 
 [connection signal="wave_finished" from="." to="Player" method="_on_world_wave_finished"]
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
