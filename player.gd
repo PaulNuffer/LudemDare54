@@ -275,6 +275,7 @@ func process_utility_slot(i):
 			GlobalVariables.utilitytimermax = GlobalVariables.utilitytimer
 			utilityactivetimer = 60
 			reloadtime = -1
+			reloadtimer = 0
 			
 		_:
 			pass #default behaviour

@@ -3,8 +3,8 @@
 [ext_resource type="Script" path="res://worker.gd" id="1_sw1sg"]
 [ext_resource type="Texture2D" uid="uid://ckl6f2ibslqq4" path="res://splatter.png" id="2_2ew75"]
 [ext_resource type="Texture2D" uid="uid://chn0hfmqq7ngx" path="res://enemy_sprite_worker_leftleg.png" id="2_3dcfi"]
-[ext_resource type="Texture2D" uid="uid://dxowcefwl7pqw" path="res://dead_body.png" id="2_7smkk"]
 [ext_resource type="Texture2D" uid="uid://ceqxtiuxtkd6x" path="res://enemy_sprite_worker_rightleg.png" id="3_k0alt"]
+[ext_resource type="Texture2D" uid="uid://boft6j7spo5ca" path="res://enemy_sprite_death.png" id="4_x5x8e"]
 [ext_resource type="AudioStream" uid="uid://bj5b2m0dmc71d" path="res://death.wav" id="5_506rq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_54b51"]
@@ -45,9 +45,11 @@ sprite_frames = SubResource("SpriteFrames_buy24")
 [node name="Dead" type="Sprite2D" parent="Graphics"]
 visible = false
 z_index = -1
-texture = ExtResource("2_7smkk")
+scale = Vector2(0.17, 0.17)
+texture = ExtResource("4_x5x8e")
 
 [node name="Splatter" type="Sprite2D" parent="Graphics/Dead"]
+visible = false
 show_behind_parent = true
 position = Vector2(11, -3)
 texture = ExtResource("2_2ew75")
