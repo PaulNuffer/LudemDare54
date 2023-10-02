@@ -201,6 +201,7 @@ one_shot = true
 
 [node name="MainSoundtrack" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("15_3axyb")
+bus = &"music"
 
 [node name="DeathMenu" parent="." instance=ExtResource("15_jp0rs")]
 visible = false

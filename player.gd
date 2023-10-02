@@ -79,9 +79,9 @@ func _process(delta):
 	$WeaponGraphics.rotation = global_position.direction_to(get_global_mouse_position()).angle()
 	
 	if $WeaponGraphics.rotation > PI/2 - PI && $WeaponGraphics.rotation < 3*PI/2 - PI:
-		$WeaponGraphics.scale.y = -1
-	else:
 		$WeaponGraphics.scale.y = 1
+	else:
+		$WeaponGraphics.scale.y = -1
 	
 	if dead:
 		return
