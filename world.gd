@@ -14,7 +14,7 @@ var wave_number = 0
 var wave_array = [[1, .5], [5, .7], [7, 1]]
 
 var weapon_array = [["Default", "Default description", "Default Flavortext"], ["Sniper Rifle", "High damage and accuracy, instantly hits, low rate of fire", "The sniper was introduced to train the AI with stealth and ranged combat. "], ["Shotgun", "5 bullets, high spread, low range", "Kablow!"], ["Sword", "Melee weapon, high movespeed", "The sword was introduced to train the AI with swift melee combat."]]
-var utility_array = [["Default", "Default description", "Default Flavortext"], ["Teleport", "Right click to go to that location", "Advanced tech created and used to test the AI’s capability of trans-space movement."], ["Invulnerability", "Right click for one second of invulnerability", "Tech that was created to strengthen the AI’s current shell during testing."], ["Dash", "Right click to gain a burst of increased movespeed", "A program designed to disable the AI’s shell weapon speed capacity limitors."], ["Rapid Fire", "Right click to breifly increase fire speed", "A program designed to disable the AI’s weapon safety protocol during testing."]]
+var utility_array = [["Default", "Default description", "Default Flavortext"], ["Teleport", "Right click to go to that location", "Advanced tech created and used to test the AI’s capability of trans-space movement."], ["Invulnerability", "Right click for one second of invulnerability", "Tech that was created to strengthen the AI’s current shell during testing."], ["Dash", "Right click to gain a burst of increased movespeed", "A program designed to disable the AI’s shell weapon speed capacity limitors."], ["Rapid Fire", "Right click to briefly increase fire speed", "A program designed to disable the AI’s weapon safety protocol during testing."]]
 var passive_array = [["Default", "Default description", "Default Flavortext"], ["Blind Rage", "High damage, high spread", "Something went wrong here…The AI’s programming seemed to go haywire…"], ["Calculated Shot", "Bullets instantly hit, but have lower damage", "A tweak in the system that allowed the AI more time to aim precisely."], ["Rapid Fire", "Faster firing and more spread", "Some of the AI’s programming seems to be malfunctioning."], ["Titanium Plating", "Increased health", "A self-healing tech that was implemented in order to make the AI’s shell last longer."], ["Boosted Core", "Increased move speed", "The AI’s programming has diverted more power into the movement core."]]
 
 
@@ -233,6 +233,7 @@ func _on_death_game_reset_timer_timeout():
 	
 func player_died():
 	#$DeathGameResetTimer.start()
+	$InfoBars/VBoxContainer/Health/HealthBar.value = 0
 	$CutsceneSoundtrack.play($MainSoundtrack.get_playback_position())
 	$MainSoundtrack.stop()
 	emit_signal("player_died_signal")
