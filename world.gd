@@ -5,6 +5,7 @@ extends Node2D
 @export var upgrade_chip_scene: PackedScene
 
 signal wave_finished
+signal player_died_signal
 
 var wave_number = 0
 
@@ -19,6 +20,7 @@ func _ready():
 	var player = get_node("Player")
 	var main_menu = get_node("Menu")
 	var pause_menu = get_node("PauseMenu")
+	var death_menu = get_node("DeathMenu")
 	player.show_textbox.connect(show_textbox)
 	player.hide_textbox.connect(hide_textbox)
 	player.textbox_fields.connect(textbox_fields)
@@ -28,7 +30,12 @@ func _ready():
 	pause_menu.show_pop_up.connect(show_pop_up)
 	pause_menu.hide_pop_up.connect(hide_pop_up)
 	pause_menu.show_main_menu.connect(show_main_menu)
+	death_menu.show_main_menu.connect(show_main_menu)
+	death_menu.hide_death_menu.connect(hide_death_menu)
 	get_tree().paused = true
+	if(GlobalVariables.immediateStart):
+		start_game()
+		GlobalVariables.immediateStart = false
 	
 
 func start_game():
@@ -38,6 +45,7 @@ func start_game():
 	$MainSoundtrack.play()
 
 func show_main_menu(): #we are treating this as a time the game should be totally reset
+	$DeathMenu.hide()
 	reset_game()
 	$Menu.show()
 	get_tree().paused = true
@@ -51,6 +59,11 @@ func hide_pop_up():
 	if(!$Menu.visible):
 		$PauseMenu.hide()
 		get_tree().paused = false
+		
+func hide_death_menu():
+	GlobalVariables.immediateStart = true
+	$DeathMenu.hide()
+	reset_game()
 
 func show_textbox():
 	$Textbox.show()
@@ -81,8 +94,7 @@ func reset_game():
 	GlobalVariables.maxPlayerHealth = 4
 	GlobalVariables.utilitytimer = 0 #the sudden camel_case has gone
 	GlobalVariables.utilitytimermax = 0
-	
-		
+
 func _process(delta):
 	if GlobalVariables.upgraded == true:
 		var remaining = get_tree().get_nodes_in_group("upgrade_chips")
@@ -99,6 +111,7 @@ func _process(delta):
 		$InfoBars/VBoxContainer/Utility.show()
 		utilityBar.max_value = GlobalVariables.utilitytimermax
 		utilityBar.value = GlobalVariables.utilitytimermax - GlobalVariables.utilitytimer
+
 
 func _on_spawn_timer_timeout():
 	
@@ -169,4 +182,8 @@ func _on_death_game_reset_timer_timeout():
 	reset_game()
 	
 func player_died():
-	$DeathGameResetTimer.start()
+	#$DeathGameResetTimer.start()
+	emit_signal("player_died_signal")
+	$DeathMenu.show()
+	get_tree().paused = true
+	

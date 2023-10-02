@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://b41wckkqdp72i"]
 
-[ext_resource type="Script" path="res://pausemenu.gd" id="1_8a35s"]
+[ext_resource type="Script" path="res://deathmenu.gd" id="1_3qns4"]
 [ext_resource type="FontFile" uid="uid://dpcnnl8v24k5w" path="res://HelvetiPixel.ttf" id="2_14x4g"]
 [ext_resource type="Texture2D" uid="uid://bexe3fx167ypp" path="res://The_Head_Scientist.PNG" id="3_fgn7y"]
 
@@ -9,7 +9,7 @@ bg_color = Color(0, 0, 0, 0.568627)
 
 [node name="CanvasLayer" type="CanvasLayer"]
 process_mode = 3
-script = ExtResource("1_8a35s")
+script = ExtResource("1_3qns4")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchors_preset = 15
@@ -33,7 +33,7 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Close Pop-Up" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="Restart" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_fonts/font = ExtResource("2_14x4g")
@@ -68,6 +68,6 @@ layout_mode = 2
 texture = ExtResource("3_fgn7y")
 expand_mode = 3
 
-[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/Close Pop-Up" to="." method="_on_close_pop_up_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/Restart" to="." method="_on_restart_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/Menu" to="." method="_on_menu_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
