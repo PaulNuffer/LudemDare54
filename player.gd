@@ -12,10 +12,13 @@ signal door_entered
 const bulletPath = preload('res://bullet.tscn')
 
 #array of arrays representing the upgrades, master array pos is slot number, first element of child array is type, second element of child array is index
-var upgrades = [["none", 0], ["none", 0], ["none", 0]]
+var upgrades = [["weapon", 0], ["none", 0], ["none", 0]]
 
 var maxHealth = 4
 var health = maxHealth
+var doorOpen = false
+var doorFade = false
+var canact = true
 
 #default variables (any variables not specified here are bools or 0 by default) (we could init everything as zero and have all these set in the default weapon shoot case)
 var dspeed = 2000
@@ -37,15 +40,14 @@ var spread = 0
 var hitscandist = 0
 var hitscan = false
 var homing = false
-var canact = true
-var doorFade = false
-var doorOpen = false
+var invulnerable = false
 
 #constantly changing variables
 var reloadtimer = 0;
 var screenfadetimer = 0;
 var maxScreenFade = 0
 var utilitytimer = 0
+var utilityactivetimer = 0
 
 #reset function
 func resetvars():
@@ -59,7 +61,7 @@ func resetvars():
 	hitscandist = 0
 	hitscan = false
 	homing = false
-	canact = true
+	invulnerable = false
 
 var dead = false
 
@@ -74,6 +76,7 @@ func _process(delta):
 	
 	$MousePos.position = get_global_mouse_position() - $".".global_position
 	
+	$WeaponGraphics.rotation = global_position.direction_to(get_global_mouse_position()).angle()
 	if dead:
 		return
 		
@@ -90,6 +93,11 @@ func _physics_process(delta):
 			reloadtimer-=1
 	if utilitytimer > 0: #decrement reload timer
 		utilitytimer-=1
+	if utilityactivetimer > 0: #decrement reload timer
+		utilityactivetimer-=1
+		
+	if utilityactivetimer == 0: #decrement reload timer
+		recalculate()
 		
 	if (screenfadetimer > 0 || !doorFade): #decrement screen fade timer
 		if !doorFade:
@@ -145,9 +153,10 @@ func hideGraphics():
 	$Graphics/Left.hide()
 	
 func hurt(damage):
-	health -= damage
-	if(health <= 0):
-		kill()
+	if (!invulnerable):
+		health -= damage
+		if(health <= 0):
+			kill()
 	
 func kill():
 	if dead:
@@ -165,9 +174,27 @@ func recalculate(): #recalculates all player variables
 		if item[0] == "weapon": #if any of them are weapons
 			initialize_weapon_slot(item[1]) #initialize them
 			
+			$WeaponGraphics/Pistol.hide()
+			$WeaponGraphics/Shotgun.hide()
+			$WeaponGraphics/Sniper.hide()
+			$WeaponGraphics/Sword.hide()
+
+			match item[1]:
+				1:
+					$WeaponGraphics/Sniper.show()
+				2:
+					$WeaponGraphics/Shotgun.show()
+				3:
+					$WeaponGraphics/Sword.show()
+				_:
+					$WeaponGraphics/Pistol.show()
+			
 	for item in upgrades: #loop through all upgrade slots
 		if item[0] == "passive": #if any of them are passives
 			process_passive_slot(item[1]) #initialize them
+			
+	
+		
 	
 	
 func shoot():
@@ -227,8 +254,10 @@ func process_utility_slot(i):
 				
 			
 			global_position = $MousePos.position + $".".global_position  #works but is shit, make it so you cant teleport in walls and you can telefrag
-		2:
-			pass
+		2: #invulnerability
+			utilitytimer = 600
+			utilityactivetimer = 60
+			invulnerable = true
 		_:
 			pass #default behaviour
 	
@@ -264,8 +293,9 @@ func initialize_weapon_slot(i):
 			lifetime = 30
 		3: #sword
 			hitscan = true
-			hitscandist = 600
-			speed += 200
+			hitscandist = 1000
+			speed += 600
+			damage += 10
 		_:
 			pass #default behaviour
 	

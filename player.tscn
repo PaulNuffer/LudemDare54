@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dyj383tmdfjq0"]
+[gd_scene load_steps=16 format=3 uid="uid://dyj383tmdfjq0"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_arttm"]
 [ext_resource type="Texture2D" uid="uid://ckl6f2ibslqq4" path="res://splatter.png" id="2_5etr6"]
@@ -9,6 +9,10 @@
 [ext_resource type="AudioStream" uid="uid://dd18ahss4rhma" path="res://gunshoot.wav" id="4_ko4eh"]
 [ext_resource type="Texture2D" uid="uid://dccx1ax2txcdm" path="res://player_sprite_left.png" id="4_xcbl8"]
 [ext_resource type="FontFile" uid="uid://dpcnnl8v24k5w" path="res://HelvetiPixel.ttf" id="9_2cera"]
+[ext_resource type="Texture2D" uid="uid://baiutpe28srly" path="res://weapon_sprite_peashooter.png" id="10_jw3dk"]
+[ext_resource type="Texture2D" uid="uid://60fam4vcrb5" path="res://weapon_sprite_shotgun.png" id="11_dw84u"]
+[ext_resource type="Texture2D" uid="uid://bsyu7wpacq2ya" path="res://weapon_sprite_sniper.png" id="12_u1ho8"]
+[ext_resource type="Texture2D" uid="uid://bp1nofe8fqgwa" path="res://weapon_sprite_sword.png" id="13_dyty1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_co1bf"]
 
@@ -63,6 +67,7 @@ texture = ExtResource("2_5etr6")
 [node name="RayCast2D" type="RayCast2D" parent="."]
 target_position = Vector2(10000, 0)
 collision_mask = 5
+hit_from_inside = true
 
 [node name="DeathSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_esu3y")
@@ -190,6 +195,31 @@ color = Color(0, 0, 0, 1)
 target_position = Vector2(1, 1)
 collision_mask = 5
 hit_from_inside = true
+
+[node name="WeaponGraphics" type="Node2D" parent="."]
+
+[node name="Pistol" type="Sprite2D" parent="WeaponGraphics"]
+position = Vector2(348, 12)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("10_jw3dk")
+
+[node name="Shotgun" type="Sprite2D" parent="WeaponGraphics"]
+visible = false
+position = Vector2(526, 34)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("11_dw84u")
+
+[node name="Sniper" type="Sprite2D" parent="WeaponGraphics"]
+visible = false
+position = Vector2(575, 28)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("12_u1ho8")
+
+[node name="Sword" type="Sprite2D" parent="WeaponGraphics"]
+visible = false
+position = Vector2(613, 13)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("13_dyty1")
 
 [connection signal="timeout" from="MuzzleFlash/Timer" to="MuzzleFlash" method="hide"]
 [connection signal="button_up" from="CanvasLayer/DeathScreen/Panel/Button" to="." method="restart"]
