@@ -10,12 +10,12 @@ extends CanvasLayer
 @onready var dialogueImage = $MarginContainer/MarginContainer/HSplitContainer/DialogueImage
 @onready var upgradeFields = $MarginContainer/MarginContainer/HSplitContainer/HBoxContainer/UpgradeText
 
-func set_dialogue(imgPath, dialogueText):
-	dialogueImage.texture = ResourceLoader.load(imgPath)
+func set_dialogue(dialogueText):
+	#dialogueImage.texture = ResourceLoader.load(imgPath)
 	dialogue.text = dialogueText
 	upgradeFields.hide()
 	dialogue.show()
-	dialogueImage.show()
+	#dialogueImage.show()
 	weapon.hide()
 	passive.hide()
 	utility.hide()

@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://fig3oo0l870o"]
+[gd_scene load_steps=7 format=3 uid="uid://fig3oo0l870o"]
 
 [ext_resource type="FontFile" uid="uid://df2y2tsnkt706" path="res://Born2bSportyV2.ttf" id="1_xt8s0"]
 [ext_resource type="FontFile" uid="uid://dpcnnl8v24k5w" path="res://HelvetiPixel.ttf" id="2_buies"]
 [ext_resource type="Script" path="res://menu.gd" id="3_0pwvw"]
 [ext_resource type="Texture2D" uid="uid://0fnqtr75ener" path="res://The_Android.PNG" id="3_i31om"]
+[ext_resource type="PackedScene" uid="uid://bw5fd470mt7gv" path="res://cutscene.tscn" id="5_wk140"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fsne0"]
 bg_color = Color(0.00784314, 0.00784314, 0.00784314, 1)
@@ -86,6 +87,8 @@ size_flags_vertical = 3
 texture = ExtResource("3_i31om")
 expand_mode = 3
 stretch_mode = 4
+
+[node name="Cutscene" parent="." instance=ExtResource("5_wk140")]
 
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
