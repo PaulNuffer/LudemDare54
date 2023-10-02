@@ -13,7 +13,7 @@ var run_won = false
 
 var wave_number = 0
 
-var wave_array = [[6, .5], [8, .6]]
+var wave_array = [[6, .5], [8, .6], [10, 0.7], [12, 0.8], [14, 0.9], [16, 0.9], [17, 0.9], [18, 0.9], [19, 0.9], [20, 1]]
 
 var weapon_array = [["Default", "Default description", "Default Flavortext"], ["Sniper Rifle", "High damage and accuracy, instantly hits, low rate of fire", "The sniper was introduced to train the AI with stealth and ranged combat. "], ["Shotgun", "5 bullets, high spread, low range", "Kablow!"], ["Sword", "Melee weapon, high movespeed", "The sword was introduced to train the AI with swift melee combat."]]
 var utility_array = [["Default", "Default description", "Default Flavortext"], ["Teleport", "Right click to go to that location", "Advanced tech created and used to test the AI’s capability of trans-space movement."], ["Invulnerability", "Right click for one second of invulnerability", "Tech that was created to strengthen the AI’s current shell during testing."], ["Dash", "Right click to gain a burst of increased movespeed", "A program designed to disable the AI’s shell weapon speed capacity limitors."], ["Rapid Fire", "Right click to briefly increase fire speed", "A program designed to disable the AI’s weapon safety protocol during testing."]]
