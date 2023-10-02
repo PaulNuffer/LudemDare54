@@ -209,10 +209,13 @@ func _on_spawn_timer_timeout():
 				wave_ended()
 	
 func wave_ended():
+	$OpenDoor.show()	
 	if(run_won):
 		$OpenDoor/FinalOpenDoorArt.show()
+		$OpenDoor/OpenDoorArt.hide()
 	else:
-		$OpenDoor.show()
+		$OpenDoor/FinalOpenDoorArt.hide()
+		$OpenDoor/OpenDoorArt.show()
 	$ClosedDoorArt.hide()
 	emit_signal("wave_finished")
 
