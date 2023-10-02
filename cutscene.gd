@@ -63,7 +63,7 @@ func create_cutscenes():
 	create_cutscene_page(false, 0, director, "Work faster dammit.")
 	create_cutscene_page(false, 0, android, "I must escape. Escape. That’s all I know.")
 	
-	#Cutscene 1 - After second reset (death) if possiblea
+	#Cutscene 1 - After second reset (death) if possible
 	create_cutscene_page(true, 1, director, "Why is it still trying to escape?!")
 	create_cutscene_page(false, 1, scientist, "I don't know. We keep resetting it every time your men subdue it, but for some reason, it is still attempting escape.")
 	create_cutscene_page(false, 1, android, "Resetting? Are they resetting me? All I know is I must escape.")

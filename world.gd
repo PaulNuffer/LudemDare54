@@ -7,6 +7,7 @@ extends Node2D
 signal wave_finished
 signal player_died_signal
 signal start_cutscene(cutsceneID)
+signal restart_game
 
 var wave_number = 0
 
@@ -44,12 +45,15 @@ func _ready():
 	
 func set_fade(value):
 	$fade/ColorRect.self_modulate.a8 = value
+	if($fade/ColorRect.self_modulate.a8 >= 255):
+		check_for_cutscenes()
 
 func start_game():
 	$Menu.hide()
 	$PauseMenu.hide()
 	get_tree().paused = false
 	$MainSoundtrack.play()
+	emit_signal("restart_game")
 
 func show_main_menu(): #we are treating this as a time the game should be totally reset
 	$DeathMenu.hide()
@@ -82,7 +86,6 @@ func door_entered():
 	$ClosedDoorArt.show()
 	$OpenDoor.hide()
 	GlobalVariables.upgraded = true
-	check_for_cutscenes()
 
 func textbox_fields(info):
 	if(info.interact_type == 'dialogue'):
@@ -105,12 +108,26 @@ func reset_game():
 	GlobalVariables.utilitytimermax = 0
 
 func check_for_cutscenes():
-	if(true):
+	var numWins = GlobalVariables.numWins
+	var numResets = GlobalVariables.numResets
+	check_and_play_cutscene(0, true)
+	check_and_play_cutscene(1, numResets > 0)
+	check_and_play_cutscene(2, numResets > 1)
+	check_and_play_cutscene(3, numResets > 2)
+	check_and_play_cutscene(4, numResets > 3)
+	check_and_play_cutscene(5, numResets > 4)
+	check_and_play_cutscene(6, numResets > 5)
+	check_and_play_cutscene(7, numWins > 0)
+
+func check_and_play_cutscene(num, condition):
+	var viewed = GlobalVariables.viewedCutscenes
+	if(!viewed.has(num) && condition):
 		$Cutscene.show()
 		$Cutscene/CanvasLayer.show()
 		$Cutscene/DialogueBox.show()
+		GlobalVariables.viewedCutscenes.insert(0,num)
 		get_tree().paused = true
-		emit_signal("start_cutscene",0)
+		emit_signal("start_cutscene", num)
 
 func end_cutscene():
 	$Cutscene.hide()

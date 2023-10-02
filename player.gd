@@ -175,6 +175,7 @@ func kill():
 	hideGraphics()
 	$CanvasLayer/DeathScreen.show()
 	z_index = -1
+	GlobalVariables.numResets = GlobalVariables.numResets + 1
 	emit_signal("player_died")
 	
 func recalculate(): #recalculates all player variables
@@ -415,3 +416,8 @@ func execute_interaction():
 
 func _on_world_wave_finished():
 	doorOpen = true
+
+
+func _on_world_restart_game():
+	doorFade = true
+	screenfadetimer = 350

@@ -224,6 +224,7 @@ layer = 128
 visible = false
 
 [connection signal="player_died_signal" from="." to="DeathMenu" method="_on_world_player_died_signal"]
+[connection signal="restart_game" from="." to="Player" method="_on_world_restart_game"]
 [connection signal="start_cutscene" from="." to="Cutscene" method="_on_world_start_cutscene"]
 [connection signal="wave_finished" from="." to="Player" method="_on_world_wave_finished"]
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
